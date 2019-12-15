@@ -4,7 +4,7 @@ from django.db import models
 
 
 class History(models.Model):
-    matchId = models.IntegerField()  # 赛事ID
+    matchId = models.IntegerField(editable=False, unique=True)  # 赛事ID
     match = models.CharField(max_length=10)  # 赛事
     round = models.CharField(max_length=10)   # 轮次
     time = models.DateField()                   # 比赛时间
@@ -29,4 +29,4 @@ class BigOrSmall(models.Model):
     startLowerStage = models.FloatField()  # 初盘下盘水位
     startOpening = models.CharField(max_length=20)  # 初盘大小球盘
     # 表示外键关联到History表,当History表删除了该条数据,此表中也被删除
-    subMatchId = models.ForeignKey('History', on_delete=models.CASCADE)  # 赛事ID
+    subMatchId = models.ForeignKey(History, to_field='matchId', on_delete=models.CASCADE)  # 赛事ID

@@ -2,6 +2,6 @@ from django.shortcuts import render
 from .models import History
 
 
-def index(request):
+def index_history(request):
 
-    return render(request, "history.html")
+    return render(request, "index_history.html")

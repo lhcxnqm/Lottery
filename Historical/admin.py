@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import History,BigOrSmall
+from .models import History, BigOrSmall
 
 # Register your models here.
 

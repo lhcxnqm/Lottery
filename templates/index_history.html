@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>历史记录</title>
+
+    <link rel="stylesheet" href="/static/index_history.css">
+
+</head>
+<body>
+<div class="sub_bf_nav li_change">
+    <div>选择彩种</div>
+    <ul id="lot-ul">
+        <li data-href="/">竞彩足球</li>
+        <li class="selected" data-href="/history">历史回查</li>
+    </ul>
+    <script type="text/javascript">
+        (function (a, b) {
+            for (b = 0; b < a.length; ++b) {
+                a[b].onclick = (function (a) {
+                    return function () {
+                        if (a) {
+                            location.href = a;
+                        }
+                    };
+                })(a[b].getAttribute('data-href'));
+            }
+            window.hrefReg = "\/index_history_#.html";
+            window.lotType = "history";
+        })(document.getElementById('lot-ul').getElementsByTagName('li'));
+    </script>
+</div>
+</body>
+</html>

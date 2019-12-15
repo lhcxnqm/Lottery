@@ -1,0 +1,5 @@
+.sub_bf_nav{height: 28px;border:1px solid #dedede; border-width:0 1px; padding: 8px 20px 0 20px;}
+.sub_bf_nav div{float: left; line-height: 20px;}
+.sub_bf_nav li{float: left; height: 22px; line-height: 22px; padding: 0 10px; margin-right: 10px; color:#666; cursor: pointer; border-radius: 4px;}
+.sub_bf_nav li:hover,
+.sub_bf_nav li.selected{background: #1e7ddf; color: #fff; font-weight: bold;}
