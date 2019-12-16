@@ -16,10 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
-from .views import index
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
+    path('', views.index),
+    path('europe/', views.europe),
+    path('asia/', views.asia),
+    path('bigOrSmall/', views.big_or_small),
+    path('score/', views.score),
     path('history/', include('Historical.urls')),
 ]

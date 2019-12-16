@@ -1,0 +1,121 @@
+/* 规范全局样式 */
+body { color:#333; background:#fff}
+:focus{outline:0;}
+body, h1, h2, h3, h4, h5, h6, hr, p,
+blockquote, dl, dt, dd, ul, ol, li, pre,
+form, fieldset, legend,input,label
+{ margin:0; padding:0; }
+body, td {font:12px/1.5 "Microsoft YaHei","\5FAE\8F6F\96C5\9ED1",simsun, tahoma,sans-serif;}
+h1, h2, h3, h4, h5, h6 { font-size: 100%; }
+em,i,s{font-style:normal;}
+ul, ol { list-style: none; }
+a {color:#0f3f94; text-decoration:none; outline:none; transition: color .2s;}
+a:hover {color:#F30;}
+img{ border:0px;vertical-align:middle;}
+table{border-collapse:collapse;}
+td{empty-cells:show;}
+/*--------常用样式--------*/
+.mar_left5{ margin-left:5px;}
+.mar_left20{margin-left:20px;}
+.mar_right8{margin-right:8px;}
+.mar_right10{margin-right:10px;}
+.mar_right15{ margin-right:15px;}
+.mar_right20{ margin-right:20px;}
+.m-r {margin-right:10px;}
+.p-b5{padding-bottom:5px;}
+.m-t5{margin-top:5px;}
+.m_b10{margin-bottom:10px;}
+.font-s12{font-size:12px;}
+.font-s14{font-size:14px;}
+.font-s16{font-size:16px;}
+/*--------行高--------*/
+.line-h1{line-height:18px;}
+.line-h2{line-height:20px;}
+.line-h3{line-height:22px;}
+.line-h4{line-height:24px;}
+.line-h5{line-height:28px;}
+.line-h6{line-height:30px;}
+/*--------浮动 清除浮动--------*/
+.fl{float:left;}
+.fr{float:right;}
+.clearb{clear:both; height:0px; line-height:0px; font-size:0px;}
+.clearfix{zoom:1;}
+.clearfix:after{content:'';clear:both;display:block;height:0;visibility:hidden;}
+/*--------字体颜色定义--------*/
+.black,.black a,a.black { color:#333}
+.black a:hover,a.black:hover { color:#ff3300}
+.gray,.gray a,a.gray { color:#999}
+.red,.red a,a.red { color:#ff3300;}
+.green,.green a,a.green{color:#090;}
+.blue,.blue a,a.blue { color:#0f3f94;}
+.blue a:hover,a.blue:hover { color:#ff3300}
+/*--------英文字体--------*/
+.eng{font-family:Tahoma, Geneva, sans-serif;}
+/*--------文字居中--------*/
+.text_l{ text-align:left;}
+.text_c{ text-align:center;}
+.text_r{ text-align:right;}
+.dn{display:none;}
+.blue a:hover,a.blue:hover { color:#ff3300}
+/* 通用按钮样式 */
+.btn_Dblue_l,a.btn_Dblue_l,.btn_Dblue_s,a.btn_Dblue_s,.btn_Dblue_m,a.btn_Dblue_m,.btn_Dblue_b,a.btn_Dblue_b,.btn_Lblue_l,a.btn_Lblue_l,.btn_Lblue_s,a.btn_Lblue_s,.btn_Lblue_m,a.btn_Lblue_m,.btn_Lblue_b,a.btn_Lblue_b,.btn_Dora_l,a.btn_Dora_l,.btn_Dora_s,a.btn_Dora_s,.btn_Dora_m,a.btn_Dora_m,.btn_Dora_b,a.btn_Dora_b,.btn_Dora_bs,a.btn_Dora_bs,.btn_Lora_l,a.btn_Lora_l,.btn_Lora_s,a.btn_Lora_s,.btn_Lora_m,a.btn_Lora_m,.btn_Lora_b,a.btn_Lora_b,.btn_Dred_s,a.btn_Dred_s,.btn_Dred_b,a.btn_Dred_b,.btn_buy_m,a.btn_buy_m,.btn_buy_hm,a.btn_buy_hm,.btn_buy_b,a.btn_buy_b,.btn_addList,a.btn_addList,.btn_gray_s,a.btn_gray_s,.btn_gray_m,a.btn_gray_m,.btn_gray_b,a.btn_gray_b,.btn_modify,a.btn_modify{ background:url(../images/main/sprite_btn.png) no-repeat; overflow:hidden; text-align:center; display:inline-block; font-size:12px; text-decoration:none; cursor:pointer; border:0; vertical-align:middle; }
+/* 深蓝色按钮 */
+.btn_Dblue_l,a.btn_Dblue_l,a.btn_Dblue_l:hover { background-position:-55px 0; width:35px; height:18px; line-height:20px; color:#fff; text-decoration:none;}
+.btn_Dblue_s,a.btn_Dblue_s,a.btn_Dblue_s:hover { background-position:0 0; width:45px; height:22px; line-height:24px; color:#fff; text-decoration:none;}
+.btn_Dblue_m,a.btn_Dblue_m,a.btn_Dblue_m:hover { background-position:0 -32px; width:70px; height:22px; line-height:24px; color:#fff; text-decoration:none;}
+.btn_Dblue_b,a.btn_Dblue_b,a.btn_Dblue_b:hover { background-position:0 -64px; width:100px; height:30px; line-height:32px; color:#fff; font-size:14px; text-decoration:none;}
+/* 浅蓝色按钮 */
+.btn_Lblue_l,a.btn_Lblue_l,a.btn_Lblue_l:hover { background-position:-165px 0; width:35px; height:18px; line-height:20px; color:#0F3F94; text-decoration:none;}
+.btn_Lblue_s,a.btn_Lblue_s,a.btn_Lblue_s:hover { background-position:-110px 0; width:45px; height:22px; line-height:24px; color:#0F3F94; text-decoration:none;}
+.btn_Lblue_m,a.btn_Lblue_m,a.btn_Lblue_m:hover { background-position:-110px -32px; width:70px; height:22px; line-height:24px; color:#0F3F94; text-decoration:none;}
+.btn_Lblue_b,a.btn_Lblue_b,a.btn_Lblue_b:hover { background-position:-110px -64px; width:100px; height:30px; line-height:32px; color:#0F3F94; font-size:14px; text-decoration:none;}
+/* 深橙色按钮 */
+.btn_Dora_l,a.btn_Dora_l,a.btn_Dora_l:hover { background-position:-275px 0; width:35px; height:18px; line-height:20px; color:#fff; text-decoration:none;}
+.btn_Dora_s,a.btn_Dora_s,a.btn_Dora_s:hover { background-position:-220px 0; width:45px; height:22px; line-height:24px; color:#fff; text-decoration:none;}
+.btn_Dora_m,a.btn_Dora_m,a.btn_Dora_m:hover { background-position:-220px -32px; width:70px; height:22px; line-height:24px; color:#fff; text-decoration:none;}
+.btn_Dora_b,a.btn_Dora_b,a.btn_Dora_b:hover { background-position:-220px -64px; width:100px; height:30px; line-height:32px; color:#fff; font-size:14px; font-weight:bold; text-decoration:none;}
+.btn_Dora_bs,a.btn_Dora_bs,a.btn_Dora_bs:hover { background-position:-220px -104px; width:80px; height:30px; line-height:32px; color:#fff; font-size:14px; font-weight:bold; text-decoration:none; font-weight:bold;}
+.btn_Dora_q,a.btn_Dora_q,a.btn_Dora_q:hover { background:url(../images/advAlert/gcq_btn.png) no-repeat; width:147px; height:30px; line-height:32px; color:#fff; font-size:14px; font-weight:bold; text-decoration:none; overflow:hidden; text-align:center; display:inline-block;cursor:pointer; border:0; vertical-align:middle;}
+.btn_c_org,a.btn_c_org,a.btn_c_org:hover{background-position:0 -42px; width:123px; height:30px; line-height:32px; color:#fff; font-size:14px; font-weight:bold; text-decoration:none; font-weight:bold;}
+/* 浅橙色按钮 */
+.btn_Lora_l,a.btn_Lora_l,a.btn_Lora_l:hvoer { background-position:-385px 0; width:35px; height:18px; line-height:20px; color:#da4901; text-decoration:none;}
+.btn_Lora_s,a.btn_Lora_s,a.btn_Lora_s:hvoer { background-position:-330px 0; width:45px; height:22px; line-height:24px; color:#da4901; text-decoration:none;}
+.btn_Lora_m,a.btn_Lora_m,a.btn_Lora_m:hover { background-position:-330px -32px; width:70px; height:22px; line-height:24px; color:#da4901; text-decoration:none;}
+.btn_Lora_b,a.btn_Lora_b,a.btn_Lora_b:hover { background-position:-330px -64px; width:100px; height:30px; line-height:32px; color:#da4901; font-size:14px; font-weight:bold; text-decoration:none;}
+
+
+/* 红色按钮 */
+.btn_Dred_s,a.btn_Dred_s,a.btn_Dred_s:hover { background-position:0 -104px; width:45px; height:22px; line-height:24px; color:#fff; text-decoration:none;}
+.btn_Dred_b,a.btn_Dred_b,a.btn_Dred_b:hover { background-position:0 -136px; width:100px; height:30px; line-height:32px; color:#fff; font-size:14px; text-decoration:none;}
+.btn_buy_m,a.btn_buy_m { background-position:0 -176px; width:130px; height:45px; line-height:45px; font-size:0; overflow:hidden; text-indent:-9999px;}
+.btn_buy_hm,a.btn_buy_hm{ background-position:-170px -136px; width:130px; height:45px; line-height:45px; font-size:0; overflow:hidden; text-indent:-9999px;}
+.btn_buy_b,a.btn_buy_b { background-position:0 -231px; width:150px; height:30px; line-height:30px; font-size:0; overflow:hidden; text-indent:-9999px;}
+.btn_modify,a.btn_modify{ background-position:-330px -104px; width:130px; height:45px; line-height:45px; font-size:0; overflow:hidden; text-indent:-9999px;}
+/* 特殊类按钮 */
+.btn_addList,a.btn_addList { background-position:0 -271px; width:160px; height:30px; line-height:30px; font-size:0; overflow:hidden; text-indent:-9999px;}
+.btn_gray_s,a.btn_gray_s,a.btn_gray_s:hover { background-position:-170px -198px; width:70px; height:22px; line-height:24px; color:#0F3F94;text-decoration:none;}
+.btn_gray_m,a.btn_gray_m,a.btn_gray_m:hover { background-position:-170px -230px; width:100px; height:22px; line-height:24px; color:#0F3F94;text-decoration:none;}
+.btn_gray_b,a.btn_gray_b,a.btn_gray_b:hover { background-position:-170px -271px; width:100px; height:30px; line-height:32px; color:#0F3F94;text-decoration:none;}
+/* 通用类按钮 */
+.public_Dblue,.public_Dblue b,a.public_Dblue,a.public_Dblue b,.public_Lblue,.public_Lblue b,a.public_Lblue,a.public_Lblue b,.public_Dora,.public_Dora b,a.public_Dora,a.public_Dora b,.public_Lora,.public_Lora b,a.public_Lora,a.public_Lora b,.public_Dred,.public_Dred b,a.public_Dred,a.public_Dred b,.public_gray,.public_gray b,a.public_gray,a.public_gray b{display:inline-block; background:url(../images/main/extbtn_bg.png) no-repeat; cursor:pointer;
+height:22px; line-height:22px; overflow:hidden; text-decoration:none; vertical-align:middle; font-weight:normal; text-decoration:none; font-size:12px;}
+a.public_Dblue:hover,a.public_Lblue:hover,a.public_Dora:hover,a.public_Lora:hover,a.public_Dred:hover,a.public_gray:hover{text-decoration:none;}
+.public_Dblue,a.public_Dblue{padding-left:8px; background-position:left 0;}
+.public_Dblue b,a.public_Dblue b{padding-right:8px; background-position:right 0; color:#fff;}
+.public_Lblue,a.public_Lblue{padding-left:8px; background-position:left -22px;}
+.public_Lblue b,a.public_Lblue b{padding-right:8px; background-position:right -22px; color:#0F3F94;}
+.public_Dora,a.public_Dora{padding-left:8px; background-position:left -44px; border: 0 none; color: #fff; width: 125px;}
+.public_Dora b,a.public_Dora b{padding-right:8px; background-position:right -44px; color:#fff;}
+.public_Lora,a.public_Lora{padding-left:8px; background-position:left -66px;}
+.public_Lora b,a.public_Lora b{padding-right:8px; background-position:right -66px; color:#da4901;}
+.public_Dred,a.public_Dred{padding-left:8px; background-position:left -88px;}
+.public_Dred b,a.public_Dred b{padding-right:8px; background-position:right -88px; color:#fff;}
+.public_gray,a.public_gray{padding-left:8px; background-position:left -110px;}
+.public_gray b,a.public_gray b{padding-right:8px; background-position:right -110px; color:#0F3F94;}
+
+/*选好了*/
+.s-ok,a.s-ok{display:inline-block;text-decoration:none;background:url(../images/main/b-btn.png) no-repeat left top; border:0 none;}
+.s-ok,a.s-ok{background-position:0 -70px;width:110px;height:30px;margin-right:10px;text-align:center;font:bold 14px/30px simsun;color:#fff;cursor:pointer;}
+a.s-ok:hover{color:#fff;text-decoration:none;}
+
+

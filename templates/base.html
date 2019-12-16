@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ocean足彩网</title>
+    <link rel="stylesheet" href="/static/global.css">
+    <link rel="stylesheet" href="/static/index.css">
+
+    {% block header %}{% endblock %}
+
+</head>
+<body>
+<div id="bd">
+    <div class="bf_nav">
+        <ul id="nav-ul" class="tab">
+            <li class="cur"><a href="/" id="link125">综合指数</a></li>
+            <li><a href="/europe" id="link126">欧洲指数</a></li>
+            <li><a href="/asia" id="link127">亚洲盘口</a></li>
+            <li><a href="/bigOrSmall" id="link128">大小指数</a></li>
+            <li><a href="/score" id="link129">今日波胆</a></li>
+        </ul>
+    </div>
+    <div class="sub_bf_nav li_change">
+        <div>选择彩种</div>
+        <ul id="lot-ul">
+            <li data-href="/">竞彩足球</li>
+            <li data-href="/history">历史回查</li>
+            <li data-href="/">球队详情</li>
+        </ul>
+        <script type="text/javascript">
+            (function (a, b) {
+                for (b = 0; b < a.length; ++b) {
+                    a[b].onclick = (function (a) {
+                        return function () {
+                            if (a) {
+                                location.href = a;
+                            }
+                        };
+                    })(a[b].getAttribute('data-href'));
+                }
+                window.hrefReg = "\/index_jczq_#.shtml";
+                window.lotType = "jczq";
+            })(document.getElementById('lot-ul').getElementsByTagName('li'));
+        </script>
+    </div>
+    <div class="bf_btn">
+        <div class="l">
+            <ul id="ul-keep-or-hide" class="show_hide_chose li_change">
+                <li data-act="keeps" class="selected">保留</li>
+                <li data-act="hides">隐藏</li>
+            </ul>
+            <div class="select_left select_box" id="select-match">
+                <div class="select_center">
+                <span class="select_right">
+                    <span class="down_select">赛事选择</span>
+                </span>
+                </div>
+                <span class="link_up" style="width: 76px;"></span>
+                <div class="layer lsxz" style="width:318px">
+                    <div class="sx" style="padding-left:2px;">
+                        <label for="mck-five"><input type="checkbox" id="mck-five"><span class="red">五大联赛</span></label>
+                    </div>
+                    <table width="318" border="0" align="center" cellpadding="2" cellspacing="0">
+                        <colgroup span="3" width="106"></colgroup>
+                        <tbody id="match-tbody">
+                        <tr>
+                            <td><label for="mck_32"><input id="mck_32" type="checkbox" checked="checked"
+                                                           value="32"><span class="team"
+                                                                            style="background:#DB31EE">德乙</span></label>[1]
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn">
+                        <input type="button" value="全选" class="btn_Lblue_m" id="btn-match-all">&nbsp;&nbsp;<input
+                            type="button" value="反选" class="btn_Lblue_m" id="btn-match-anti">&nbsp;&nbsp;<input
+                            type="button" value="关闭" class="btn_Lblue_m close_btn">
+                    </div>
+                </div>
+            </div>
+            <div class="select_left select_box" id="select-company">
+                <div class="select_center">
+                <span class="select_right">
+                    <span class="down_select">公司选择</span>
+                </span>
+                </div>
+                <span class="link_up" style="width: 76px;"></span>
+                <div class="layer lsxz lsxz_company">
+                    <div class="sx">
+                        <div>功能选择</div>
+                        <label for="ck_sound"><input type="checkbox" id="ck_sound" checked="checked">声音提示</label> &nbsp;
+                        <label for="ck_tips"><input type="checkbox" id="ck_tips" checked="checked">变化窗口提示</label>&nbsp;
+                    </div>
+                    <table width="250" border="0" align="center" cellpadding="2" cellspacing="0">
+                        <colgroup span="3" width="33%"></colgroup>
+                        <thead>
+                        <tr>
+                            <td>公司选择</td>
+                            <td colspan="2">提示：最多同时选择2家公司</td>
+                        </tr>
+                        </thead>
+                        <tbody id="company-tbody">
+                        <tr>
+                            <td><label for="cck_3" style="color: red;"><input id="cck_3" type="checkbox"
+                                                                              checked="checked" value="3">Bet365</label>
+                            </td>
+                            <td><label for="cck_5" style="color: rgb(51, 51, 51);"><input id="cck_5" type="checkbox"
+                                                                                          value="5"
+                                                                                          disabled="">澳门</label></td>
+                        </tr>
+
+
+                        </tbody>
+                    </table>
+                    <div class="btn">
+                        <input id="company-confirm" type="button" value="确认" class="btn_Lblue_m">&nbsp;&nbsp;<input
+                            id="company-default" type="button" value="默认" class="btn_Lblue_m">&nbsp;&nbsp;<input
+                            type="button" value="关闭" class="btn_Lblue_m close_btn">
+                    </div>
+                </div>
+            </div>
+            <div class="game_info">
+                共<span id="game-total-count">10</span>场 隐藏<span class="red"
+                                                                id="game-hided-count">0</span>场&nbsp;&nbsp;
+            </div>
+        {% block searchHistory %}{% endblock %}
+        </div>
+    </div>
+    <table width="100%" cellspacing="0" cellpadding="0" class="zs_tablelist">
+        <colgroup>
+            <col width="74">
+            <col width="61" span="2">
+            <col width="81">
+            <col width="63">
+            <col width="18">
+            <col width="63">
+            <col width="66">
+            <col width="61">
+            <col width="106">
+            <col width="61">
+            <col width="47" span="3">
+            <col width="56">
+            <col width="86">
+        </colgroup>
+        <thead>
+        <tr>
+            <th>场次</th>
+            <th>赛事</th>
+            <th>轮次</th>
+            <th>比赛时间</th>
+            <th colspan="3">对阵</th>
+            <th>公司</th>
+            <th>水位</th>
+            <th>亚盘</th>
+            <th>水位</th>
+            <th>胜</th>
+            <th>平</th>
+            <th>负</th>
+            <th class="last">详细</th>
+        </tr>
+        </thead>
+
+        <!--下面是用来写内容的-->
+        {% block content %}{% endblock %}
+
+    </table>
+</div>
+
+
+
+
+<script type="text/javascript">
+    (function (a, b) {
+        for (b = 0; b < a.length; ++b) {
+            a[b].onclick = (function (a) {
+                return function () {
+                    if (a) {
+                        location.href = a;
+                    }
+                };
+            })(a[b].getAttribute('data-href'));
+        }
+        window.hrefReg = "\/index_history.html";
+        window.lotType = "history";
+    })(document.getElementById('lot-ul').getElementsByTagName('li'));
+</script>
+</body>
+</html>
