@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import History, BigOrSmall, European
+from .models import History, BigOrSmall, European, Asia
 
 # Register your models here.
 
@@ -7,3 +7,4 @@ from .models import History, BigOrSmall, European
 admin.site.register(History)
 admin.site.register(BigOrSmall)
 admin.site.register(European)
+admin.site.register(Asia)

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block searchHistory %}
+    <form class="r" method="post" action="/history/">
+        {% csrf_token %}
+        <select id="sel-year" name="year">
+            <option>2019</option>
+        </select>年
+        <select id="sel-month" name="month">
+            <option>12</option>
+        </select>月
+        <select id="sel-date" name="date">
+            <option>21</option>
+        </select>日
+        <input id="btn-query" type="submit" value="查询">
+    </form>
+{% endblock %}
+
+{% block content %}
+    <tr data-fid="837681" data-cid="3" data-mid="71" data-win="4.20,4.10" data-draw="3.50,3.30"
+        data-lost="1.85,1.87" data-pk="0.5,0.5" data-bp="0" data-r="1">
+        <td rowspan="2"><label for="fck_837681"><input type="checkbox" id="fck_837681" value="837681">周一001</label>
+        </td>
+        <td rowspan="2" style="background-color:#008888"><a style="color:#fff" target="_blank"
+                                                            href="http://liansai.500.com/zuqiu-5425/" title="葡超"
+                                                            id="link135">葡超</a></td>
+        <td rowspan="2">第14轮</td>
+        <td rowspan="2">12-17 03:00</td>
+        <td rowspan="2" class="text_right no_border"><a class="team_link" href="http://liansai.500.com/team/470/"
+                                                        target="_blank" title="圣克拉拉" id="link136">圣克拉</a></td>
+        <td rowspan="2" class="no_border">VS</td>
+        <td rowspan="2" class="text_left"><a class="team_link" href="http://liansai.500.com/team/1000/"
+                                             target="_blank" title="里斯本" id="link137">里斯本</a></td>
+        <td class="border_r_c5">Bet365</td>
+        <td class="cur-pointer">1.049</td>
+        <td class="cur-pointer">受半球</td>
+        <td class="border_r_c5 cur-pointer">0.850</td>
+        <td class="cur-pointer">4.20</td>
+        <td class="cur-pointer">3.50</td>
+        <td class="border_r_c5 cur-pointer">1.85</td>
+        <td rowspan="2"><a target="_blank" href="//odds.500.com/fenxi/shuju-837681.shtml" title="圣克拉拉VS里斯本数据分析"
+                           id="link138">析</a> <a target="_blank" href="//odds.500.com/fenxi/yazhi-837681.shtml"
+                                                 title="圣克拉拉VS里斯本亚盘对比" id="link139">亚</a> <a target="_blank"
+                                                                                             href="//odds.500.com/fenxi/ouzhi-837681.shtml"
+                                                                                             title="圣克拉拉VS里斯本百家欧赔"
+                                                                                             id="link140">欧</a></td>
+    </tr>
+    <tr data-fid="837681" data-cid="280">
+        <td class="border_r_c5">皇冠</td>
+        <td class="cur-pointer">1.030</td>
+        <td class="cur-pointer">受半球</td>
+        <td class="border_r_c5 cur-pointer">0.870</td>
+        <td class="cur-pointer">4.10</td>
+        <td class="cur-pointer">3.30</td>
+        <td class="border_r_c5 cur-pointer">1.87</td>
+    </tr>
+
+    {{ test }}
+
+    <script type="text/javascript">
+
+    </script>
+
+{% endblock %}
