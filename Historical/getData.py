@@ -2,6 +2,8 @@ import requests
 from lxml import etree
 import re
 import datetime
+from Historical import historySpider
+from pandas.tseries.offsets import Day
 
 special_match = ['欧国联', '欧罗巴', '欧洲杯', '英锦赛']
 
@@ -90,11 +92,12 @@ def get_big_or_small_detail(match_id):
 
 
 if __name__ == '__main__':
-    # get_asia_detail("869026")
-    # get_europe_detail("825903")
-    # get_big_or_small_detail("825903")
+    # today = "2019-12-21"
+    # get_history_data = historySpider.HistorySpider(today)
+    # today = datetime.datetime.strptime(today, "%Y-%m-%d")
+    # today = datetime.datetime.strftime(today, "%Y-%m-%d")
 
-    today = datetime.date.today().strftime("%Y-%m-%d")
-    date = datetime.datetime.strptime(today, "%Y-%m-%d")
-    print(date)
+    # 日期转字符串
+    today = datetime.date.today() - Day()
+    print(today)
     pass

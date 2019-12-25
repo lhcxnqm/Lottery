@@ -2,38 +2,39 @@ from django.shortcuts import render
 from .models import History, BigOrSmall, European, Asia
 import datetime
 from Historical import historySpider, getData
+from pandas.tseries.offsets import Day
 
 
-def history(request):
-    # today = datetime.date.today().strftime("%Y-%m-%d")
-    # today = datetime.datetime.strptime(today, "%Y-%m-%d")
+def index_history(request):
+    prior_day = datetime.date.today() - Day()
+    try:
+        result = History.objects.get(time=prior_day)
+        return render(request, "history.html", {'result': result})
+    except History.DoesNotExist:
+        get_history_data = historySpider.HistorySpider(str(prior_day))
+        final_id = get_history_data.run()
+        for match_id in final_id:
+            team_message, asia_dict = getData.get_asia_detail(match_id)
+            if "VS".__eq__(team_message[3]):
+                continue
+            # 存储赛事基本信息
+            team_sql = History(int(match_id), match=team_message[5], round=team_message[6], time=prior_day,
+                               match_time=team_message[2], hostTeam=team_message[0], guestTeam=team_message[4],
+                               result=team_message[3])
+            team_sql.save()
+            big_or_small_dict = getData.get_big_or_small_detail(match_id)
+            europe_dict = getData.get_europe_detail(match_id)
+            for each in ['3', '5', '280', '293']:
+                if asia_dict[each] and '3'.__eq__(each):
+                    save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, 'Bet365')
+                elif asia_dict[each] and '5'.__eq__(each):
+                    save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '澳门')
+                elif asia_dict[each] and '280'.__eq__(each):
+                    save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '皇冠')
+                else:
+                    save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '威廉希尔')
 
-    today = "2019-12-21"
-    get_history_data = historySpider.HistorySpider(today)
-    today = datetime.datetime.strptime(today, "%Y-%d-%m")
-    final_id = get_history_data.run()
-    for match_id in final_id:
-        team_message, asia_dict = getData.get_asia_detail(match_id)
-        if "VS".__eq__(team_message[3]):
-            continue
-        # 存储赛事基本信息
-        team_sql = History(int(match_id), match=team_message[5], round=team_message[6], time=today,
-                           match_time=team_message[2], hostTeam=team_message[0], guestTeam=team_message[4],
-                           result=team_message[3])
-        team_sql.save()
-        big_or_small_dict = getData.get_big_or_small_detail(match_id)
-        europe_dict = getData.get_europe_detail(match_id)
-        for each in ['3', '5', '280', '293']:
-            if asia_dict[each] and '3'.__eq__(each):
-                save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, 'Bet365')
-            elif asia_dict[each] and '5'.__eq__(each):
-                save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '澳门')
-            elif asia_dict[each] and '280'.__eq__(each):
-                save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '皇冠')
-            else:
-                save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '威廉希尔')
-
-    return render(request, "history.html")
+        return render(request, "history.html", {'result': '123456'})
 
 
 def save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, company):
