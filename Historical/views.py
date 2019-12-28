@@ -8,8 +8,14 @@ from pandas.tseries.offsets import Day
 def index_history(request):
     prior_day = datetime.date.today() - Day()
     try:
-        result = History.objects.get(time=prior_day)
-        return render(request, "history.html", {'result': result})
+        history = History.objects.filter(time=prior_day).order_by('match_time')
+        result_list = []
+        for each in history:
+            result_item = dict()
+            return_result(result_item, each)
+            result_list.append(result_item)
+
+        return render(request, "history.html", {'result_list': result_list})
     except History.DoesNotExist:
         get_history_data = historySpider.HistorySpider(str(prior_day))
         final_id = get_history_data.run()
@@ -34,7 +40,44 @@ def index_history(request):
                 else:
                     save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '威廉希尔')
 
-        return render(request, "history.html", {'result': '123456'})
+        return render(request, "history.html", {'result': '历史记录已更新，请刷新页面'})
+
+
+def history_asia(request):
+    return render(request, "history_asia.html")
+
+
+def return_result(result_item, each):
+    result_item['matchId'] = each.matchId
+    result_item['match'] = each.match
+    result_item['round'] = each.round
+    result_item['short_time'] = each.short_time
+    result_item['hostTeam'] = each.hostTeam
+    result_item['result'] = each.result
+    result_item['guestTeam'] = each.guestTeam
+
+    match_color = {'英超': '#FF1717', '意甲': '#0066FF', '德乙': '#DB31EE', '荷甲': '#ff6699', '澳超': '#336699',
+                   '日职': '#017001', '葡超': '#008888', '阿甲': '#00CCFF', '英甲': '#750000', '挪超': '#666666',
+                   '欧罗巴': '#6F00DD', '比甲': '#FC9B0A', '法乙': '#ACA96C', '日职乙': '#5A9400', '瑞典超': '#004488',
+                   '欧洲杯': '#6F006F', '欧国联': '#6066FF', '英锦赛': '#E07C64'}
+    result_item['match_color'] = match_color[each.match]
+
+    each_asia = Asia.objects.get(company='澳门', subMatchId_id=each.matchId)
+    result_item['company'] = each_asia.company
+    result_item['immediateUpperStage'] = each_asia.immediateUpperStage
+    result_item['immediateLowerStage'] = each_asia.immediateLowerStage
+    result_item['immediateOpening'] = each_asia.immediateOpening
+    result_item['startUpperStage'] = each_asia.startUpperStage
+    result_item['startLowerStage'] = each_asia.startLowerStage
+    result_item['startOpening'] = each_asia.startOpening
+
+    each_europe = European.objects.get(company='澳门', subMatchId_id=each.matchId)
+    result_item['immediateWin'] = each_europe.immediateWin
+    result_item['immediatePeace'] = each_europe.immediatePeace
+    result_item['immediateLose'] = each_europe.immediateLose
+    result_item['startWin'] = each_europe.startWin
+    result_item['startPeace'] = each_europe.startPeace
+    result_item['startLose'] = each_europe.startLose
 
 
 def save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, company):

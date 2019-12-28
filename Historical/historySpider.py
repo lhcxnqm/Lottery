@@ -2,9 +2,9 @@ import requests
 from lxml import etree
 from Historical import getData
 
-best_match = ['欧罗巴', '荷甲', '葡超', '日职', '日乙', '澳超',
-              '意甲', '英超', '瑞超', '欧洲杯', '阿甲', '比甲',
-              '挪超', '英锦赛', '德乙', '法乙', '英甲']
+best_match = ['欧罗巴', '荷甲', '葡超', '日职', '日职乙', '澳超',
+              '意甲', '英超', '瑞典超', '欧洲杯', '阿甲', '比甲',
+              '挪超', '英锦赛', '德乙', '法乙', '英甲', '欧国联']
 
 
 class HistorySpider:
@@ -35,11 +35,12 @@ class HistorySpider:
         for i in range(len(id_list) - 1):
             if id_list[i+1] in best_match:
                 final_id.append(id_list[i])
+                # print(id_list[i+1])
             i += 2
 
         return final_id
 
 
 if __name__ == '__main__':
-    getHistoryData = HistorySpider("2019-12-26")
+    getHistoryData = HistorySpider("2019-10-05")
     getHistoryData.run()

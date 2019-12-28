@@ -13,6 +13,9 @@ class History(models.Model):
     guestTeam = models.CharField(max_length=16)   # 客队
     result = models.CharField(max_length=5)    # 比赛结果
 
+    def short_time(self):
+        return self.match_time[5:]
+
 
 class BigOrSmall(models.Model):
     company = models.CharField(max_length=8)   # 公司

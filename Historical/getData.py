@@ -5,7 +5,7 @@ import datetime
 from Historical import historySpider
 from pandas.tseries.offsets import Day
 
-special_match = ['欧国联', '欧罗巴', '欧洲杯', '英锦赛']
+special_match = ['欧国联', '欧罗巴', '欧洲杯', '英锦赛', '日职乙', '瑞典超']
 
 
 def get_asia_detail(match_id):
