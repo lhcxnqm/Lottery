@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index_history),
-    path('asia/', views.history_asia),
+    path('asia_<int:match_id>/', views.history_asia),
 ]

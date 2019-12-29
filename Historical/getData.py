@@ -99,5 +99,6 @@ if __name__ == '__main__':
 
     # 日期转字符串
     today = datetime.date.today() - Day()
+    today = datetime.datetime.strftime(today, "%Y-%m-%d")
     print(today)
     pass

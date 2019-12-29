@@ -7,16 +7,20 @@ from pandas.tseries.offsets import Day
 
 def index_history(request):
     prior_day = datetime.date.today() - Day()
-    try:
-        history = History.objects.filter(time=prior_day).order_by('match_time')
+    history = History.objects.filter(time=prior_day).order_by('match_time')
+    if history.count():
         result_list = []
         for each in history:
             result_item = dict()
-            return_result(result_item, each)
+            return_team_result(result_item, each)
+            return_asia_result(result_item, each, '澳门')
+            return_europe_result(result_item, each, '澳门')
             result_list.append(result_item)
 
         return render(request, "history.html", {'result_list': result_list})
-    except History.DoesNotExist:
+
+    else:
+        prior_day = datetime.datetime.strftime(prior_day, "%Y-%m-%d")
         get_history_data = historySpider.HistorySpider(str(prior_day))
         final_id = get_history_data.run()
         for match_id in final_id:
@@ -43,35 +47,53 @@ def index_history(request):
         return render(request, "history.html", {'result': '历史记录已更新，请刷新页面'})
 
 
-def history_asia(request):
-    return render(request, "history_asia.html")
+def history_asia(request, match_id):
+    history = History.objects.get(matchId=match_id)
+    team_message = dict()
+    return_team_result(team_message, history)
+
+    result_list = []
+    for each in Asia.objects.filter(subMatchId_id=match_id):
+        result_item = dict()
+        return_asia_result(result_item, history, each.company)
+        result_list.append(result_item)
+
+    return render(request, "history_asia.html", {'team_message': team_message, 'result_list': result_list})
 
 
-def return_result(result_item, each):
-    result_item['matchId'] = each.matchId
-    result_item['match'] = each.match
-    result_item['round'] = each.round
-    result_item['short_time'] = each.short_time
-    result_item['hostTeam'] = each.hostTeam
-    result_item['result'] = each.result
-    result_item['guestTeam'] = each.guestTeam
+def return_team_result(team_message, each):
+    team_message['matchId'] = each.matchId
+    team_message['match'] = each.match
+    team_message['round'] = each.round
+    team_message['short_time'] = each.short_time
+    team_message['hostTeam'] = each.hostTeam
+    team_message['result'] = each.result
+    team_message['guestTeam'] = each.guestTeam
+    team_message['match_time'] = each.match_time
 
     match_color = {'英超': '#FF1717', '意甲': '#0066FF', '德乙': '#DB31EE', '荷甲': '#ff6699', '澳超': '#336699',
                    '日职': '#017001', '葡超': '#008888', '阿甲': '#00CCFF', '英甲': '#750000', '挪超': '#666666',
                    '欧罗巴': '#6F00DD', '比甲': '#FC9B0A', '法乙': '#ACA96C', '日职乙': '#5A9400', '瑞典超': '#004488',
                    '欧洲杯': '#6F006F', '欧国联': '#6066FF', '英锦赛': '#E07C64'}
-    result_item['match_color'] = match_color[each.match]
+    team_message['match_color'] = match_color[each.match]
 
-    each_asia = Asia.objects.get(company='澳门', subMatchId_id=each.matchId)
+
+def return_asia_result(result_item, each, company):
+    each_asia = Asia.objects.get(company=company, subMatchId_id=each.matchId)
     result_item['company'] = each_asia.company
     result_item['immediateUpperStage'] = each_asia.immediateUpperStage
     result_item['immediateLowerStage'] = each_asia.immediateLowerStage
     result_item['immediateOpening'] = each_asia.immediateOpening
+    result_item['changedTime'] = each_asia.changedTime
     result_item['startUpperStage'] = each_asia.startUpperStage
     result_item['startLowerStage'] = each_asia.startLowerStage
     result_item['startOpening'] = each_asia.startOpening
+    result_item['startTime'] = each_asia.startTime
 
-    each_europe = European.objects.get(company='澳门', subMatchId_id=each.matchId)
+
+def return_europe_result(result_item, each, company):
+    each_europe = European.objects.get(company=company, subMatchId_id=each.matchId)
+    result_item['company'] = each_europe.company
     result_item['immediateWin'] = each_europe.immediateWin
     result_item['immediatePeace'] = each_europe.immediatePeace
     result_item['immediateLose'] = each_europe.immediateLose

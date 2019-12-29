@@ -1,42 +1,50 @@
 {% extends "base.html" %}
 
+{% block zonghe_cur %}
+    class="cur"
+{% endblock %}
+
 {% block content %}
     <tbody id="main-tbody">
-    <tr data-fid="837681" data-cid="3" data-mid="71" data-win="4.20,4.10" data-draw="3.50,3.30"
-        data-lost="1.85,1.87" data-pk="0.5,0.5" data-bp="0" data-r="1">
-        <td rowspan="2" style="background-color:#008888"><a style="color:#fff" target="_blank"
-                                                            href="http://liansai.500.com/zuqiu-5425/" title="葡超"
-                                                            id="link135">葡超</a></td>
-        <td rowspan="2">第14轮</td>
-        <td rowspan="2">12-17 03:00</td>
-        <td rowspan="2" class="text_right no_border"><a class="team_link" href="http://liansai.500.com/team/470/"
-                                                        target="_blank" title="圣克拉拉" id="link136">圣克拉</a></td>
-        <td rowspan="2" class="no_border">VS</td>
-        <td rowspan="2" class="text_left"><a class="team_link" href="http://liansai.500.com/team/1000/"
-                                             target="_blank" title="里斯本" id="link137">里斯本</a></td>
-        <td class="border_r_c5">Bet365</td>
-        <td class="cur-pointer">1.049</td>
-        <td class="cur-pointer">受半球</td>
-        <td class="border_r_c5 cur-pointer">0.850</td>
-        <td class="cur-pointer">4.20</td>
-        <td class="cur-pointer">3.50</td>
-        <td class="border_r_c5 cur-pointer">1.85</td>
-        <td rowspan="2"><a target="_blank" href="//odds.500.com/fenxi/shuju-837681.shtml" title="圣克拉拉VS里斯本数据分析"
-                           id="link138">析</a> <a target="_blank" href="//odds.500.com/fenxi/yazhi-837681.shtml"
-                                                 title="圣克拉拉VS里斯本亚盘对比" id="link139">亚</a> <a target="_blank"
-                                                                                             href="//odds.500.com/fenxi/ouzhi-837681.shtml"
-                                                                                             title="圣克拉拉VS里斯本百家欧赔"
-                                                                                             id="link140">欧</a></td>
-    </tr>
-    <tr data-fid="837681" data-cid="280">
-        <td class="border_r_c5">皇冠</td>
-        <td class="cur-pointer">1.030</td>
-        <td class="cur-pointer">受半球</td>
-        <td class="border_r_c5 cur-pointer">0.870</td>
-        <td class="cur-pointer">4.10</td>
-        <td class="cur-pointer">3.30</td>
-        <td class="border_r_c5 cur-pointer">1.87</td>
-    </tr>
-
+    {% for each in result_list %}
+        <tr data-fid="">
+            <td rowspan="2" style="background-color:{{ each.match_color }}">
+                <a style="color:#fff" target="_blank" href="" title="" id="link135">{{ each.match }}</a></td>
+            <td rowspan="2">{{ each.round }}</td>
+            <td rowspan="2">{{ each.match_time }}</td>
+            <td rowspan="2" class="text_right no_border">
+                <a class="team_link" href="" target="_blank" title="" id="link136">{{ each.hostTeam }}</a>
+            </td>
+            {% if each.result != "VS" %}
+                <td rowspan="2" class="no_border" style="color:#f00;">{{ each.result }}</td>
+            {% else %}
+                <td rowspan="2" class="no_border">{{ each.result }}</td>
+            {% endif %}
+            <td rowspan="2" class="text_left">
+                <a class="team_link" href="" target="_blank" title="" id="link137">{{ each.guestTeam }}</a>
+            </td>
+            <td class="border_r_c5">{{ each.company3 }}</td>
+            <td >{{ each.immediateUpperStage3 }}</td>
+            <td >{{ each.immediateOpening3 }}</td>
+            <td >{{ each.immediateLowerStage3 }}</td>
+            <td >{{ each.immediateWin3 }}</td>
+            <td >{{ each.immediatePeace3 }}</td>
+            <td >{{ each.immediateLose3 }}</td>
+            <td rowspan="2">
+                <a target="_blank" href="" title="" id="link138">析</a>
+                <a target="_blank" href="" title="" id="link139">亚</a>
+                <a target="_blank" href="" title="" id="link140">欧</a>
+            </td>
+        </tr>
+        <tr data-fid="">
+            <td class="border_r_c5">{{ each.company5 }}</td>
+            <td >{{ each.immediateUpperStage5 }}</td>
+            <td >{{ each.immediateOpening5 }}</td>
+            <td >{{ each.immediateLowerStage5 }}</td>
+            <td >{{ each.immediateWin5 }}</td>
+            <td >{{ each.immediatePeace5 }}</td>
+            <td >{{ each.immediateLose5 }}</td>
+        </tr>
+    {% endfor %}
     </tbody>
 {% endblock %}

@@ -6,33 +6,31 @@ best_match = ['欧罗巴', '荷甲', '葡超', '日职', '日职乙', '澳超',
               '挪超', '英锦赛', '德乙', '法乙', '英甲', '欧国联']
 
 
-class HistorySpider:
-    def __init__(self, date):
+class IndexSpider:
+    def __init__(self):
         self.headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-        self.date = date
 
     def run(self):
         # 获取url链接
-        url = 'http://odds.500.com/index_history_{0}.shtml'.format(self.date)
-
-        response = requests.get(url, headers=self.headers, timeout=50)
+        url = 'http://odds.500.com'
+        response = requests.get(url, headers=self.headers, timeout=100)
         response.encoding = 'gb2312'
         parser = etree.HTMLParser(encoding="gb2312")
         html = etree.HTML(response.text, parser=parser)
         # 获取当前日期下所有赛事的编号
         id_list = html.xpath('//tbody[@id="main-tbody"]/tr[@data-cid="3"]/@data-fid|'
-                             '//tbody[@id="main-tbody"]/tr[@data-fid]/td[2]/a/text()')
+                             '//tbody[@id="main-tbody"]/tr[@data-cid="3"]/td[2]/a/text()')
 
         final_id = []
         for i in range(len(id_list) - 1):
             if id_list[i+1] in best_match:
                 final_id.append(id_list[i])
-                print(id_list[i+1])
+                # print(id_list[i+1])
             i += 2
 
         return final_id
 
 
 if __name__ == '__main__':
-    getHistoryData = HistorySpider("2019-12-28")
-    getHistoryData.run()
+    getIndexData = IndexSpider()
+    getIndexData.run()

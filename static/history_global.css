@@ -1,0 +1,933 @@
+
+th { font-weight:normal }
+input {margin:0; padding:0;}
+td {font:12px tahoma,\5B8B\4F53;}
+.l { float:left; }
+.r { float:right; }
+/*base*/
+.tc { text-align:center; }
+.tr { text-align:right; }
+.clear { clear: both; }
+.pr5 { padding-right:5px; }
+.red {color:#f00;}
+.gray {color:#999;}
+.f16 {font-size:16px; }
+.clear{height:0; overflow:hidden; clear:both;}
+
+/** header **/
+.odds_header { width:100%; height:168px; background:url(/static/images/odds_hd_bg.png) repeat-x 0 -4px; position:relative; z-index:10;}
+.odds_header td { font-family:Tahoma;}
+.odds_hd_cont { width:1000px; margin:0 auto; height:124px; background:url(/static/images/odds_bg.png) no-repeat 0 78px; }
+.odds_hd_cont td { vertical-align:top; }
+.odds_hd_list { margin-top:24px; height:60px; }
+.odds_hd_list li { height:24px; line-height:24px; }
+.odds_hd_list li .hd_name { font-family:microsoft yahei, "榛戜綋"; font-size:18px; font-weight:bold; color:#333;}
+.odds_hd_list li .red { font-weight:bold;}
+.odds_hd_center { margin-top:20px;}
+.odds_hd_center li { position:relative; }
+.odds_hd_center .hd_list_first {z-index:2;}
+.odds_hd_ls {position:relative; z-index:2; width:160px;}
+.hd_box { background:#fff; -webkit-box-shadow:1px 2px 2px #666; -moz-box-shadow:1px 2px 2px #666; box-shadow:1px 2px 2px #666; border:1px solid #a0b4be; width:158px; display:none; position:absolute; z-index:5; left:0; top:28px; text-align:left; overflow-x:hidden; overflow-y:auto;}
+.hd_box table {width:158px;}
+.hd_box .hd_cz_duizhen {clear:both; cursor:pointer; display:table; margin:0 auto;}
+.hd_box .hd_cz_duizhen .l {width:62px; text-align:right; display:table-cell;}
+.hd_box .hd_cz_duizhen .r {width:62px; text-align:left; display:table-cell;}
+.hd_box .hd_cz_duizhen .gray {float:left; width:28px; padding-left:2px; display:block; text-align:center; display:table-cell;}
+.hd_box tr:hover, .hd_box tr:hover .gray, .hd_box tr.hover, .hd_box tr.hover .gray{background-color:#1b62a0; color:#fff;}
+.hd_box tr:hover a, .hd_cz .hd_box_this a{color:#fff;}
+.hd_box tr.hover a, .hd_box tr.hover a:hover {_color:#fff; _text-decoration:none;}
+.hd_box td {height:22px; line-height:22px; border-bottom:1px solid #efefef;}
+.hd_box tr.hd_box_this {background-color:#1b62a0;}
+.hd_box tr.hd_box_this a, .hd_box tr.hd_box_this .gray {color:#fff;}
+.hd_box a {color:#333;}
+.hd_box a:hover {color:#f30;}
+
+.odds_hd_ls .btn_hover {border:1px solid #a0b4be; background-color:#e8f2f8; position:relative; top:-1px; text-decoration:none;}
+.odds_hd_center .hd_name { font-size:14px; font-family:"瀹嬩綋"; display:block; font-weight:bold; color:#333;}
+.odds_hd_center .hd_name .raw_down {display:inline-block; *display:inline; *zoom:1; width:12px; height:12px; background:url(/static/images/odds_bg.png) no-repeat -303px -86px; margin-left:3px; *vertical-align:middle;}
+.odds_hd_center .btn_hover .raw_up {background-position:-302px -101px; right:11px;}
+.odds_hd_center .odds_hd_bf strong { font-family:Tahoma; font-size:40px; color:#fff; letter-spacing:12px; text-align:center; display:block; padding-left:19px; padding-left:20px\9; *padding-left:10px;}
+.odds_hd_team { display:block; position:relative; width:100%; height:100%;}
+.odds_hd_team a { display:block; width:78px; height:78px; line-height:78px; font-size:0; *font-size:60px; position:absolute; left:25px; top:23px; text-align:center; background-color:#fff; border:1px solid #d6d6d6; }
+.odds_hd_team2 a { left:13px; }
+
+
+/*绉垎姒滆〃鏍�*/
+.hd_jfb {border-top:0; width:118px; top:36px; display:block; box-shadow:none; -webkit-box-shadow:1px 2px 4px #ccc,1px 2px 3px #ccc,-1px 2px 4px #ccc; -moz-box-shadow:1px 2px 4px #ccc,1px 2px 3px #ccc,-1px 2px 4px #ccc; box-shadow:1px 2px 4px #ccc,1px 2px 3px #ccc,-1px 2px 4px #ccc;  -ms-box-shadow:1px 2px 4px #ccc,1px 2px 3px #ccc,-1px 2px 4px #ccc;}
+.hd_jfb table {width:118px;}
+.hd_jfb tr:hover, .hd_jfb tr.hover {background-color:#fffacc; cursor:default; color:#333;}
+.hd_jfb td {border-right:1px solid #fff; height:21px; line-height:21px; text-align:center;}
+.hd_jfb td.align_left {text-align:left; padding-left:4px;}
+.hd_jfb tr:hover a, .hd_jfb tr.hover a {color:#333;}
+.hd_jfb tr:hover a:hover, .hd_jfb tr.hover a:hover {color:#f30;}
+.hd_jfb .jfb_tb_trbg {background-color:#e2e2e2;}
+.hd_jfb .jfb_tb_trbg td {border-right:1px solid #fff;}
+.hd_jfb .jfb_this {background-color:#d4d4d4;}
+
+/*瀵艰埅鑿滃崟*/
+.odds_nav_list { margin-left:25%; _margin-left:0px;}
+.odds_nav_list li { float:left; width:80px; line-height:36px; position:relative}
+.odds_nav_list li .new-icon{ position:absolute;right:-1px;}
+.odds_nav_list li a { display:block; color:#fff; font-size:14px; font-weight:bold; width:78px; text-align:center; }
+.odds_nav_list li.cur a, .odds_nav_list .cur a:hover, .odds_nav_list li a:hover { text-decoration:none; background:url(/static/images/odds_bg.png) no-repeat 0 -82px; color:#fff;}
+.hd_cz {top:36px; width:216px; border:1px solid #a0b4be; background:#fff; box-shadow:1px 2px 2px #666; z-index:5; position:absolute; right:0; display:none;}
+.hd_cz_tit {height:22px; line-height:22px; background-color:#e9e9e9; width:216px; text-align:center;}
+.hd_cz_tit a {float:left; display:block; width:60px;}
+.hd_cz_tit span {float:left; display:block; width:90px;}
+.hd_cz_box {overflow-x:hidden; overflow-y:auto;}
+.hd_cz table {width:216px;}
+.hd_cz .hd_cz_duizhen {display:block; clear:both; cursor:pointer;}
+.hd_cz .hd_cz_duizhen .l {width:60px; text-align:right; display:block;}
+.hd_cz .hd_cz_duizhen .r {width:66px; text-align:left; display:block;}
+.hd_cz .hd_cz_duizhen .gray {float:left; width:28px; padding-left:2px; display:block; text-align:center;}
+.hd_cz_dc .hd_cz_duizhen .r {width:76px;}
+.hd_cz_dc .hd_cz_duizhen .gray {width:40px;}
+.hd_cz tr:hover, .hd_cz tr:hover .gray, .hd_cz tr.hover, .hd_cz tr.hover .gray{background-color:#1b62a0; color:#fff;}
+.hd_cz tr:hover a, .hd_cz .hd_cz_this a{color:#fff;}
+.hd_cz tr.hover a, .hd_cz tr.hover a:hover {_color:#fff; _text-decoration:none;}
+.hd_cz td {height:22px; line-height:22px; border-bottom:1px solid #dfebf3;}
+.hd_cz tr.hd_box_this {background-color:#1b62a0;}
+.hd_cz tr.hd_box_this a, .hd_cz tr.hd_box_this .gray {color:#fff;}
+.hd_cz a {color:#333;}
+.hd_cz a:hover {color:#f30;}
+.hd_cz a.gray, .hd_cz a.gray:hover {color:#999; cursor:default; text-decoration:none;}
+
+
+/** Model:鍓嶇灮鏁版嵁 **/
+.M_box {margin-bottom:6px; min-height:200px; height:auto; _height:200px;}
+.odds_content { margin:10px auto; width:1000px; clear:both; font-family:Tahoma; font-size:12px;font-family: 'microsoft yahei', '寰蒋闆呴粦', '榛戜綋';}
+.M_title { height: 33px; clear:both;}
+.M_title h4 { font-size: 18px; font-weight:normal; font-family: 'microsoft yahei', '寰蒋闆呴粦', '榛戜綋'; line-height: 33px; float: left; }
+.M_sub_title { height:34px; overflow:hidden; line-height:34px; background:#f5f5f5; font-size: 14px; font-weight: bold; border: 1px solid #e1e3e2; }
+.M_sub_title .h2c { font-size:14px; text-align:center; display:block; margin-right:10px; }
+.M_content { border:1px solid #e1e3e2 ; border-top:0; background:#fff; zoom:1 }
+.M_content_t { height:34px; background:#f5f5f5; clear:both; line-height:34px; padding-left:3px;border: 1px solid #e1e3e2; }
+.M_content_t .selt { float:left;}
+.selt_box {position:relative; height:28px; line-height:28px; width:96px; text-align:left; cursor:pointer; top:2px;}
+.selt_box2 {width:48px;}
+.selt_box3 {width:92px;}
+.selt_t {display:block; width:100%; height:25px; line-height:25px;border: 1px solid #f5f5f5;}
+.selt_t em {padding-left:10px; display:inline-block; *display:inline; zoom:1;}
+.selt_raw {border-width:4px; border-style:solid; border-color:#333 #f5f5f5 #f5f5f5 #f5f5f5; margin-left:2px; display:inline-block; *display:inline; zoom:1; width:0; height:0; font-size:0; overflow:hidden; position:relative; top:2px;}
+.selt_box.hover .selt_raw {border-color:#666 #fff #fff #fff;}
+.selt_list {position:absolute; left:0; top:26px; padding-top:4px; display:block; background:#fff; border:1px solid #cacaca; border-top:0; width:100%; display:none;}
+.selt_list li {color:#333; padding-left:10px; height:24px; line-height:24px;}
+.selt_list li:hover, .selt_list li.hover {background:#ebebeb;}
+.selt_pl {width:120px; margin:0 auto;}
+.selt_pl .selt_t { border-color:#ebebeb;}
+.selt_pl .selt_raw {border:0; width:12px; height:16px; background:url(/static/images/odds_bg.png) no-repeat -282px -82px;}
+.selt_pl .selt_list li {height:20px; line-height:20px;}
+.selt_box.hover .selt_t {background:#fff; border-color:#cacaca; color:#666;}
+.table_top .tb_plgs .selt_box {left:10px; *float:left;}
+.table_top .tb_plgs .selt_box.hover { background:#fff;}
+.table_top .tb_plgs .selt_box.hover .selt_list li.hover {background:#1b62a0;}
+.M_content_t .selt select { color:#333; line-height:22px; }
+.M_content_t .selt_box { float:left; margin-right:10px;}
+.selt_checkbox{ float:left; margin-right:10px; _padding-top:5px;}
+.M_content_t input, .record_check input { vertical-align:-2px; cursor:pointer;}
+.M_content_t select, .record_check select {border:0;}
+.M_content_topr { float:right;}
+.box_p1 { padding:10px 0 5px 5px; }
+.percent_t td { height:26px; }
+.percent_t tr.top td, .percent_t tr.bottom td { height:20px; }
+.percent_t tr.top td { vertical-align:top; }
+.percent_t tr.bottom td { vertical-align:bottom; }
+.per_w { width:40px; height:10px; float:left; margin-top:3px; }
+.zc_bili span { display:block; float:left; _display:inline; text-align:center; line-height:14px; }
+.zc_bili span.sp_info { line-height:26px; }
+.per_w .per_s, .per_w .per_p, .per_w .per_f { background:#f00; display:block; text-indent:-9999px; line-height:10px; font-size:10px; }
+.per_w .per_p { background:#090; }
+.per_w .per_f { background:#00f; }
+.per_num { width:33px; float:right; _display:inline; text-align:right; padding-right:5px; }
+.up_down { margin-left:10px; }
+.click_b { display:block; width:50px; height:40px; background-position:0 -211px; line-height:20px; padding:5px 0; cursor:pointer; }
+.main_right .comments .com_right { width:294px; float:left; }
+.main_right .comments .com_right .ifr_text { height:150px; _width:293px; overflow:hidden; overflow-y:auto; }
+.com_pl { margin:6px 10px; }
+.com_pl .com_info span { display:block; }
+.com_pl .com_info .c_name { width:50%; padding-left:15px; background-position:-417px -24px; height:20px; float:left; }
+.com_pl .com_info .c_data { width:40%; float:right; text-align:right; }
+.com_pl .com_info p { text-indent:15px; }
+
+.setmsg { height:55px; padding:0 10px; background-position:0 -76px; }
+.setmsg .tips { text-align:right; padding-right:8px; }
+.setmsg p { line-height:24px; }
+.setmsg div input.msg_txt { width:220px; height:20px; line-height:20px; background-position:-70px -211px; border:1px solid #92beee; background:url(/static/images/input_seach_bg.png) no-repeat right\9; }
+.setmsg div input.msg_btn { width:45px; height:22px; background-position:-173px -239px; border:none; margin-left:1px; color:#fff; cursor:pointer; }
+.setmsg div input.btn_Dblue_s { margin-left:1px; cursor:pointer; vertical-align:inherit; }
+.team_a { width:499px; border-right:1px solid #d8d8d8; float:left; }
+.team_b { width:498px; float:right; }
+.team_b .team_b_info { background:#ececec; padding:10px 0; height:44px; border-bottom:#f5f5f5 solid 1px; }
+.M_box_jifen .td_one {color:#666;}
+.bet_msg {text-align:center; padding-top:10px; color:#d9e9fc;}
+.bet_msg .bet_buy {padding-top:4px;}
+.bet_msg .bet_buy_btn {width:86px; height:30px; display:inline-block; *display:inline; zoom:1; background:url(/static/images/tongji/bet_info.png) no-repeat; vertical-align:middle; margin-left:6px;}
+.bet_msg .bet_buy .bet_buy_btn {background-position:-311px -67px;}
+.bet_msg .bet_buy_slt .bet_buy_btn {background-position:-311px -101px;}
+.bet_msg .bet_buy_wait .bet_buy_btn {background-position:-222px -67px;}
+.bet_msg .bet_result { font-size:26px; font-family:microsoft yahei,"寰蒋闆呴粦";}
+.bet_msg .bet_buy, .bet_msg .bet_buy_wait, .bet_msg .bet_buy_slt, .bet_msg .bet_result{display:none;}
+.bet_msg .bet_beishu {display:inline-block; *display:inline; zoom:1; width:98px; height:22px; position:relative; top:6px;}
+.bet_msg .bet_beishu i {display:block; float:left; width:20px; height:20px; border:1px solid #1d4575; background:url(/static/images/tongji/odds_bg.png) no-repeat -334px -56px; cursor:pointer;}
+.bet_msg .bet_beishu i.bet_beishu_add {background-position:-364px -56px;}
+.bet_msg .bet_beishu input {width:54px; height:20px; line-height:20px; border:1px solid #1d4575; border-left:0; border-right:0; color:#1d4575; background-color:#d9e9fc; float:left; text-align:center;}
+.bet_msg .bet_buy_slt_msg {font-size:16px; margin-left:40px; margin-right:8px; font-family:microsoft yahei,"寰蒋闆呴粦"; }
+.bet_msg .i-qw {display:inline-block; *display:inline; zoom:1; width:16px; height:16px; background:url(/static/images/tongji/bet_info.png) no-repeat -227px -100px;}
+
+.odds_nav { width:1000px; margin:0 auto; height:46px; clear:both; position:relative; background-color:#6795ce;}
+
+/*浜ゆ垬鍘嗗彶*/
+.history .M_content_t .selt { width:620px;}
+.history .his_info { padding-left:14px; padding-top: 6px; display: inline-block; }
+.history .his_info em { font-weight:bold; }
+.pub_table th { height:34px; border-left:1px solid #fff; border-bottom:1px solid #e0e0e0; background:#ebebeb; text-align:center; color:#666; }
+.pub_table th.th_one { border-left:none; }
+.pub_table td { border-top:1px solid #dedede;border-left: 1px solid #fff; text-align:center; color:#333; height:34px; height:33px\9; line-height:34px; line-height:33px\9; font-family:Tahoma; font-size:12px; }
+.pub_table tr.cur_td td { background:#fffacc; }
+.pub_table td.td_one { border-left:none; }
+.pub_table td.td_one a { color:#fff; }
+.pub_table td.td_one a:hover { color:#fff; text-decoration:underline }
+.pub_table td.td_even { background:#f6f6f6; }
+.pub_table td.td_max { background:#fff9cb; }
+.pub_table td.td_min { background:#ddffcc; }
+.pub_table td img { vertical-align:middle; margin-left:2px; }
+.pub_table td.line_h { background:#F8F3CC; line-height:16px; }
+.pub_table td.red_up { background:url(/static/images/red_up_ico.png) no-repeat 44px 6px; }
+.pub_table td.green_down { background:url(/static/images/green_down_ico.png) no-repeat 44px 6px; }
+.pub_table .tr_no_end {background-color:#fffacc;}
+.pub_table .tr2, .pub_table .tr2 td.red_up { background-color:#f5f5f5; }
+.pub_table .tr3 { background:#fffacc; }
+.pub_table .last_tr td { border-bottom:0; }
+.pub_table .dz{ width:240px; font-family:Tahoma; }
+.pub_table .dz .dz-l, .pub_table .dz .dz-r { display:inline-block; _display:inline; zoom:1; width:96px; }
+.pub_table .dz .dz-l {float:left; text-align:right;}
+.pub_table .dz .dz-r {float:right; text-align:left;}
+.pub_table .dz .zhu, .zhu, a.zhu, .zhu a { color:#a00000 }
+.pub_table .dz a { color:#333; text-decoration:none; overflow:hidden; zoom:1;}
+.pub_table .dz a:hover, .pub_table .dz a:hover span, .pub_table .dz a:hover em { color:#ff3300; text-decoration:underline; }
+.pub_table .dz em {width:48px; text-align:center; float:left;}
+.pub_table_pl span {display:inline-block; _display:inline; zoom:1; margin:0 5px; width:34px; height:16px; line-height:16px; text-align:center;}
+.pub_table_pl .pl_yes { color:red;}
+.pub_table_pl .table_pl_center {width:78px;}
+/*杩戞湡鎴樼哗*/
+.record .M_content, .integral .M_content, .starting .M_content { backgound:#fff; *margin-top:-1px;}
+.M_sub_title {clear:both; text-align:center;}
+.M_sub_title .team_name { text-align:center; font-weight:bold; width:499px; float:left;}
+.M_sub_title .team_name span { font-weight:normal; font-size:12px; }
+.M_content_t .team_name { float:left; padding-right:10px; font-size:14px;}
+.M_title_fx { float:left; padding-left:14px; padding-top:8px;}
+.M_title_fx span {cursor:pointer;}
+.M_title_fx span:hover {text-decoration:underline;color:red;}
+.M_title_fx .title_cur {color:#333;}
+.selt strong{ padding-left:10px;}
+.selt p { margin-bottom:10px; font-size:14px; }
+.record_check {background-color:#ebebeb; border-left:1px solid #cacaca; border-bottom:1px solid #e0e0e0; width:488px; height:28px; line-height:28px; padding-left:10px;}
+.record .team_a {width:499px;}
+.record .team_b {width:500px;}
+.record .team_b .record_check {border-left:0; border-right:1px solid #cacaca; width:489px;}
+.record .team_a .M_content_t,.record .team_a .M_content {border-right:0;}
+.record .team_b .M_content_t,.record .team_b .M_content {border-left:0;}
+.odds_zj_tubiao .pub_table .dz{ width:160px;}
+.odds_zj_tubiao .pub_table .dz .dz-l, .odds_zj_tubiao .pub_table .dz .dz-r { width:56px; }
+.odds_zj_tubiao .bottom_info { height:100px; font-size:14px; text-align:center;}
+.record .bottom_info p { text-align:center; line-height:20px; padding-top:8px; }
+.record .bottom_info .chart { margin:0 auto; height:75px; font-size:12px; }
+.line_t { font-size:0; height:0; line-height:0; overflow:hidden; border-top:#D8D8D8 solid 1px; }
+.pub_table_tabs a {display:inline-block; _display:inline; zoom:1; margin:0 8px; padding:1px 3px;}
+.pub_table_tabs a.cur {background-color:#2faacd; color:#fff; cursor:default;}
+.pub_table_tabs a.cur:hover {text-decoration:none;}
+.pl_yapan, .pl_daxiao {display:none;}
+.record_msg {height:24px; line-height:24px; font-size:14px;}
+/*鏌辩姸鍥�*/
+.record .bottom_info .chart .histogram div { width:20px; margin:0 auto; }
+.red_h span, .green_h span, .blue_h span { display:block; font-size:0px; line-height:0px; }
+.red_h .height, .green_h .height, .blue_h .height { background:url(/static/images/red_middle.png) repeat-y; height:57px; }
+.green_h .height { background:url(/static/images/green_middle.png) repeat-y; }
+.blue_h .height { background:url(/static/images/blue_middle.png) repeat-y; }
+.starting img { vertical-align:-3px; }
+.starting .team_a .pub_table td, .starting .team_b .pub_table td { text-align:left; }
+.recommend .rec_title { border-bottom:1px solid #f5f5f5; background:#ececec; height:31px; line-height:31px; text-align:center; font-weight:bold; }
+.recommend .M_content { backgound:#fff; padding:0 1px; *margin-top:-1px;}
+.recommend .pub_table td { text-align:left; padding-left:10px; }
+.recommend .pub_table td.td_center { text-align:center; }
+.recommend .pub_table td.td_center .mar_right60 { margin-right:60px; }
+.recommend .pub_table td.td_no4 { padding:6px 10px; }
+
+/*鏈潵璧涗簨*/
+.int_dz {width:180px; margin:0 auto; clear:both;}
+.int_dz a {color:#333; display:block;}
+.int_dz a:hover {color:#f00;}
+.int_dz .dz-l {float:left; text-align:right; width:70px;}
+.int_dz .dz-r {float:right; text-align:left; width:70px;}
+.int_dz em {float:left; display:block; width:36px;}
+
+.c_btn_b, .c_btn_b b, .c_btn_c, .c_btn_c b { display:inline-block; background:url(/static/images/c_btn_b.gif) no-repeat; cursor:pointer; }
+.c_btn_b { background-position:left top; padding-left:8px; }
+.c_btn_c { background-position:left top; padding-left:21px; }
+.c_btn_b b { background-position:right top; padding-right:8px; font:normal 12px/24px Simsun; height:22px; }
+.c_btn_c b { background-position:right top; padding-right:21px; font:normal 12px/24px Simsun; height:22px; }
+.con_down a, .con_bottom a { margin-left:12px; }
+.con_bottom { text-align:center; }
+
+/*table*/
+table {border-collapse:collapse;}
+.table_cont .pub_table {border-left:1px solid #cacaca; border-right:1px solid #cacaca;}
+.tb_bdr {border-right:1px solid #fff;}
+.tb_bdb {border-bottom:1px solid #e0e5ea;}
+.tb_tdul {font-size:0; line-height:28px; height:28px;}
+.tb_tdul span {font-size:12px;}
+.tb_tdul li { display:inline-block; *display:inline; zoom:1; width:56px; font-size:12px; overflow:hidden;}
+.tb_tdul li.bg-a {background:#faa6a6;}
+.tb_tdul li.bg-b {background:#c1ef8d;}
+.odds_yazhi .tb_tdul li {width:50px;}
+.tb_tdul li i {font-family:"瀹嬩綋"; position:absolute; margin-top:1px; margin-top:2px\0; *margin-top:-5px;}
+.table_cont tr:hover, .table_cont tr.hover {background-color:#fffacc;}
+.table_cont table .tb_plgs p, .odds_t .tb_plgs p{text-align:left; padding-left:20px;}
+.tb_plgs a {color:#333;}
+.tb_plgs a:hover {color:#f30;}
+.odds_t { height:34px; background:#f5f5f5; clear:both; line-height:34px; color:#fff; position:relative;}
+.odds_t table td {height:28px;text-align:center; line-height:28px; color:#fff;}
+.odds_t table select {border:0; margin-left:-1px;}
+.odds_t_tr {background-color:#e1e9f0; color:#333;}
+.pub_table .odds_t_th th{background-color:#f5f5f5; color:#333; border: 1px solid #dedede;}
+.odds_t .pub_table {border-left:1px solid #cacaca;border-right:1px solid #cacaca;}
+.icon_explain {display:inline-block; *display:inline; zoom:1; width:16px; height:16px; vertical-align:middle; background:url(/static/images/odds_icon.png) no-repeat; margin-left:2px;}
+.odds_t .explain_box {position:absolute; top:28px; left:0; z-index:5; width:240px; display:none;}
+.odds_t .explain_box p {background-color:#feffe5; color:#333; padding:8px 12px; text-indent:2em; line-height:20px;}
+.odds_t .explain_box .icon_raw {display:block; width:0; height:0; overflow:hidden; position:absolute; left:50%; margin-left:-3px; top:-5px; border:5px solid #feffe5; border-top:0; border-left-color:#6795ce; border-right-color:#6795ce;}
+.odds_t .explain_box_jishi {left:446px;}
+.odds_t .explain_box_kaili {left:730px;}
+.table_cont table .td_one p, .table_cont table .th_one p{ text-align:left; padding-left:15px;}
+.table_cont table .td_one input { vertical-align:-2px;}
+.table_cont td {border-bottom:1px solid #dedede; border-right: 1px solid #dedede;}
+.table_btm {border-bottom:1px solid #cacaca;}
+.table_btm table {background-color:#e1e9f0; text-align:center; border:1px solid #cacaca; border-top:0;}
+.table_btm table td {border-bottom:1px solid #fff;border-left:1px solid #fff; height: 36px;}
+.table_btm table td.td_one {border-left:0;}
+.table_btm td input { vertical-align:-2px; cursor:pointer;}
+.table_btm .tb_xiazai_btn {padding:0 8px;}
+.table_btm_btn { line-height:28px; padding-top:6px;}
+.table_btm_btn  .btn_width_auto {padding:0 6px;}
+.odds_msg {text-align:center; padding:10px 0;}
+.odds_msg2 {text-align:left; border:1px solid #ddd; background:#f5f5f5; padding:0 20px; margin-top:10px;}
+.odds_msg2  li {margin:10px 0; line-height:20px;}
+
+/*琛ㄦ牸澶村熬璺熼殢*/
+.table_top {height:69px;}
+.table_top_fixed {position:fixed; z-index:5; top:0;}
+* html .table_top_fixed {position:absolute; top:expression(eval(document.documentElement.scrollTop));}
+* html .table_btm_fixed {position:absolute; top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight));}
+.table_btm_fixed {position:fixed; z-index:5; bottom:0;}
+* html,* html body{background-image:url(about:blank);background-attachment:fixed} /*淇IE6鎸姩bug */
+/*娆ц禂*/
+.th_jsop { position:relative; text-align:left; padding-left:50px; /* height:28px; */}
+.th_jsop label {position:absolute; right:5px; top:0; _top:4px;}
+.th_jsop label input {vertical-align:-2px; margin-right:4px; *margin-right:0;}
+.td_show_cp {border-bottom:1px solid #efefef;}
+/*璧旂巼瀹氬埗*/
+.odds .dz_tips_box {position:absolute; width: 552px; z-index: 10001; font-size:12px;}
+.odds .dz_tips_box .tips_title {background:#e1e9f0;}
+.odds .dz-btn,.dz-con .hd,.dz-c-se a:hover,.dz-c-list .del{background:url(/static/images/dz-sp.png) no-repeat 0 -200em;}
+.odds .dz-btn{display:inline-block;width:114px;height:27px;line-height:26px;background-position:0 -35px;color:#294190;text-align:center;}
+.odds .dz-btn-on{background-position:0 -63px;color:#fff;}
+.odds .dz-wrap .btn_blue_cur {background-position:0 -210px; color:#fff; border:1px solid #1762A0;}
+.odds .dz-wrap{overflow:hidden;zoom:1; border-top:1px solid #d8d8d8;}
+.odds .dz-side{float:left;width:134px;height:370px;padding:10px;padding-bottom:50px;border-right:1px solid #D8D8D8;background:#F5F7FB;text-align:center;}
+.odds .dz-wrap .dz-list{margin-bottom:20px;text-align:left;color:#999999;}
+.odds .dz-list li{margin-bottom:8px;}
+.odds .dz-wrap .tq-list{margin-bottom:20px;line-height:20px;text-align:left;color:#666666;}
+.odds .dz-con{margin-left:155px;}
+.odds .dz-con .hd{height:34px;background-position:0 0;background-repeat:repeat-x;overflow:hidden;}
+.odds .dz-con .hd span{float:left;width:180px;line-height:34px;padding-left:18px;border-right:1px solid #E4E4E4;color:#999;}
+.odds .dz-con .bd{overflow:hidden;zoom:1;}
+.odds .dz-c-wp{float:left;width:49.9%;}
+.odds .dz-c-se,.dz-c-sed{height:326px;padding-top:4px;overflow:hidden;overflow-y:scroll;position:relative;}
+.odds .dz-c-list li{height:24px;font-size:12px;position:relative;overflow:hidden;}
+.odds .dz-c-list .del{position:absolute;width:17px;height:15px;right:20px;top:6px;background-position:-115px -35px;line-height:9999px;overflow:hidden;}
+.odds .dz-c-list .del:hover{background-position:-115px -51px;}
+.odds .dz-c-se .dz-c-list a{display:block;padding-left:20px;height:22px;line-height:22px;border:1px solid #fff;border-width:1px 0;color:#363636;}
+.odds .dz-c-se .dz-c-list a:hover{border-color:#BECEE9;background-color:#E8EEF8;background-position:140px -106px;color:#294190;}
+.odds .dz-c-sed li{line-height:24px;padding-left:20px;}
+.odds .dz-con .ft{padding:16px 0 20px;border-top:1px solid #E4E4E4;background:#F8F8F8;text-align:center;}
+.odds .dz-c-jq{padding:10px 0 10px 20px;border-bottom:1px solid #E4E4E4;}
+.odds .dz-c-jq .cx .dz-i{width:80px;}
+.odds .dz-c-jq .cx-c{padding-top:10px;}
+.odds .dz-c-jq .cx-c span{color:#999;display:inline-block;width:50px;}
+.dz-i{width:100px;line-height:16px;padding:4px 2px;border:1px solid #CBCBCB;vertical-align:middle;color:#999;}
+
+.con_down{position:relative;}
+.dz-tips{position:absolute;width:116px;left:12px;top:32px;border:1px solid #7CB4E3;background:#F1F8FE;display:none;}
+.dz-t-list{text-align:left;padding-left:15px;padding-top:10px;padding-bottom:15px;}
+.dz-t-list li{line-height:24px;}
+.dz-t-list li a{margin-left:0;}
+
+/*姣斿垎鎸囨暟*/
+.M_box_bifen {margin-bottom:10px;}
+.M_box_bifen .M_sub_title .h2c {text-align:left; padding-left:14px;}
+.bifen_tabs {float:left; text-align:left;}
+.bifen_tabs li{ float:left; font-weight:normal; cursor:pointer; margin-right:1px;}
+.bifen_tabs li a {display:block; padding:0 10px; color: #333;}
+.bifen_tabs a:hover {  text-decoration:none;background-color:#fff;}
+.bifen_tabs li.cur {background-color:#fff; cursor:default;}
+.bd_btm {display:block; border-bottom:1px solid #e0e5ea;}
+.M_box_bifen table .tb_plgs p { padding-left:24px;}
+.M_box_bifen .table_cont .pub_table {border:0;}
+.M_box_bifen .selt_box {float:left; margin-left:10px; _margin-left:5px;}
+.M_box_bifen .selt_t {border-color:#ebebeb;}
+.M_box_bifen .selt_raw {border-color:#ebebeb; border-top-color:#4872aa;}
+.M_box_bifen .tb_plgs .btn_blue_l {float:left; margin-top:6px; margin-left:4px;}
+.tr4 {background-color:#e1e9f0;}
+.M_box_bifen .pub_table .tr4 td {border-top:1px solid #fff;}
+.M_box_bifen .table_cont td {border-bottom:1px solid #fff;}
+.table_btm_msg {background-color:#e0e5ea; border:1px solid #cacaca; border-top:0; height:32px; padding-top:8px; padding-left:14px;}
+/* 鎸囨暟tips鎻愮ず灞� */
+.datachart_tips{ border: 1px solid #BCBCBC; background-color:#fff; -webkit-box-shadow:0px 0px 7px #cdcdcd; -moz-box-shadow:0px 0px 7px #cdcdcd; box-shadow:0px 0px 7px #cdcdcd; width:360px;}
+.datachart_tips .tit{height: 27px; background: #eee; line-height:27px; clear:both;}
+.datachart_tips .tit .ch_btn{ padding: 2px 5px; border: 1px solid #BCBCBC; background: #fff; float: right; cursor: pointer;}
+.datachart_tips .tit_cur {padding-left:10px; float:left;}
+.datachart_tips .tips_close {display: block; float:right; width:18px; height:18px; line-height:18px; background:url(/static/images/tips_ico.png) no-repeat 4px 4px; text-indent:-999em; margin-top:3px; margin-right:5px;}
+.datachart_tips .tips_close:hover {background-position:4px -14px; background-color:#4586D2;}
+.datachart_table th{border-left: 1px solid #EBEBEB; height: 29px; font-weight:bold;}
+.datachart_table th.first, .datachart_table td{border-left: 0;}
+.datachart_table td{border: 1px solid #ebebeb; border-width: 1px 0 0 1px; height: 29px; text-align: center;}
+.datachart_table td strong {display:inline-block; width:8px;}
+
+.datachart_tips td.tips_up{background:url(/static/images/red_up_ico.png) no-repeat 50px 8px;}
+.datachart_tips td.tips_down{background:url(/static/images/green_down_ico.png) no-repeat 50px 8px;}
+
+.pl_table_data td span.tips_up{background:url(/static/images/red_up_ico.png) no-repeat 50px 8px;
+color:#E24949 ; width: 100%;height: 100%; display: inline-block;}
+.pl_table_data td span.tips_down{background:url(/static/images/green_down_ico.png) no-repeat 50px 8px;
+color: #009900; width: 100%;height: 100%; display: inline-block;}
+.pl_table_data td span.bg-a{background:#EEC9CD;color:#E24949; border-right:1px solid #fff;}
+.pl_table_data td span.bg-b{background:#BFE5BF;color:#009900;border-right:1px solid #fff;}
+
+/*浜氱洏銆佸ぇ灏忔寚鏁�*/
+.tb_tdul li.tb_tdul_pan {width:120px;}
+.tb_tdul li.tb_tdul_more {width:40px;}
+.tb_tdul_more span {display:inline-block; *display:inline; zoom:1; width:16px; height:12px; margin-left:2px; background:url(/static/images/odds_bg.png) no-repeat -329px -85px; cursor:pointer; position:relative; *top:-3px; _top:0;}
+.tb_tdul_more span.raw_up {background-position:-329px -101px;}
+.odds_daxiao .tb_tdul li.tb_tdul_pan {width:60px;}
+
+/*璧板娍鍒嗘瀽*/
+.cont_jfzs {padding:16px 22px; text-align:center; height:220px; background-color:#f6f6f6;}
+.M_title_msg {float:right; padding-top:12px; font-family:"瀹嬩綋";}
+.odds_zs .M_sub_title, .odds_zs .M_sub_title .h2c {font-size:12px; font-weight:normal;}
+.M_box_zs .M_content {width:998px; overflow-x:scroll; overflow-y:hidden; border-bottom:0;}
+.zs_table{background:#F6F6F6; font-family:Tahoma, Geneva, sans-serif; width:1400px; text-align:center; border-collapse:separate;}
+.zs_table td{border-left:1px solid #d8d8d8; border-top:1px solid #fff; border-bottom:1px solid #d8d8d8;}
+.zs_table td p{line-height:22px;}
+.zs_table td.s_title div{width:28px; vertical-align:middle; margin:0 3px;}
+.zs_table td.s_text2 div{width:12px; line-height:12px; margin:0 auto; color:#999; overflow:hidden;}
+.zs_table td.s_text div{width:12px; line-height:15px; margin:0 auto; padding-top:8px;}
+.zs_table td.h_light{border-left:1px solid #d8d8d8; background:#f6f6f6;}
+.zs_table td.n_left{border-left:none;}
+.zs_table td.n_bottom{border-bottom:none;}
+.zs_table td.even{background:#fff;}
+.zs_table_msg {padding:6px 0 6px 10px; font-size:14px;}
+
+/* 鎶曟敞鍒嗘瀽 */
+.odds_tz .M_box {margin-bottom:16px;}
+.odds_tz .M_sub_title {text-align:left; padding-left:12px;}
+.tz_table {background-color:#f3f8fc; border: 1px solid #dedede;}
+.tz_table td { border-left: 1px solid #e0e5ea;}
+.tz_table tr.cur_td td { background:#fffacc; }
+.tz_table td.td_one { border-left:none; }
+.tz_table .td_color {background-color:#fff;}
+.tz_table .td_no {background-color:#fff; height:12px; line-height:12px;}
+.tz_table_wf p{text-align:left; padding-left:10px;}
+.tz_table td.tz_table_bili {border-top:1px solid #fff;}
+.tz_table_bili div {width:100%; background-color:#77aef3; position:relative; height:100%;}
+.tz_table_bili div p {background-color:#f46a6a; color:#fff; position:absolute; left:0; top:0; width:100%; height:100%;}
+.tz_table_bili div span {position:absolute; left:12px; color:#fff;}
+.comment_top {border-bottom:1px solid #cacaca; text-align:center; padding:12px 30px 16px 30px; height:50px;}
+.comment_top div{display:table; margin:0 auto;}
+.comment_top .icon {display:table-cell; width:38px; height:36px; background:url(/static/images/odds_bg.png) no-repeat -360px -96px;}
+.comment_top .icon2 {background-position:-408px -96px; position:relative; top:5px;}
+.comment_top p {display:table-cell; font-family:microsoft yahei,"榛戜綋"; font-size:18px; vertical-align:middle; padding:0 30px; text-align:left;}
+.comment_top p span {font-size:14px;}
+.comment { background-color:#f4f6f8; height:260px;}
+.comment_l {float:left; width:460px; height:240px; padding-left:46px; overflow-y:scroll; overflow-x:hidden;}
+.comment_l ul li {border-bottom:1px dashed #dbdbdb; padding:12px 0; line-height:22px; clear:both;}
+.comment_l ul .gray {padding-right:18px; float:right;}
+
+.comment_l ul li  .c{ margin-left:5px;}
+.comment_l ul li .ok { background:url(/static/images/ok.jpg) no-repeat 0 4px; padding-left:15px;}
+.comment_l ul li .d:hover{ text-decoration:none; color:#F00;}
+
+.comment_l ul .gray .hide{ cursor:pointer; display:none;}
+.comment_l ul .gray .hide:hover{ text-decoration:underline; color:#F00;}
+
+
+.comment_r {float:left; padding-left:56px; padding-top:30px;}
+.comment_r .com_text {width:360px; height:100px; display:block; margin-bottom:10px; padding:10px; border:1px solid #a8a8a8; color:#999;}
+.comment_r .btn_orange {float:left;}
+.comment_r .gray {float:right; }
+.comment_r .gray span {font-size:24px; font-family:Georgia,Tahoma,sans-serif;}
+
+/*鍘嗗彶鐩稿悓璧旂巼*/
+.contrast .M_content{backgound:#fff; border-top:1px solid #cacaca;}
+.contrast .con_top{height:41px; background:#F6F6F6; border-bottom:1px solid #d8d8d8;}
+.contrast .con_top .sort_con{width:440px; height:22px; padding:10px 0; line-height:20px; color:#666; float:left;}
+.contrast .con_top .sort_con span{display:block; float:left; height:22px;}
+.contrast .con_top .sort_con span.select_sp1{padding-left:8px;background:url(/static/images/oz_fg.gif) no-repeat right; }
+.contrast .con_top .sort_con span.select_sp2{padding-left:15px;}
+.contrast .con_top .sort_con span.select_sp3{margin-left:15px;}
+.contrast .con_top .sort_con select{margin-right:15px; vertical-align:middle; height:20px; border:1px solid #7f9db9;}
+.contrast .con_top .sort_con input.fw{width:30px; height:19px; line-height:19px; border:1px solid #7f9db9; color:#999; text-indent:0px; margin-right:3px; vertical-align:middle;}
+.contrast .con_top .sort_con input.btn_Lblue_s{margin-left:14px; margin-right:15px; vertical-align:middle;}
+.contrast .con_top .con_down{width:340px; float:right; height:22px; padding:10px 10px 0 0; text-align:right;}
+.contrast .con_top .con_down a.btn_Lblue_m{margin-left:10px; margin-left:14px\9;}
+.contrast .con_top .con_down a.public_Lblue{margin-left:15px;}
+.contrast .con_top2{line-height:24px;padding:5px 10px; background:#ECECEC; border-bottom:1px solid #d8d8d8;}
+.contrast .con_top3{ padding:5px 10px; background:#f6f6f6; border-bottom:1px solid #d8d8d8;}
+.contrast .con_top3 .btn_blue_l_w40 {width:38px; margin-right:6px; margin-top:6px;}
+.contrast .con_top3 p.fx_right{ float:left; border-left:1px solid #C5D7EC; padding-left:10px; line-height:27px; min-height:54px; _height:54px;}
+.contrast .con_top3 input{vertical-align:-2px; margin-right:2px; margin-right:0px\9; *margin-right:-3px;}
+.contrast .con_top3 label{width:78px; float:left; overflow:hidden;}
+.contrast .dz {font-family:'瀹嬩綋';}
+.contrast .dz .ff_thm {font-family:Tahoma, Geneva, sans-serif;}
+
+.rangqiu_info {text-align:left; padding-left:60px; line-height:30px; color:#666;} /*璁╃悆搴曢儴淇℃伅*/
+/*搴曢儴鎻愰啋*/
+.remind {text-align:center; padding-top:5px;}
+
+/*璧旂巼閮ㄥ垎鏀规垚table褰㈠紡锛屼慨澶嶅鍒剁矘璐村埌word鐨勬牸寮忛敊璇�*/
+.pub_table .pl_table_data, .table_btm .pl_table_data {width:100%; margin:0 auto; border:0;}
+.pub_table .pl_table_data td, .table_btm .pl_table_data td {border:0; height:28px; line-height:28px;}
+.pub_table th .pl_table_data td {color:#666;}
+.pl_table_data td.bg-a{background-color:#faa6a6; border-right:1px solid #fff;}
+.pl_table_data td.bg-b{background-color:#c1ef8d; border-right:1px solid #fff;}
+.pl_table_data tr.tr_bdb {border-bottom:1px solid #efefef;}
+.pl_table_data td.ying {color:#f00;}
+.pl_table_data td.ping {color:#090;}
+.pl_table_data td i {font-family:"瀹嬩綋"; position:absolute; margin-top:1px; margin-top:2px\0; *margin-top:-5px;}
+.pl_table_data td i.red {margin-left:3px;}
+
+/*缁熻鍒嗘瀽椤甸潰*/
+.statis-l {float:left; width:200px; position:relative;}
+.team-tb  {text-align:center;}
+.team-tb th {height:30px; line-height:30px; color:#fff; font-family:microsoft yahei,"寰蒋闆呴粦"; font-size:16px; text-align:center; background-color:#329665;}
+.team-tb td {height:30px; border-bottom:1px solid #fff; padding:0;}
+.team-tb tr {background-color:#f8f6f6;}
+.team-tb td a {color:#333;}
+.team-tb td a:hover {color:#f00;}
+.team-tb .team_bench td a {color:#666;}
+.team-tb .team_bench td a:hover {color:#f00;}
+.player-info {width:200px; text-align:center; border-top:1px solid #d4d4d4; background-color:#e9f5f0; padding-bottom:10px; position:absolute; left:0; z-index:9; display:none;}
+.player-info-t {padding:10px 0; display:block;}
+.player-info table {width:185px; margin:0 auto;}
+.player-info td {border:1px solid #cfe0d9; height:20px; color:#666;}
+.statis .icon {display:inline-block; *display:inline; zoom:1; vertical-align:middle; width:20px; height:18px; line-height:18px; overflow:hidden; text-align:center; background:url(/static/images/tongji/icon_live.png) no-repeat 0 1px;}
+.statis .icon-bg { background-image:none; background-color:#20b56d; color:#fff;}
+.statis .team_bench .icon-bg {background-color:#999;}
+.statis .icon-goal {background-position:0 0;}
+.statis .icon-goal-kick {background-position:-40px 0;}
+.statis .icon-goal-own {background-position:-20px 0;}
+.statis .icon-yellow-card {background-position:-60px 0;}
+.statis .icon-red-card {background-position:-80px 0;}
+.statis .icon-yellow-card2 {background-position:-100px 0;}
+.statis .icon-goal-void {background-position:-120px 0;}
+.statis .icon-player-change {background-position:-140px 0;}
+.statis .icon-player-on {background-position:-160px 0;}
+.statis .icon-player-out {background-position:-180px 0;}
+.statis .icon-pulldown {background:url(/static/images/tongji/odds_bg.png) no-repeat -24px -55px; cursor:pointer;}
+.statis .icon-pullup {background-position:-111px -56px;}
+.statis .statis-r .icon-bg {background-color:#24b5da;}
+.statis .statis-r .team_bench .icon-bg {background-color:#999;}
+.statis .statis-r .icon-pulldown {background-position:-53px -55px;}
+.statis .statis-r .icon-pullup {background-position:-140px -55px;}
+.statis-r {float:right; width:200px; position:relative;}
+.statis-r .team-tb th {background-color:#24b5da;}
+.statis-r .player-info {background-color:#e7f1f7;}
+
+.statis-c {float:left; margin-left:20px; width:560px;}
+.statis-c-t {min-height:452px; height:auto; _height:452px;}
+.statis-c-tabs {height:30px; padding-bottom:6px;}
+.statis-c-tabs li {float:left; width:140px; height:30px; line-height:30px; text-align:center; font-family:microsoft yahei,"寰蒋闆呴粦"; font-size:16px; cursor:pointer; position:relative; overflow:hidden;border-bottom:1px solid #dfdfdf; }
+.statis-c-tabs li:hover, .statis-c-tabs li.cur {border-bottom:2px solid #2563a4; height:29px; line-height:29px;}
+.statis-c-tabs li:hover span, .statis-c-tabs li.cur span {display:block; background:url(/static/images/tongji/odds_bg.png) no-repeat -240px -61px; width:8px; height:5px; position:absolute; left:50%; margin-left:-4px; bottom:-1px;}
+.statis-c-tc {display:none;}
+.zhenxing {width:100%; height:396px; background:url(/static/images/tongji/field_bg.jpg) no-repeat;}
+.zhenxing-t {height:26px;}
+.zhenxing-t p {width:45%;; padding-left:8px; color:#fff; height:26px; line-height:26px; font-family:Tahoma;}
+.zhenxing .r { padding-left:0; padding-right:8px; text-align:right;}
+.zhenxing-l {float:left; position:relative; width:50%;}
+.zhenxing-r {float:right; position:relative; width:50%;}
+.zhenxing .itm {position:absolute; width:52px; height:54px; text-align:center;}
+.zhenxing .itm a {display:block;}
+.zhenxing .itm img {border-radius:50%; margin:0 auto; background-color:#fff;}
+.zhenxing .itm .itm_name {height:18px; line-height:18px; color:#fff; width:100%; background-color:#076227;}
+.zhenxing .itm .itm_name:hover {color:#fff;}
+
+.team-statis table {text-align:center;}
+.team-statis tr.nobottom {border-bottom:0;}
+.team-statis td {height:31px;border-top:1px solid #efefef;}
+.team-statis tfoot tr {background-color:#e9e9e9;}
+.team-statis tfoot td {height:30px;}
+.team-statis tfoot td .icon {width:18px;}
+.team-statis th {font-family:microsoft yahei,"寰蒋闆呴粦"; font-size:16px; height:33px;}
+.team-statis .bgcolor1, .team-statis .bgcolor2 {height:20px; line-height:20px; background-color:#20b56d; padding-right:1px;}
+.team-statis .bgcolor2 {background-color:#24b5da; padding-right:0; padding-left:1px;}
+.text { height:396px; overflow-x:hidden; overflow-y:auto;}
+.text td {height:30px;}
+.text tr {background-color:#f8f6f6; border-bottom:1px solid #fff;}
+.text tr:nth-child(even) {background-color:#e9e9e9}
+
+
+.player {width:1000px; padding-top:20px; clear:both;}
+.player-t {height:46px; line-height:46px; color:#fff; background-color:#6795ce; font-size:14px; overflow:hidden;}
+.player-t h4 {float:left; width:158px; text-align:center; font-size:14px;}
+.teams {float:left; width:340px; text-align:center;}
+.teams .teams01, .teams .teams02 {width:150px; float:left; display:block; cursor:pointer;}
+.teams .cur {background-color:#104b8b; cursor:default;}
+.teams span {font-size:12px; display:block; float:left; font-family:"瀹嬩綋"; width:40px;}
+.player-tb {text-align:center;}
+.player-tb tr {border-bottom:1px solid #fff; background-color:#f8f6f6;}
+.player-tb tr:nth-child(odd) {background-color:#e9e9e9}
+.player-tb th {height:30px; background-color:#104b8b; color:#fff;}
+.player-tb td {height:30px; color:#666;}
+.player-tb td a {color:#666;}
+.player-tb td a:hover {color:#f00;}
+
+/*娌℃湁姣旇禌*/
+.statis-no {background-color:#f6f7f9; height:841px;}
+.statis-no .team-tb td {border-bottom:0; padding-top:20px;}
+.statis-no-bg {background:url(/static/images/tongji/statis-no-bg.jpg) no-repeat center 80px #f6f7f9; height:420px; position:relative;}
+.statis-no-bg p {position:absolute; top:230px; left:0; padding:0 20px; text-align:center; width:520px;}
+
+/*fifa鎺掑悕鏍峰紡*/
+.lcol {margin-bottom:25px;}
+.lcol_hd {position:relative;padding-bottom:10px;width:100%;border-bottom:2px solid #2563A4;}
+.lslayout1:after {content:"";display:table;clear:both;}.lslayout1 {*zoom:1;}
+.lslayout1_col {float:left;width:50%;}
+.lslayout1_col .lslayout1_stit {width:100%;height:30px;line-height:30px;text-align:center;font-weight:normal;color:#333;border:1px solid #e1e1e1;background:#f5f5f5;}
+.lgjzl_top_list1 .td_sjpm {font-weight:bold;color:#f00;}
+.ltable {margin-top:-1px;table-layout:fixed;width:100%;text-align:center;border:1px solid #E1E1E1;}
+.ltable td {font-family:tahoma,simsun;}
+.ltable a {color:#000;}
+.ltable .even {background:#F1F6FA;}
+.ltable th {height:30px;color:#999;background:#fff;}
+.ltable td {height:30px;border-bottom:1px solid #E1E1E1;border-top:1px solid #E1E1E1;}
+.ltable tr {background:#F3F3F3;}
+.ltable_sep {border-collapse:separate;}
+.ltable_tl {text-align:left;}
+.ltable_auto td {padding:5px 0;height:auto;}
+.ltable_white tr {background:#fff;}
+.sxpl{float: left;}
+/*2015-08-24 涓炬姤*/
+.M_content .comment_l ul .gray i.jubao-bn{ text-decoration: none;color: #0f3f94; margin-right:8px;}
+.M_content  .comment_l ul .gray i.jubao-bn:hover{ text-decoration:underline;color: #F30;}
+/*鍑埄鎸囨暟鍔犵矖*/
+.kl-font{font-weight: bolder;}
+.M_content .comment_l ul .gray i.jubao-bn.on{ text-decoration: none;color: #999;}
+.M_content  .comment_l ul .gray i.jubao-bn.on:hover{ text-decoration:none;color: #999; cursor:default;}
+.odds_msg {text-align:center; padding:10px 0;}
+.most-low{width:20px; height: 10px;background:#BFE5BF;display: inline-block;margin-right:4px;margin-left: 6px;}
+.most-hight{ width: 20px; height: 10px; background:#EEC9CD;display: inline-block;margin-right:4px;margin-left: 6px;}
+.ying{color:#f00}
+.ping{color:#090}
+.odds_msg em{ font-weight: bolder;}
+
+/*鎯呮姤鎺ㄨ崘*/
+.this-period{width:1000px; margin:0 auto;}
+ .news-list {
+    padding: 10px 0 24px 0
+}
+ .news-list.zj {
+    padding: 0 30px 24px 0
+}
+ .news-list li {
+    position: relative;
+    height: auto;
+    border-bottom: 1px dotted #e7e7e7;
+    font-size: 14px;
+    padding: 27px 0 30px;
+    color: #999;
+	line-height:24px;
+}
+ .news-list li .banner {
+    position: absolute;
+    top: 27px;
+    right: 0;
+    width: 190px;
+    height: 120px;
+    background-color: #ccc
+}
+ .news-list li .banner img {
+    width: 190px;
+    height: 120px
+}
+ .news-list li h3.title {
+    font-size: 22px;
+    font-weight: 400;
+    padding-bottom: 3px;
+    zoom: 1
+}
+ .news-list li h3.title:after {
+    clear: both;
+    content: ".";
+    display: block;
+    width: 0;
+    height: 0;
+    visibility: hidden
+}
+ .news-list li h3.title span {
+    float: left;
+    margin-right: 10px;
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    font-size: 14px;
+    color: #fff;
+    padding: 0 4px;
+    background-color: #68a4ed;
+    border-radius: 2px
+}
+ .news-list li h3.title a {
+    float: left;
+    display: block;
+    color: #333;
+    margin-right: 10px;
+    max-width: 460px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	font-size:24px;
+	color:#333;
+}
+ .news-list li .subtitle {
+    font-size: 14px;
+    color: #999;
+    zoom: 1
+}
+ .news-list li .subtitle:after {
+    clear: both;
+    content: ".";
+    display: block;
+    width: 0;
+    height: 0;
+    visibility: hidden
+}
+ .news-list li .subtitle span {
+    float: left;
+    margin-right: 30px;
+	color:#999;
+	font-size:14px;
+}
+.news-list li .subtitle .view{margin-left:26px;}
+.news-list li .subtitle .liansl{
+	display:inline-block;padding:0 10px;color:#ff0000; border:1px solid #ff0000; font-size:12px;border-radius:8px;height:14px;line-height:14px;
+	float:left;margin-right:4px;margin-top:4px;*margin-top:4px;/*ie7*/_margin-top:4px;/*ie6*/ }
+.news-list li .subtitle  .mr4{margin-right:4px;*margin-right:4px;/*ie7*/_margin-right:4px;/*ie6*/}
+.news-list li .subtitle  .mr8{margin-right:8px;*margin-right:8px;/*ie7*/_margin-right:8px;/*ie6*/}
+ .news-list li .subtitle span:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+    width: 16px;
+    height: 14px;
+    background: url(/lottery/images/contribute/title_sprite.png) no-repeat
+}
+ .news-list li .subtitle span a{color:#999}
+ .news-list li .subtitle span.name:before {
+    background-position: 0 0
+}
+ .news-list li .subtitle span.view:before {
+    background-position: -16px 0
+}
+ .news-list li .subtitle span.subtitle-comment:before {
+    background-position: -32px 0
+}
+ .news-list li .subtitle span.date:before {
+    background-position: -48px 0
+}
+ .news-list li .dec {
+    display: block; cursor:pointer;
+    width: 800px;
+    height: 48px;
+    line-height: 24px;
+    color: #999;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+	font-size:14px;color:#999999;margin-top:20px;margin-bottom:10px;
+}
+ .news-list li .dec:hover {
+    color: #ef5b51
+}
+ .news-list li .dec a:hover,  .news-list li h3.title a:hover {
+    color: #ef5b51
+}
+.banner{line-height:0;}
+.this-period-tit{font-size:18px; color:#333333;width:100%;text-align:left;  padding-bottom:10px; border-bottom:1px solid #eaeaea; }
+.add-load-more{ height:80px;line-heiht:80px; width:100%; text-align:center; color:#999999; font-size:16px; cursor:pointer;}
+.zanw-tuij{height:80px; line-height:80px; text-align:center; width:100%; color:#999999; font-size:16px; }
+.zwtj-hot{overflow:hidden;cear:both;width:1000px; }
+.zwtj-hot a{ color:#231815}
+.zwtj-hot .card {
+    width: 300px;
+    height: 310px;
+    padding: 30px 45px 0 45px;
+    margin-right: 30px;
+    text-align: center;
+	box-sizing:border-box
+}
+.zwtj-hot .card_mr0 {
+    margin-right: 0
+}
+.card {
+    float: left;
+    border: 1px solid #dedede;
+    margin-bottom: 20px;
+    -webkit-transition: border-color .2s;
+    transition: border-color .2s
+}
+.card:hover {
+    border-color: #1e7ddf;
+    cursor: pointer
+}
+.card .face {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border-radius: 100%
+}
+.card .face img {
+    width: 70px;
+    height: 70px;
+    display: block
+}
+.card .name {
+    font-size: 20px
+}
+.card .red {
+    color: #eb4d41
+}
+.zwtj-hot li {
+    line-height: 24px
+}
+
+.zwtj-hot .card .name {
+    height: 35px;
+    line-height: 35px;
+    padding-top: 10px;
+	position:relative;
+}
+
+.zwtj-hot .card .red {
+    font-size: 18px
+}
+.card .info {
+    height: 48px
+}
+.card .good_at {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    font-size: 12px;
+    color: #999
+}
+.card .msg {
+    text-align: left;
+    padding-left: 30px;
+    color: #999
+}
+.card .btn_wrap {
+    padding-top: 20px
+}
+.card .btn_follow {
+    width: 92px;
+    height: 34px;
+    line-height: 34px;
+    border: 1px solid #f63f3f;
+    font-size: 16px
+}
+.card .btn_follow_already {
+    border-color: #999
+}
+.card .red {
+    font-size: 18px
+}
+.btn {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    text-align: center
+}
+.btn_follow {
+    width: 60px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px solid #f63f3f;
+    background: #f63f3f;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    -webkit-transition: background .2s;
+    transition: background .2s
+}
+.btn_follow:hover {
+    background: #f32222
+}
+.btn_follow_already {
+    background: #f7f7f7;
+    border: 1px solid #dedede;
+    color: #231815
+}
+.btn_follow_already:hover {
+    background: #e4e1e1
+}
+
+.odds_nav { width:1000px; margin:0 auto; height:36px; background:url(/static/images/odds_bg.png) no-repeat 0 -45px; clear:both; position:relative;}
+.odds_hd_team a img {vertical-align:middle;}
+.hide{ display:none}
+
+
+.table_cont tr.step_line td{border-left: 1px solid #dedede;}
+.odds_content a.btn_blue_l_h18,
+.odds_content .btn_blue_l_h18{
+	border-color: #dee1e9;
+	background-image: none;
+	background-color: #fff;
+	border-radius: 4px;
+	color: #333;
+}
+.odds_content a.btn_blue_l_h18,
+.odds_content .btn_blue_l_h18
+.odds_content a.btn_blue_l,
+.odds_content .btn_blue_l{
+	border-color: #dee1e9;
+	background-image: none;
+	background-color: #fff;
+	border-radius: 4px;
+	color: #333;
+}
+.odds_content a.btn_blue_l_h18:hover,
+.odds_content .btn_blue_l_h18:hover,
+.odds_content .btn_blue_l_h18_hover,
+.odds_content a.btn_blue_l_h24:hover,
+.odds_content .btn_blue_l_h24:hover,
+.odds_content .btn_blue_l_h24_hover{
+	border-color: #dee1e9;
+	background-color: #f5f5f5;
+	color: #333;
+}
+
+/* common */
+         ul,ol,li {list-style:none;}
+         a {text-decoration:none;color:#555;outline:none;}
+        .topbar {font-size:12px;}
+        .lottery_box a{ font: 12px/1.5 '瀹嬩綋',tahoma; }
+        .topbar .div_m{ width: 1180px }
+        .div_m ul{ height:27px }
+        .hide {display:none;}
+        .red, a.red {color:#ef5b51;}
+        .blue, a.blue {color:#5b9fe2;}
+        .gray, a.gray {color:#979797;}
+        .green, a.green {color:#07b867;}
+        .topbar-in, .nav-in, .header-in {margin:0 auto;width:1180px;}

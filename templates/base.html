@@ -13,18 +13,17 @@
 <div id="bd">
     <div class="bf_nav">
         <ul id="nav-ul" class="tab">
-            <li class="cur"><a href="/" id="link125">综合指数</a></li>
-            <li><a href="/europe" id="link126">欧洲指数</a></li>
-            <li><a href="/asia" id="link127">亚洲盘口</a></li>
-            <li><a href="/bigOrSmall" id="link128">大小指数</a></li>
-            <li><a href="/score" id="link129">今日波胆</a></li>
+            <li {% block zonghe_cur %}{% endblock %}><a href="/" id="link125">综合指数</a></li>
+            <li {% block europe_cur %}{% endblock %}><a href="/europe" id="link126">欧洲指数</a></li>
+            <li {% block asia_cur %}{% endblock %}><a href="/asia" id="link127">亚洲盘口</a></li>
+            <li {% block big_cur %}{% endblock %}><a href="/bigOrSmall" id="link128">大小指数</a></li>
+            <li {% block history_cur %}{% endblock %}><a href="/history" id="link129">历史回查</a></li>
         </ul>
     </div>
     <div class="sub_bf_nav li_change">
         <div>选择彩种</div>
         <ul id="lot-ul">
             <li data-href="/">竞彩足球</li>
-            <li data-href="/history">历史回查</li>
             <li data-href="/">球队详情</li>
         </ul>
         <script type="text/javascript">
@@ -79,11 +78,6 @@
                 </div>
             </div>
             <div class="select_left select_box" id="select-company">
-                <div class="select_center">
-                <span class="select_right">
-                    <span class="down_select">公司选择</span>
-                </span>
-                </div>
                 <span class="link_up" style="width: 76px;"></span>
                 <div class="layer lsxz lsxz_company">
                     <div class="sx">

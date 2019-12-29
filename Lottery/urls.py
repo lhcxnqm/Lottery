@@ -24,6 +24,5 @@ urlpatterns = [
     path('europe/', views.europe),
     path('asia/', views.asia),
     path('bigOrSmall/', views.big_or_small),
-    path('score/', views.score),
     path('history/', include('Historical.urls')),
 ]

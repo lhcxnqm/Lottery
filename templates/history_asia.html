@@ -2,32 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>阿德莱德联VS西悉尼漫步者(2019/2020澳超)-亚盘对比</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
-    <link href="/css/public.css" type="text/css" rel="stylesheet"/>
-    <link href="https://www.500cache.com/public/css/trade_nav.css" rel="stylesheet"/>
-    <link href="https://www.500cache.com/odds/css/odds_new.css?v=20141016" rel="stylesheet"/>
+    <title>{{ team_message.hostTeam }}VS{{ team_message.guestTeam }}-亚盘对比</title>
+    <link href="/static/history_global.css" rel="stylesheet"/>
 </head>
 
 <body class="odds">
-<div id="loadingMask"
-     style="position: absolute; left: 0px; top: 0px; background-color: rgb(221, 221, 221); display:none; height: 1705px; width: 1415px; opacity: 0.01;">
-    <iframe frameborder="0" oncontextmenu="return false" src="about:blank"
-            style="position: absolute; width: 100%; height: 100%; top: 0pt; left: 0pt;"></iframe>
-</div>
-
-<link href="https://www.500cache.com/public/css/top_v2.css?v=20151210" rel="stylesheet" type="text/css"/>
-
-<script type="text/javascript" src="https://www.500cache.com/public/js/public/core_jq.js"></script>
-<script type="text/javascript" src="https://www.500cache.com/public/js/public/top_v2.js?v=1200333"></script>
-
-<script>
-    if (top != self) {
-        location.href = "about:blank";
-    }
-</script>
-<link href="https://www.500cache.com/public/css/dxt/topmenuheader.css?v=20151210" rel="stylesheet">
-
 <div class="odds_header">
     <div class="odds_hd_cont">
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
@@ -35,54 +14,45 @@
             <tr>
                 <td width="290" align="right">
                     <ul class="odds_hd_list">
-                        <li><a class="hd_name" href="" target="_blank">阿德莱德联</a></li>
+                        <li><a class="hd_name" href="" target="_blank">{{ team_message.hostTeam }}</a></li>
                     </ul>
                 </td>
                 <td width="110"><span class="odds_hd_team">
-        	<a href="http://liansai.500.com/team/3986/" target="_blank"><img
-                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png" alt="阿德莱德联"
+        	<a href="" target="_blank"><img
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png" alt=""
                     width="65" height="65"/></a>        </span></td>
                 <td align="center" width="190">
                     <div class="odds_hd_center">
-                        <div class="odds_hd_ls" id="odds_hd_ls"><a class="hd_name" href="" target="_blank">19/20澳超第12轮
-                        </a>
+                        <div class="odds_hd_ls" id="odds_hd_ls">
+                            <a class="hd_name" target="_blank">{{ team_message.match }}{{ team_message.round }}
+                            </a>
                         </div>
-                        <p class="game_time">比赛时间2019-12-27 16:30</p>
-                        <p class="odds_hd_bf"><strong>2:3</strong></p>
+                        <p>{{ team_message.match_time }}</p>
+                        <p class="odds_hd_bf"><strong>{{ team_message.result }}</strong></p>
                     </div>
                 </td>
 
                 <td width="110"><span class="odds_hd_team odds_hd_team2">
         	<a href="http://liansai.500.com/team/7014/" target="_blank"><img
-                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_7014.png" alt="西悉尼漫步者"
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_7014.png" alt=""
                     width="65" height="65"/></a>
                 <td align="left">
                     <ul class="odds_hd_list">
-                        <li><a class="hd_name" href="" target="_blank">西悉尼漫步者</a></li>
+                        <li><a class="hd_name" href="" target="_blank">{{ team_message.guestTeam }}</a></li>
                     </ul>
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
-    <div class="odds_nav clearfix">
+    <div class="odds_nav">
         <ul class="odds_nav_list" id="odds_nav_list">
-            <li><a href="" title="">数据分析</a>
-            </li>
-            <li><a href=""
-                   title="">百家欧赔</a>
-            </li>
-            <li class="cur"><a
-                    href="" title="">亚盘对比</a></li>
-            <li><a href=""
-                   title="">大小指数</a>
-            </li>
-
-            <li><a href=""
-                   title="">走势分析</a>
-            </li>
+            <li><a href="" title="">数据分析</a></li>
+            <li><a href="" title="">百家欧赔</a></li>
+            <li class="cur"><a href="" title="">亚盘对比</a></li>
+            <li><a href="" title="">大小指数</a></li>
+            <li><a href="" title="">走势分析</a></li>
         </ul>
-
     </div>
 </div>
 
@@ -97,13 +67,10 @@
                     <col width="80">
                     <col width="240">
                     <col width="80">
-                    <col width="">
                 </colgroup>
                 <tr xls="header" class="odds_t_th">
                     <th class="tb_bdr">筛选</th>
-                    <th class="tb_bdr tb_plgs">
-
-                    </th>
+                    <th class="tb_bdr tb_plgs"></th>
                     <th class="tb_bdr" row="3">即时盘口</th>
                     <th class="tb_bdr" row="1">变化时间</th>
                     <th class="tb_bdr" row="3">初始盘口</th>
@@ -117,10 +84,9 @@
                         <table cellspacing="0" cellpadding="0" class="pl_table_data">
                             <tbody>
                             <tr>
-                                <td row="1" width="58">水</td>
+                                <td row="1" width="78">水</td>
                                 <td row="1">盘</td>
-                                <td row="1" width="58">水</td>
-                                <td width="40">更多</td>
+                                <td row="1" width="78">水</td>
                             </tr>
                             </tbody>
                         </table>
@@ -138,7 +104,7 @@
                         </table>
                     </th>
                     <th row="1"></th>
-                    <th><a class="btn_blue_l btn_blue_l_h24 btn_w70 downpl" href="javascript:void(0)">赔率下载</a></th>
+                    <th></th>
                 </tr>
             </table>
         </div>
@@ -154,471 +120,78 @@
                 <col width="80">
                 <col width="">
             </colgroup>
-            <tr class="tr1" xls="row" id="293" dt="2019-12-27 17:26:57">
-                <td class="td_one">
-                    <p>
-                        <input id="ck293" type="checkbox" value=""/> 1 </p>
-                </td>
-                <td class="tb_plgs" row="1"><p><a href="http://odds.500.com/yazhi.php?cid=293" title="威廉希尔"><span
-                        class="quancheng" style="display:;">威廉希尔</span><span class="guojia"
-                                                                             style="display:none;">威廉希尔</span></a><img
-                        src="/images/oz_zhu.gif" alt="" style="margin-left:5px;"/></p></td>
-                <td>
-                    <table cellspacing="0" cellpadding="0" class="pl_table_data">
-                        <tbody>
-                        <tr>
-                            <td width="58" row="1" class="ying">0.810↑</td>
-                            <td onclick="javascript:openPl(this);" style="cursor:pointer;" row="1" ref="-0.250">
-                                平手/半球<font color="blue"> 降</font></td>
-                            <td row="1" width="58" class="ying">0.950↑</td>
-                            <td width="40"><span class="tb_tdul_more">1<span></span></span></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td row="1">
-                    <time>12-27 16:24</time>
-                </td>
-                <td>
-                    <table cellspacing="0" cellpadding="0" class="pl_table_data">
-                        <tbody>
-                        <tr>
-                            <td width="58" row="1" class="">0.800</td>
-                            <td row="1" ref="-0.500" class="">半球</td>
-                            <td row="1" width="58" class="">0.910</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
-                <td row="1">
-                    <time>12-20 15:05</time>
-                </td>
-                <td>
-                    <a href="http://liansai.500.com/team_data.php?teamid=3986&hoa=1&type=1&cid=293" target="_blank"
-                       rel="nofollow">主</a> <a
-                        href="http://liansai.500.com/team_data.php?teamid=7014&hoa=2&type=1&cid=293" target="_blank"
-                        rel="nofollow">客</a>
-                    <a href="/fenxi1/yazhi_same.php?cid=293&cp=半球&id=869890&s1=0.800&s2=0.910" class="red"
-                       target="_blank" rel="nofollow">同</a>
-                </td>
-            </tr>
+            {% for each in result_list %}
+                <tr class="tr1" xls="row" id="293" dt="">
+                    <td class="td_one">
+                        <p>
+                            <input id="ck293" type="checkbox" value=""/> 1 </p>
+                    </td>
+                    <td class="tb_plgs" row="1"><p><a title=""><span>{{ each.company }}</span></a>
+                    </p></td>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" class="pl_table_data">
+                            <tbody>
+                            <tr>
+                                {% if each.immediateUpperStage > each.startUpperStage %}
+                                    <td width="58" row="1" class="ying">{{ each.immediateUpperStage }}↑</td>
+                                {% elif each.immediateUpperStage == each.startUpperStage%}
+                                    <td width="58" row="1">{{ each.immediateUpperStage }}</td>
+                                {% else %}
+                                    <td width="58" row="1" class="ping">{{ each.immediateUpperStage }}↓</td>
+                                {% endif %}
+                                <td row="1" ref="-0.250">
+                                    {{ each.immediateOpening }}
+                                </td>
+                                {% if each.immediateLowerStage > each.startLowerStage %}
+                                    <td width="58" row="1" class="ying">{{ each.immediateLowerStage }}↑</td>
+                                {% elif each.immediateLowerStage == each.startLowerStage%}
+                                    <td width="58" row="1">{{ each.immediateLowerStage }}</td>
+                                {% else %}
+                                    <td width="58" row="1" class="ping">{{ each.immediateLowerStage }}↓</td>
+                                {% endif %}
 
-        </table>
-    </div>
-    <form name="plform" action="/fenxi1/xls.php" method="post" id="plform">
-        <input type="hidden" name="name" value="阿德莱德联VS西悉尼漫步者(亚盘)"/>
-    </form>
-    <div class="table_btm" id="table_btm">
-        <table width="1000" border="0" cellspacing="0" cellpadding="0">
-            <colgroup>
-                <col width="180">
-                <col width="60">
-                <col width="280">
-                <col width="80">
-                <col width="240">
-                <col width="80">
-                <col width="">
-            </colgroup>
-
-
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td row="1">
+                        <time>{{ each.changedTime }}</time>
+                    </td>
+                    <td>
+                        <table cellspacing="0" cellpadding="0" class="pl_table_data">
+                            <tbody>
+                            <tr>
+                                <td width="58" row="1" class="">{{ each.startUpperStage }}</td>
+                                <td row="1" ref="-0.500" class="">{{ each.startOpening }}</td>
+                                <td row="1" width="58" class="">{{ each.startLowerStage }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td row="1">
+                        <time>{{ each.startTime }}</time>
+                    </td>
+                    <td>
+                        <a href="" target="_blank"
+                           rel="nofollow">主</a> <a
+                            href="" target="_blank"
+                            rel="nofollow">客</a>
+                        <a href="" class="red" target="_blank" rel="nofollow">同</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
     <div class="odds_msg2">
-        <ul>
-            <li>
-                亚盘：全称亚洲盘口，它的存在形态是通过让球盘口使得两个相差悬殊的球队之间能够在一个相对公平的平台上进行较量，从而拉平了双方客观上存在的实力差距。这种盘口也可称之为“独赢盘”。因为这种玩法起源于亚洲，顾名思义又被称之为亚洲盘口。
-            </li>
-
-            <div class="odds_msg"> 其中<img alt="" src="//odds.500.com/images/oz_zhu.gif">为主流公司，颜色<span
-                    class="ying">上升↑</span><span class="ping">下降↓</span>代表水位之升降，点击盘口数据能查看相应变化（<img alt=""
-                                                                                                   src="//odds.500.com/images/oz_e.gif">为交易所，其指数不计入统计）
-            </div>
-            <div class="odds_msg"> 提醒：以上资料数据仅供浏览、投注参考之用。并不作为最终投注依据。</div>
-    </div>
-    <script type="text/javascript" src="/js/odds/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="https://www.500cache.com/odds/js/fenxi1.js?v=201708"></script>
-    <script type="text/javascript" src="https://www.500cache.com/odds/js/loadingbar.js"></script>
-    <script type="text/javascript" src="https://www.500cache.com/odds/js/chart.js"></script>
-    <script type="text/javascript" src="https://www.500cache.com/odds/js/ouzhi1.js?v=20141016"></script>
-    <script type="text/javascript">
-        (function (window) {
-            var _target = window,
-                _offsetTop = 0,
-                _notLoading = true,
-                _limit = 30,
-                _start = _limit,
-                _r = 1,
-                _id = 869890,
-                _ctype = 1,
-                _style = 0;
-            window._total = 44;
-            window._notLoaded = true;
-
-            function bindEvent(t, e, f) {
-                if (t.attachEvent) {
-                    t.attachEvent('on' + e, f);
-                } else if (t.addEventListener) {
-                    t.addEventListener(e, f, false);
-                }
-            }
-
-            $(document).ready(function () {
-                bindEvent(_target, 'scroll', function () {
-                    if (_notLoaded && _notLoading) {
-                        if ($('#step_line').offset().top + _offsetTop < 810 + $(_target.document).scrollTop() + _target.document.documentElement.clientHeight) {
-                            _notLoading = false;
-                            $('#step_loading').html('正在动态加载');
-                            var _guojia = $("#guojia").attr("checked") ? 1 : 0;
-                            $.get('/fenxi1/yazhi.php', {
-                                id: _id,
-                                ctype: _ctype,
-                                start: _start,
-                                r: _r,
-                                style: _style,
-                                guojia: _guojia
-                            }, function (data) {
-                                if (data && data.code && data.code == -100 || typeof(data) == "string" && /\"code\"\:-100\,/.test(data)) {
-                                    window.location.href = window.location.protocol + "//passport.500.com/user/login/?backurl=" + encodeURIComponent(window.location.href)
-                                }
-                                if (data == '') {
-                                    _notLoaded = false;
-                                    $('#step_line').remove();
-                                } else {
-                                    $('#step_line').replaceWith(data + '<tr id="step_line" class="step_line"><td id="step_loading" colspan="15">等待动态加载</td></tr>');
-                                    if ($("#jskl").val() == '1') {
-                                        $("#jskl").change();
-                                    }
-                                    $("#guojia").attr("checked", function () {
-                                        if (!$(this).attr("checked")) {
-                                            $(this).click();
-                                            return false;
-                                        }
-                                    });
-                                    _notLoading = true;
-                                    //setOddsClick(_start);
-                                    _start += _limit;
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-            window.oddsLoadAll = function () {
-                if (_notLoaded !== false) {
-                    if (_notLoaded === 0) {
-                        showOddsAll();
-                        return;
-                    }
-                    _notLoading = false;
-                    $('#step_loading').html('正在动态加载');
-                    setTimeout(function () {
-                        var _guojia = $("#guojia").attr("checked") ? 1 : 0;
-                        $.ajax({
-                            url: '/fenxi1/yazhi.php',
-                            async: false,
-                            data: {
-                                id: _id,
-                                ctype: _ctype,
-                                start: _start,
-                                r: _r,
-                                style: _style,
-                                last: 1,
-                                guojia: _guojia
-                            },
-                            success: function (data) {
-                                if (data && data.code && data.code == -100 || typeof(data) == "string" && /\"code\"\:-100\,/.test(data)) {
-                                    window.location.href = window.location.protocol + "//passport.500.com/user/login/?backurl=" + encodeURIComponent(window.location.href)
-                                }
-                                $('#step_line').replaceWith(data);
-                                if ($("#jskl").val() == '1') {
-                                    $("#jskl").change();
-                                }
-                                $("#guojia").attr("checked", function () {
-                                    if (!$(this).attr("checked")) {
-                                        $(this).click();
-                                        return false;
-                                    }
-                                });
-                                _start += _limit;
-                                _notLoaded = false;
-                            }
-                        });
-                    }, 10);
-                }
-            };
-        })(window);
-    </script>
-
-    <div id="uma">
-        <script>setTimeout(function () {
-        }, 3000)</script>
-    </div>
-
-    <link rel="stylesheet" href="https://www.500cache.com/public/css/footer.css?v=20181019">
-
-    <script type="text/javascript" src="https://www.500cache.com/public/js/jquery/jquery.min.js"></script>
-    <script>
-        /* 底部关键词 */
-        $(function () {
-            $('.btn-keywords').click(function () {
-                if ($(this).attr('data-fold') == 0) {
-                    $(this).html('+ 更多');
-                    $('.footer-keywords-list').animate({
-                        'height': 20
-                    });
-                    $(this).attr('data-fold', 1);
-                } else {
-                    $(this).html('- 收起');
-                    $('.footer-keywords-list').animate({
-                        'height': 60
-                    });
-                    $(this).attr('data-fold', 0);
-                }
-            });
-        });
-    </script>
-    <!-- Baidu Button BEGIN -->
-    <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=6678073"></script>
-    <script type="text/javascript" id="bdshell_js"></script>
-    <script type="text/javascript">
-        var https = 'https:' == document.location.protocol;
-        if (!https) {
-            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000)
-        }
-    </script>
-    <!-- Baidu Button END -->
-
-
-    <!-- 用户战绩调整 begin -->
-    <span class="fu_icon_layer record_tips">
-    <span style="left: 6px;" class="fu_icon_top"></span>
-    <span style="width: auto;" class="fu_icon_con new_record"></span>
-</span>
-    <!-- 用户战绩调整 end-->
-    <script type="text/javascript" src="https://www.500cache.com/public/js/stats.js?v=123"></script><!-- 指数图表层 -->
-    <div class="datachart_tips" style="display:none;z-index:9999;position:absolute;width:500px;" id="tip_oz_chart">
-        <div class="tit">
-            <a class="tit_cur" href="javascript:;">查看表格</a>
-            <a href="javascript:void(0)" class="tips_close">关闭</a>
+        <li>
+            亚盘：全称亚洲盘口，它的存在形态是通过让球盘口使得两个相差悬殊的球队之间能够在一个相对公平的平台上进行较量，从而拉平了双方客观上存在的实力差距。这种盘口也可称之为“独赢盘”。因为这种玩法起源于亚洲，顾名思义又被称之为亚洲盘口。
+        </li>
+        <div class="odds_msg"> 其中<img alt="" src="//odds.500.com/images/oz_zhu.gif">为主流公司，颜色<span
+                class="ying">上升↑</span><span class="ping">下降↓</span>代表水位之升降，点击盘口数据能查看相应变化（<img alt=""
+                                                                                               src="//odds.500.com/images/oz_e.gif">为交易所，其指数不计入统计）
         </div>
-        <div class="datachart_table"></div>
-    </div>
-    <!-- 指数弹出层 -->
-    <div class="datachart_tips" style="display:none;z-index:9999;position:absolute;width:434px;" id="tip_oz">
-        <div class="tit">
-            <a class="tit_cur" href="javascript:;">查看图表</a>
-            <a href="javascript:void(0)" class="tips_close">关闭</a>
-        </div>
-        <div class="datachart_table" style="overflow-x:hidden; overflow-y:auto; ">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pub_table">
-                <thead>
-                <tr>
-                    <th width="60">胜</th>
-                    <th width="60">平</th>
-                    <th width="60">负</th>
-                    <th width="80">返还率</th>
-                    <th>更新时间</th>
-                </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+        <div class="odds_msg"> 提醒：以上资料数据仅供浏览、投注参考之用。并不作为最终投注依据。</div>
     </div>
 </div>
-<div id="mask_layer" class="cd_zhezhao"></div>
-<div class="new_tips_box dz_tips_box" style="width:552px;display:none;z-index:10001;position:absolute;"
-     id="customize_layer">
-    <div class="tips_title">
-        <h2 class="tips_title_text">500.com赔率定制</h2>
-        <a id="customize_close" class="tips_close" href="javascript:void(0)">关闭</a>
-    </div>
-
-</div>
-<div id="loading_layer"
-     style="background:#FFF;filter:alpha(opacity=30);opacity:0.3;position:absolute;display:none;z-index:10002;"></div>
-<script type="text/javascript">
-    (function () {
-        function g(d) {
-            return document.getElementById(d);
-        }
-
-        var a = g('customize_login');
-        a.setAttribute('href', a.getAttribute('href') + '?backurl=' + encodeURIComponent(location.href.replace(/&cids=[^&]*/, '').replace(/\?cids=[^&]*&?/, '?')));
-        if (/ck_user=[^=;]+/.test(document.cookie)) {
-            g('unlogin_tip1').style.display = 'none';
-            g('unlogin_tip2').style.display = 'none';
-        } else {
-            g('customize_search_box').style.display = 'none';
-        }
-    })();
-</script>
-<!-- 底部链接 -->
-<div id="tipdiv" class="datachart_tips" style="display: none; z-index: 9999; position: absolute;">
-    <div class="tit"><a class="tips_close" href="javascript:void(0)">关闭</a></div>
-    <div class="datachart_table" style="overflow-x:hidden; overflow-y:auto; ">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pub_table">
-            <thead>
-            <tr>
-                <th width="65">水位</th>
-                <th>亚指</th>
-                <th width="65">水位</th>
-                <th width="100">更新时间</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
-</div>
-<script type="text/javascript">
-    var stopapreventDefault = function (e) {
-        if (e && e.stopPropagation) {
-            e.stopPropagation();
-        } else {
-            window.event.cancelBubble = true;
-        }
-        if (e && e.preventDefault) {
-            e.preventDefault();
-        } else {
-            window.event.returnValue = false;
-        }
-    }
-
-    function openPl(obj) {
-        var p = $(obj).offset();
-        var id = $(obj).closest('tr[id]').attr("id");
-        $("#tipdiv").css({'position': 'absolute', 'left': (p.left + 45) + "px", 'top': (p.top + 25) + "px"});
-        $("#tipdiv tbody").html('');
-        $.getJSON("/fenxi1/inc/yazhiajax.php", {fid: "869890", id: id, t: (new Date).getTime(), r: 1}, function (d) {
-            if (d && d.code == -100) {
-                window.location.href = window.location.protocol + "//passport.500.com/user/login/?backurl=" + encodeURIComponent(window.location.href)
-            }
-            $.each(d, function (i, v) {
-                $("#tipdiv tbody").append($(v));
-            })
-            $("#tipdiv").show();
-            var ht = $("#tipdiv table")[0].offsetHeight;
-            if (ht < 200) {
-                $('#tipdiv .datachart_table').height(ht);
-            } else {
-                $('#tipdiv .datachart_table').height(200);
-            }
-        });
-    }
-
-    $("#tipdiv .tips_close").click(function (e) {
-        stopapreventDefault(e);
-        $("#tipdiv").hide();
-    })
-</script>
-<style type="text/css">
-    .app_cartoon_wrap {
-        position: fixed;
-        top: 300px;
-        left: 100px;
-        width: 140px;
-        height: 160px;
-        overflow: hidden;
-    }
-
-    .app_cartoon_wrap .app_cartoon_content {
-        position: absolute;
-        top: 0;
-        left: 74px;
-        width: 140px;
-        height: 160px;
-        transition: left 0.6s ease;
-        -moz-transition: left 0.6s ease;
-        -webkit-transition: left 0.6s ease;
-        -o-transition: left 0.6s ease;
-    }
-
-    .app_cartoon_wrap .app_cartoon_content .btn_close {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 20px;
-        height: 20px;
-        background: url(https://www.500cache.com/public/images/ad/btn_close.png) no-repeat;
-        background-size: contain;
-        z-index: 2;
-    }
-
-    .app_cartoon_wrap .app_cartoon_content a {
-        position: relative;
-        display: block;
-        width: 100%;
-        height: 100%;
-        border: none;
-        z-index: 1;
-    }
-
-    .app_cartoon_wrap .app_cartoon_content img {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        border: none;
-    }
-
-    .app_cartoon_wrap .app_cartoon_content:hover {
-        left: 0;
-    }
-
-    .app_cartoon_wrap.nohover .app_cartoon_content {
-        left: 0;
-    }
-</style>
-<div id="cartonnLeft" style="display:none" class="app_cartoon_wrap nohover"
-     onclick="_hmt.push(['_trackEvent','pc_analysis','click','floatAD'])">
-    <div class="app_cartoon_content">
-        <span class="btn_close" onclick="btnClose()"></span>
-        <a href="http://www.500.com/wap/index.php" target="_blank" title=""
-           onclick="if(typeof(dcsMultiTrack)=='function'){dcsMultiTrack('DCSext.button_t','05000000','DCSext.button_w','05000000','DCSext.button_b','05000000','DCSext.button_c','05000616','DCSext.button_n','1530694493');}"
-           {$appShowHtml}><img src="https://img.500.com/upimages/sfc/201904/20190418164611_3050.gif" border="0"
-                               width="140" height="160" alt="" align="top"/></a>
-    </div>
-</div>
-<script type="text/javascript">
-    function getElementsClassObj(strClass) {
-        var obj = null;
-        if (document.getElementsByClassName) {
-            obj = document.getElementsByClassName(strClass);
-        } else {
-            var ret = [];
-            var els = document.getElementsByTagName('div');
-            for (var i = 0; i < els.length; i++) {
-                if (els[i].className === strClass || els[i].className.indexOf(strClass) >= 0) {
-                    ret.push(els[i]);
-                    break;
-                }
-            }
-        }
-        return obj ? obj[0] : null;
-    }
-
-    function changeDivWidth() {
-        var _bodyObj = getElementsClassObj("odds_content"),
-            divLeft = "100px", bodyLeft = _bodyObj && _bodyObj.offsetLeft;
-        document.getElementById("cartonnLeft").style.left = (bodyLeft + 1015) + "px";
-        document.getElementById("cartonnLeft").style.top = "595px";
-        document.getElementById("cartonnLeft").style.display = "block";
-
-    }
-
-    function btnClose() {
-        document.getElementById("cartonnLeft").style.display = "none";
-    }
-
-    window.onload = function () {
-        changeDivWidth();
-    };
-    window.onresize = function () {
-        changeDivWidth();
-    }
-    ; </script>
-<script>setTimeout(function () {
-    if (typeof(dcsMultiTrack) == 'function') {
-        dcsMultiTrack('DCSext.button_t', '05000000', 'DCSext.button_w', '05000000', 'DCSext.button_b', '05000000', 'DCSext.button_c', '05000616', 'DCSext.button_n', '1530694493');
-    }
-}, 3000)</script>
 </body>
 </html>
