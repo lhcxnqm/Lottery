@@ -7,58 +7,121 @@
 {% block searchHistory %}
     <form class="r" method="post" action="/history/">
         {% csrf_token %}
-        <select id="sel-year" name="year">
-            <option>2019</option>
-        </select>年
-        <select id="sel-month" name="month">
-            <option>12</option>
-        </select>月
-        <select id="sel-date" name="date">
-            <option>21</option>
-        </select>日
+        <select id="sel-year" name="year" onchange="doChange()"></select>年
+        <select id="sel-month" name="month" onchange="doChange()"></select>月
+        <select id="sel-date" name="date"></select>日
         <input id="btn-query" type="submit" value="查询">
     </form>
 {% endblock %}
 
 {% block content %}
-    {% for each in result_list %}
-        <tr data-fid="{{ each.matchId }}">
-            <td rowspan="2" style="background-color:{{ each.match_color }}">
-                <a style="color:#fff" target="_blank" href="" title="" id="link135">{{ each.match }}</a>
-            </td>
-            <td rowspan="2">{{ each.round }}</td>
-            <td rowspan="2">{{ each.short_time }}</td>
-            <td rowspan="2" class="text_right no_border">
-                <a class="team_link" href="" target="_blank">{{ each.hostTeam }}</a>
-            </td>
-            <td rowspan="2" class="no_border"><span class="red">{{ each.result }}</span></td>
-            <td rowspan="2" class="text_left">
-                <a class="team_link" href="" target="_blank">{{ each.guestTeam }}</a>
-            </td>
-            <td class="border_r_c5">{{ each.company }}</td>
-            <td>{{ each.immediateUpperStage }}</td>
-            <td>{{ each.immediateOpening }}</td>
-            <td>{{ each.immediateLowerStage }}</td>
-            <td>{{ each.immediateWin }}</td>
-            <td>{{ each.immediatePeace }}</td>
-            <td>{{ each.immediateLose }}</td>
-            <td rowspan="2"><a target="_blank" href="" id="link138">析</a>
-                <a target="_blank" href="/history/asia_{{ each.matchId }}" title="" id="link139">亚</a>
-                <a target="_blank" href="" id="link140">欧</a></td>
-        </tr>
-        <tr data-fid="{{ each.matchId }}">
-            <td>初盘</td>
-            <td>{{ each.startUpperStage }}</td>
-            <td>{{ each.startOpening }}</td>
-            <td>{{ each.startLowerStage }}</td>
-            <td>{{ each.startWin }}</td>
-            <td>{{ each.startPeace }}</td>
-            <td>{{ each.startLose }}</td>
-        </tr>
-    {% endfor %}
+    {% if result is None %}
+        {% for each in result_list %}
+            <tr data-fid="{{ each.matchId }}">
+                <td rowspan="2" style="background-color:{{ each.match_color }}">
+                    <a style="color:#fff" target="_blank" href="" title="" id="link135">{{ each.match }}</a>
+                </td>
+                <td rowspan="2">{{ each.round }}</td>
+                <td rowspan="2">{{ each.short_time }}</td>
+                <td rowspan="2" class="text_right no_border">
+                    <a class="team_link" href="" target="_blank">{{ each.hostTeam }}</a>
+                </td>
+                <td rowspan="2" class="no_border"><span class="red">{{ each.result }}</span></td>
+                <td rowspan="2" class="text_left">
+                    <a class="team_link" href="" target="_blank">{{ each.guestTeam }}</a>
+                </td>
+                <td class="border_r_c5">{{ each.company }}</td>
+                <td>{{ each.immediateUpperStage }}</td>
+                <td>{{ each.immediateOpening }}</td>
+                <td>{{ each.immediateLowerStage }}</td>
+                <td>{{ each.immediateWin }}</td>
+                <td>{{ each.immediatePeace }}</td>
+                <td>{{ each.immediateLose }}</td>
+                <td rowspan="2"><a target="_blank" href="" id="link138">析</a>
+                    <a target="_blank" href="/history/asia_{{ each.matchId }}" title="" id="link139">亚</a>
+                    <a target="_blank" href="" id="link140">欧</a></td>
+            </tr>
+            <tr data-fid="{{ each.matchId }}">
+                <td>初盘</td>
+                <td>{{ each.startUpperStage }}</td>
+                <td>{{ each.startOpening }}</td>
+                <td>{{ each.startLowerStage }}</td>
+                <td>{{ each.startWin }}</td>
+                <td>{{ each.startPeace }}</td>
+                <td>{{ each.startLose }}</td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>{{ result }}</tr>
+    {% endif %}
 
     <script type="text/javascript">
+         // 获取日期
+        var today = new Date();
+        // 获取当前年月日
+        var year  = today.getFullYear();
+        var month = today.getMonth();
 
+        window.onload = function(){
+            // 循环年份并且显示到页面
+            for( var i = year; i >= year-10 ; i--){
+                var option = new Option( i , i );
+                // 如果年份等于当前年份 就默认选择
+                if( i == year ){
+                    option.selected = true;
+                }
+                // 添加到id为year的select中
+                $('sel-year').add(option);
+                console.log($('sel-year').value)
+            }
+            // 循环月份
+            for(var j = 1 ; j <= 12 ;j++){
+                var option = new Option( j , j );
+                if( ( j - 1 ) == month ) {
+                    option.selected = true;
+                }
+                $('sel-month').add(option);
+            }
+            // 页面加载调用doChange事件
+            doChange();
+        }
+        // 年份和月份改变的时候调用此事件
+        function doChange(){
+            // 把$('date')中的option长度变为0
+            $('sel-date').options.length = 0;
+            var length = 31;
+            // 获取月份
+            var mon = $('sel-month').value;
+            // 如果是2月
+            if(mon == 2)
+            {
+                // 平年就是28
+                length = 28;
+                // 获取年份
+                var num = $('sel-year').value;
+                // 判断是不是闰年 闰年就是29
+                if(( num % 4  == 0 && num % 100 != 0 ) ||  num % 400 == 0 )
+                {
+                    length++;
+                }
+            }
+            // 定义正则判断月份 4 6 9 11 月
+            var reg = / [469]|^11$/;
+            // 符合条件就是30天
+            if(reg.test(mon))
+            {
+                length = 30;
+            }
+            // 然后循环 把值塞进去
+            for( var k = 1 ; k <= length ; k++ ){
+                var option = new Option( k , k );
+                $('sel-date').add(option);
+            }
+        }
+        // 封装获取id的简化函数
+        function $(id) {
+            return document.getElementById(id);
+        }
     </script>
 
 {% endblock %}

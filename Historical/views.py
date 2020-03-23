@@ -5,10 +5,16 @@ from Historical import historySpider, getData
 from pandas.tseries.offsets import Day
 
 
+# 点击历史导航栏
 def index_history(request):
-    # prior_day = datetime.date.today() - Day()
-    prior_day = datetime.datetime.strptime('2020-01-05', '%Y-%m-%d')
-    history = History.objects.filter(time=prior_day.date()).order_by('match_time')
+    prior_day = datetime.date.today() - Day()
+    if 'year' in request.POST:
+        year = request.POST['year']
+        month = request.POST['month']
+        date = request.POST['date']
+        prior_day = datetime.datetime.strptime(year+'-'+month+'-'+date, '%Y-%m-%d')
+
+    history = History.objects.filter(time=prior_day).order_by('match_time')
     if history.count():
         result_list = []
         for each in history:
@@ -22,18 +28,19 @@ def index_history(request):
             return_europe_result(result_item, each, '澳门')
             result_list.append(result_item)
 
-        return render(request, "history.html", {'result_list': result_list})
+        return render(request, "history.html", {'result_list': result_list, 'result': None})
 
     else:
-        prior_day = datetime.datetime.strftime(prior_day, "%Y-%m-%d")
-        get_history_data = historySpider.HistorySpider(str(prior_day))
-        final_id = get_history_data.run()
-        for match_id in final_id:
-            start_save(match_id, prior_day)
+        # prior_day = datetime.datetime.strftime(prior_day, "%Y-%m-%d")
+        # get_history_data = historySpider.HistorySpider(str(prior_day))
+        # final_id = get_history_data.run()
+        # for match_id in final_id:
+        #     start_save(match_id, prior_day)
+        #
+        return render(request, "history.html", {'result': '暂无比赛记录，请查询其他日期'})
 
-        return render(request, "history.html", {'result': '历史记录已更新，请刷新页面'})
 
-
+# 历史亚盘信息详情
 def history_asia(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
@@ -48,6 +55,7 @@ def history_asia(request, match_id):
     return render(request, "history_asia.html", {'team_message': team_message, 'result_list': result_list})
 
 
+# 返回赛事基本信息
 def return_team_result(team_message, each):
     team_message['matchId'] = each.matchId
     team_message['match'] = each.match
@@ -65,6 +73,7 @@ def return_team_result(team_message, each):
     team_message['match_color'] = match_color[each.match]
 
 
+# 返回亚盘信息
 def return_asia_result(result_item, each, company):
     try:
         each_asia = Asia.objects.get(company=company, subMatchId_id=each.matchId)
@@ -81,6 +90,7 @@ def return_asia_result(result_item, each, company):
         pass
 
 
+# 返回欧盘信息
 def return_europe_result(result_item, each, company):
     try:
         each_europe = European.objects.get(company=company, subMatchId_id=each.matchId)
