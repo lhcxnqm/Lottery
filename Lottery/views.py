@@ -12,9 +12,8 @@ def index(request):
         team_message, asia_dict = getData.get_asia_detail(match_id)
         europe_dict = getData.get_europe_detail(match_id)
         get_team_message(result_item, team_message)
-        for companyId in ['3', '5']:
-            get_asia_result(result_item, asia_dict, companyId)
-            get_europe_result(result_item, europe_dict, companyId)
+        get_asia_result(result_item, asia_dict, '5')
+        get_europe_result(result_item, europe_dict, '5')
 
         result_list.append(result_item)
 
@@ -52,24 +51,27 @@ def get_team_message(result_item, team_message):
 
 
 def get_asia_result(result_item, asia_dict, company_id):
-    result_item['company' + company_id] = asia_dict[company_id][0]
-    result_item['immediateUpperStage' + company_id] = asia_dict[company_id][1]
-    result_item['immediateOpening' + company_id] = asia_dict[company_id][2]
-    result_item['immediateLowerStage' + company_id] = asia_dict[company_id][3]
+    result_item['company'] = asia_dict[company_id][0]
+    result_item['immediateUpperStage'] = asia_dict[company_id][1]
+    result_item['immediateOpening'] = asia_dict[company_id][2]
+    result_item['immediateLowerStage'] = asia_dict[company_id][3]
+    result_item['startUpperStage'] = asia_dict[company_id][5]
+    result_item['startOpening'] = asia_dict[company_id][6]
+    result_item['startLowerStage'] = asia_dict[company_id][7]
 
 
 def get_europe_result(result_item, europe_dict, company_id):
-    result_item['company' + company_id] = europe_dict[company_id][0]
-    result_item['immediateWin' + company_id] = europe_dict[company_id][1]
-    result_item['immediatePeace' + company_id] = europe_dict[company_id][2]
-    result_item['immediateLose' + company_id] = europe_dict[company_id][3]
-    result_item['startWin' + company_id] = europe_dict[company_id][4]
-    result_item['startPeace' + company_id] = europe_dict[company_id][5]
-    result_item['startLose' + company_id] = europe_dict[company_id][6]
+    result_item['company'] = europe_dict[company_id][0]
+    result_item['immediateWin'] = europe_dict[company_id][1]
+    result_item['immediatePeace'] = europe_dict[company_id][2]
+    result_item['immediateLose'] = europe_dict[company_id][3]
+    result_item['startWin'] = europe_dict[company_id][4]
+    result_item['startPeace'] = europe_dict[company_id][5]
+    result_item['startLose'] = europe_dict[company_id][6]
 
 
 def get_big_or_small_result(result_item, big_or_small_dict, company_id):
-    result_item['company' + company_id] = big_or_small_dict[company_id][0]
-    result_item['immediateUpperStage' + company_id] = big_or_small_dict[company_id][1]
-    result_item['immediateOpening' + company_id] = big_or_small_dict[company_id][2]
-    result_item['immediateLowerStage' + company_id] = big_or_small_dict[company_id][3]
+    result_item['company'] = big_or_small_dict[company_id][0]
+    result_item['immediateUpperStage'] = big_or_small_dict[company_id][1]
+    result_item['immediateOpening'] = big_or_small_dict[company_id][2]
+    result_item['immediateLowerStage'] = big_or_small_dict[company_id][3]

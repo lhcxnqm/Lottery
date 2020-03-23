@@ -13,7 +13,7 @@ class IndexSpider:
     def run(self):
         # 获取url链接
         url = 'http://odds.500.com'
-        response = requests.get(url, headers=self.headers, timeout=100)
+        response = requests.get(url, headers=self.headers, timeout=10)
         response.encoding = 'gb2312'
         parser = etree.HTMLParser(encoding="gb2312")
         html = etree.HTML(response.text, parser=parser)

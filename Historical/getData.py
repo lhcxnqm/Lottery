@@ -11,7 +11,7 @@ special_match = ['欧国联', '欧罗巴', '欧洲杯', '英锦赛', '日职乙'
 def get_asia_detail(match_id):
     url = "http://odds.500.com/fenxi/yazhi-{0}.shtml".format(match_id)
     headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=20, headers=headers)
+    response = requests.get(url, timeout=10, headers=headers)
     response.encoding = 'gb2312'
     parser = etree.HTMLParser(encoding='gb2312')
     html = etree.HTML(response.text, parser=parser)
@@ -51,7 +51,7 @@ def get_asia_detail(match_id):
 def get_europe_detail(match_id):
     url = "http://odds.500.com/fenxi/ouzhi-{0}.shtml".format(match_id)
     headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=20, headers=headers)
+    response = requests.get(url, timeout=10, headers=headers)
     response.encoding = 'gb2312'
     parser = etree.HTMLParser(encoding='gb2312')
     html = etree.HTML(response.text, parser=parser)
@@ -70,7 +70,7 @@ def get_europe_detail(match_id):
 def get_big_or_small_detail(match_id):
     url = "http://odds.500.com/fenxi/daxiao-{0}.shtml".format(match_id)
     headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=20, headers=headers)
+    response = requests.get(url, timeout=10, headers=headers)
     response.encoding = 'gb2312'
     parser = etree.HTMLParser(encoding='gb2312')
     html = etree.HTML(response.text, parser=parser)
@@ -92,13 +92,17 @@ def get_big_or_small_detail(match_id):
 
 
 if __name__ == '__main__':
-    # today = "2019-12-21"
-    # get_history_data = historySpider.HistorySpider(today)
-    # today = datetime.datetime.strptime(today, "%Y-%m-%d")
-    # today = datetime.datetime.strftime(today, "%Y-%m-%d")
-
     # 日期转字符串
-    today = datetime.date.today() - Day()
-    today = datetime.datetime.strftime(today, "%Y-%m-%d")
-    print(today)
+    # today = datetime.date.today() - Day()
+    # today = datetime.datetime.strftime(today, "%Y-%m-%d")
+    # print(today)
+
+    # 字符串转日期
+    # myDay = '2020-01-05'
+    # theDay = datetime.datetime.strptime(myDay, '%Y-%m-%d').date()
+    # print(theDay, type(theDay))
+
+    prior = datetime.date.today() - Day()
+    today = datetime.date.today()
+    print(str(today) > "2020-01-06")
     pass

@@ -15,7 +15,7 @@ class HistorySpider:
         # 获取url链接
         url = 'http://odds.500.com/index_history_{0}.shtml'.format(self.date)
 
-        response = requests.get(url, headers=self.headers, timeout=50)
+        response = requests.get(url, headers=self.headers, timeout=10)
         response.encoding = 'gb2312'
         parser = etree.HTMLParser(encoding="gb2312")
         html = etree.HTML(response.text, parser=parser)
