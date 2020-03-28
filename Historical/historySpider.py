@@ -14,14 +14,16 @@ class HistorySpider:
     def run(self):
         # 获取url链接
         url = 'http://odds.500.com/index_history_{0}.shtml'.format(self.date)
-
-        response = requests.get(url, headers=self.headers, timeout=10)
-        response.encoding = 'gb2312'
-        parser = etree.HTMLParser(encoding="gb2312")
-        html = etree.HTML(response.text, parser=parser)
-        # 获取当前日期下所有赛事的编号
-        id_list = html.xpath('//tbody[@id="main-tbody"]/tr[@data-cid="3"]/@data-fid|'
-                             '//tbody[@id="main-tbody"]/tr[@data-fid]/td[2]/a/text()')
+        try:
+            response = requests.get(url, headers=self.headers, timeout=10)
+            response.encoding = 'gb2312'
+            parser = etree.HTMLParser(encoding="gb2312")
+            html = etree.HTML(response.text, parser=parser)
+            # 获取当前日期下所有赛事的编号
+            id_list = html.xpath('//tbody[@id="main-tbody"]/tr[@data-cid="3"]/@data-fid|'
+                                 '//tbody[@id="main-tbody"]/tr[@data-fid]/td[2]/a/text()')
+        except requests.exceptions as e:
+            print(e)
 
         final_id = []
         for i in range(len(id_list) - 1):
