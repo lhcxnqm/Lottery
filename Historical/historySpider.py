@@ -27,7 +27,7 @@ class HistorySpider:
         for i in range(len(id_list) - 1):
             if id_list[i+1] in best_match:
                 final_id.append(id_list[i])
-                print(id_list[i+1])
+                # print(id_list[i+1])
             i += 2
 
         return final_id
