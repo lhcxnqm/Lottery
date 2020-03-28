@@ -168,3 +168,4 @@ def start_delete(match_id):
     # 删除主信息
     obj = History.objects.get(matchId=match_id)
     obj.delete()
+
