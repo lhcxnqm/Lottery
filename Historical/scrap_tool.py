@@ -2,6 +2,8 @@ from Historical import historySpider, getData
 import MySQLdb
 import datetime
 from datetime import timedelta
+from multiprocessing.dummy import Pool as ThreadPool
+import time
 
 
 def save_message(matchID, asia_dict, big_or_small_dict, europe_dict, each, company):
@@ -80,6 +82,10 @@ def start_save(matchID, priorDay):
     db.close()
 
 
+def temp_save(x):
+    return start_save(x[0], x[1])
+
+
 def gen_dates(b_date, days):
     day = timedelta(days=1)
     # print(day)
@@ -88,7 +94,7 @@ def gen_dates(b_date, days):
         yield b_date + day*i
 
 
-def get_date_list(start_date, end_date):   # 两个日期之间的所有日期，包括开始日期， 包括 结束日期
+def get_date_list(start_date, end_date):   # 两个日期之间的所有日期，包括开始日期， 包括结束日期
     """
     获取日期列表
     :param start: 开始日期
@@ -108,23 +114,36 @@ def get_date_list(start_date, end_date):   # 两个日期之间的所有日期�
     return data
 
 
-if __name__ == '__main__':
-    start_date = '2019-12-01'
-    end_date = '2019-12-31'
+if __name__ == '__main__':      # 已完成 2016-2019
+    start_date = '2015-12-01'
+    end_date = '2015-12-31'
     date_list = get_date_list(start_date, end_date)
+    time1 = time.time()
+
     for prior_day in date_list:
         sql = "select * from historical_history where time = '{0}'".format(prior_day)
         db = MySQLdb.connect("localhost", "root", "admin", "football", charset='utf8')
         cursor = db.cursor()
         cursor.execute(sql)
         if not cursor.rowcount:     # 先判断XX日是否有记录，如果没有，则爬取数据
-            db.close()
+            pool = ThreadPool(4)  # 四核处理
+            total_match = []
+
             print('no data in %s, start to scrap and save to MySQL' % prior_day)
             getHistoryData = historySpider.HistorySpider(prior_day)
             final_id = getHistoryData.run()     # 获取XX日所有比赛的编号
             for match_id in final_id:
-                start_save(match_id, prior_day)
+                temp = (match_id, prior_day)
+                total_match.append(temp)
+                # start_save(match_id, prior_day)
+            pool.map(temp_save, total_match)
+            pool.close()
+            pool.join()
             print('finished ' + prior_day)
         else:
-            db.close()
-            print(prior_day + 'already have data')
+            print(prior_day + ' already have data')
+
+        db.close()
+
+    time2 = time.time()
+    print('总共耗时：' + str(time2 - time1) + 's')

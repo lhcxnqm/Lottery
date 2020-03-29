@@ -9,17 +9,23 @@ special_match = ['欧国联', '欧罗巴', '欧洲杯', '英锦赛', '日职乙'
 
 
 def get_asia_detail(match_id):
-    url = "http://odds.500.com/fenxi/yazhi-{0}.shtml".format(match_id)
-    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=10, headers=headers)
-    response.encoding = 'gb2312'
-    parser = etree.HTMLParser(encoding='gb2312')
-    html = etree.HTML(response.text, parser=parser)
+    try:
+        url = "http://odds.500.com/fenxi/yazhi-{0}.shtml".format(match_id)
+        headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
+        response = requests.get(url, timeout=10, headers=headers)
+        response.encoding = 'gb2312'
+        parser = etree.HTMLParser(encoding='gb2312')
+        html = etree.HTML(response.text, parser=parser)
 
-    team_message = html.xpath('//ul[@class="odds_hd_list"]/li/a/text()|'
-                              '//p[@class="game_time"]/text()|'
-                              '//div[@class="odds_hd_ls"]/a[@class="hd_name"]/text()|'
-                              '//p[@class="odds_hd_bf"]/strong/text()')
+        team_message = html.xpath('//ul[@class="odds_hd_list"]/li/a/text()|'
+                                  '//p[@class="game_time"]/text()|'
+                                  '//div[@class="odds_hd_ls"]/a[@class="hd_name"]/text()|'
+                                  '//p[@class="odds_hd_bf"]/strong/text()')
+    except requests.exceptions as e:
+        print(e)
+    except TypeError:
+        pass
+
     try:
         del team_message[2]
         team_message[1] = team_message[1].replace(" ", "")
@@ -49,12 +55,17 @@ def get_asia_detail(match_id):
 
 
 def get_europe_detail(match_id):
-    url = "http://odds.500.com/fenxi/ouzhi-{0}.shtml".format(match_id)
-    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=10, headers=headers)
-    response.encoding = 'gb2312'
-    parser = etree.HTMLParser(encoding='gb2312')
-    html = etree.HTML(response.text, parser=parser)
+    try:
+        url = "http://odds.500.com/fenxi/ouzhi-{0}.shtml".format(match_id)
+        headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
+        response = requests.get(url, timeout=10, headers=headers)
+        response.encoding = 'gb2312'
+        parser = etree.HTMLParser(encoding='gb2312')
+        html = etree.HTML(response.text, parser=parser)
+    except requests.exceptions as e:
+        print(e)
+    except TypeError:
+        pass
 
     match_dict = {}
     # companyID ：3 -->Bet365; 5 -->澳门; 280 -->皇冠; 293 -->威廉希尔
@@ -68,12 +79,17 @@ def get_europe_detail(match_id):
 
 
 def get_big_or_small_detail(match_id):
-    url = "http://odds.500.com/fenxi/daxiao-{0}.shtml".format(match_id)
-    headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
-    response = requests.get(url, timeout=10, headers=headers)
-    response.encoding = 'gb2312'
-    parser = etree.HTMLParser(encoding='gb2312')
-    html = etree.HTML(response.text, parser=parser)
+    try:
+        url = "http://odds.500.com/fenxi/daxiao-{0}.shtml".format(match_id)
+        headers = {"User-Agent": 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko'}
+        response = requests.get(url, timeout=10, headers=headers)
+        response.encoding = 'gb2312'
+        parser = etree.HTMLParser(encoding='gb2312')
+        html = etree.HTML(response.text, parser=parser)
+    except requests.exceptions as e:
+        print(e)
+    except TypeError:
+        pass
 
     match_dict = {}
     # companyID ：3 -->Bet365; 5 -->澳门; 280 -->皇冠; 293 -->威廉希尔

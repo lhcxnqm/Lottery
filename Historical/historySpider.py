@@ -24,6 +24,8 @@ class HistorySpider:
                                  '//tbody[@id="main-tbody"]/tr[@data-fid]/td[2]/a/text()')
         except requests.exceptions as e:
             print(e)
+        except TypeError:
+            pass
 
         final_id = []
         for i in range(len(id_list) - 1):
