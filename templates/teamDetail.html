@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ team_name }}</title>
+    <link rel="canonical" href="http://liansai.500.com/team//teamfixture/"/>
+    <link href="https://www.500cache.com/public/css/global.css?v=20141127" type="text/css" rel="stylesheet">
+    <link href="https://www.500cache.com/liansai/css/liansai.css?v=20141127" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+<link href="https://www.500cache.com/public/css/top_v2.css?v=20200327001" rel="stylesheet" type="text/css"/>
+
+<script type="text/javascript" src="https://www.500cache.com/public/js/public/core_jq.js"></script>
+<script type="text/javascript" src="https://www.500cache.com/public/js/public/top_v2.js?v=1200333"></script>
+<link href="https://www.500cache.com/public/css/dxt/topmenuheader.css?v=20151210" rel="stylesheet">
+
+<div class="lwrap">
+
+    <div class="lmain">
+        <div class="lmain_in clearfix">
+            <div class="lcrumbs" style="margin-top:0px;">您当前的位置：<a href="">Ocean足彩网</a> &gt; <a
+                    href="http://liansai.500.com/">联赛资料</a> &gt; <a href="http://liansai.500.com/zuqiu-5865/">{{ team.match }}</a>
+                &gt; {{ team_name }}
+            </div>
+            <!-- lpage_race_head end -->
+            <div class="lsnav_qdnav clearfix">
+                <h2 class="lsnav_qdnav_name">{{ team_name }}</h2>
+            </div>
+            <!-- lteam_select_box end -->
+
+            <div class="lcontent_full">
+
+                <div class="lcol">
+                    <div class="lcol_hd lcol_hd_nobd">
+                        <h3 class="lcol_tit">以往赛季参考</h3>
+                        <div class="lcol_tit_sub lyiwsj_panel">
+                            <select id="record" tid="913">
+                                <option value="10">近10场</option>
+                                <option selected="selected" value="30">近30场</option>
+                                <option value="50">近50场</option>
+                                <option value="100">近100场</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="lcol_bd jTab">
+                        <div class="ltab_hd" tid="913">
+                            <a href="javascript:void(0);" hoa="0" class="ltab_btn jTabBtn on">全部</a>
+                            <a href="javascript:void(0);" hoa="1" class="ltab_btn jTabBtn">主场</a>
+                            <a href="javascript:void(0);" hoa="2" class="ltab_btn jTabBtn">客场</a>
+                        </div>
+                        <div class="ltab_bd_wrap">
+                            <div class="ltab_bd jTabBD">
+                                <table class="ltable jTrHover">
+                                    <thead>
+                                    <tr>
+                                        <th width="80">赛事</th>
+                                        <th width="136">比赛时间</th>
+                                        <th width="96" class="td_lteam"><span>主队</span></th>
+                                        <th width="94">比分</th>
+                                        <th width="96" class="td_rteam"><span>客队</span></th>
+                                        <th width="54">赛果</th>
+                                        <th width="140">主流欧指</th>
+                                        <th width="85">主流盘口</th>
+                                        <th width="50">盘路</th>
+                                        <th width="50">大小</th>
+                                        <th>分析</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="jTrInterval his_table">
+                                        {% for each in team_list %}
+                                            <tr id="{{ each.matchId }}" class="306">
+                                                <td><a href="" target="_blank">{{ each.match }}</a></td>
+                                                <td class="td_time">{{ each.match_time }}</td>
+
+                                                <td class="td_lteam">
+                                                    {% if each.hostTeam == team_name %}
+                                                        <a href="" style="color:#a00000" target="_blank">{{ each.hostTeam }}</a>
+                                                    {% else %}
+                                                        <a href="" style="" target="_blank">{{ each.hostTeam }}</a>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>
+                                                    {% if each.result_host > each.result_guest %}
+                                                        <span class="lred">{{ each.result_host }}</span>:{{ each.result_guest }}
+                                                    {% elif each.result_host == each.result_guest %}
+                                                        <span class="lgreen">{{ each.result_host }}:{{ each.result_guest }}</span>
+                                                    {% else %}
+                                                        {{ each.result_host }}:<span class="lred">{{ each.result_guest }}</span>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td class="td_rteam">
+                                                    {% if each.guestTeam == team_name %}
+                                                        <a href="" style="color:#a00000" target="_blank">{{ each.guestTeam }}</a>
+                                                    {% else %}
+                                                        <a href="" target="_blank">{{ each.guestTeam }}</a>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>
+                                                    {% if each.victory_or_defeat == '胜' %}
+                                                        <span class="lred">{{ each.victory_or_defeat }}</span>
+                                                    {% elif each.victory_or_defeat == '平' %}
+                                                        <span class="lgreen">{{ each.victory_or_defeat }}</span>
+                                                    {% else %}
+                                                        <span class="lblue">{{ each.victory_or_defeat }}</span>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td class="td_ouz">
+                                                    {% if each.result_host > each.result_guest %}
+                                                        <span class="lpl_on">{{ each.immediateWin }}</span>
+                                                        <span>{{ each.immediatePeace }}</span>
+                                                        <span>{{ each.immediateLose }}</span>
+                                                    {% elif each.result_host == each.result_guest %}
+                                                        <span>{{ each.immediateWin }}</span>
+                                                        <span class="lpl_on">{{ each.immediatePeace }}</span>
+                                                        <span>{{ each.immediateLose }}</span>
+                                                    {% else %}
+                                                        <span>{{ each.immediateWin }}</span>
+                                                        <span>{{ each.immediatePeace }}</span>
+                                                        <span class="lpl_on">{{ each.immediateLose }}</span>
+                                                    {% endif %}
+                                                </td>
+
+                                                <td>{{ each.immediateOpening }}</td>
+                                                <td>赢</td>
+                                                <td>大</td>
+                                                <td class="last">
+                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}数据分析" target="_blank">析</a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    <tbody class="jTrInterval his_table" style="display: none;"></tbody>
+                                    <tbody class="jTrInterval his_table" style="display: none;"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 以往赛季参考 end -->
+
+                <div class="lcol">
+                    <table class="ltable1" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th width="60">赛</th>
+                            <th>胜</th>
+                            <th>平</th>
+                            <th>负</th>
+                            <th>一赔</th>
+                            <th>二赔</th>
+                            <th>三赔</th>
+                            <th>赢盘</th>
+                            <th>走盘</th>
+                            <th>输盘</th>
+                            <th>大球</th>
+                            <th>小球</th>
+                            <th width="60">进球</th>
+                            <th width="60">失球</th>
+                            <th width="60">净胜球</th>
+                        </tr>
+                        </thead>
+                        <tbody class="tj_table">
+                        <tr>
+                            <td rowspan="2" class="td_num1 first">{{ all_result.total_count }}</td>
+                            <td class="td_num">{{ all_result.total_win }}</td>
+                            <td class="td_num">{{ all_result.total_peace }}</td>
+                            <td class="td_num">{{ all_result.total_lose }}</td>
+                            <td class="td_num">16</td>
+                            <td class="td_num">8</td>
+                            <td class="td_num">6</td>
+                            <td class="td_num">13</td>
+                            <td class="td_num">0</td>
+                            <td class="td_num">16</td>
+                            <td class="td_num">17</td>
+                            <td class="td_num last">13</td>
+                            <td rowspan="2" class="td_num1">42</td>
+                            <td rowspan="2" class="td_num1">45</td>
+                            <td rowspan="2" class="td_num1">-3</td>
+                        </tr>
+                        <tr>
+                            <td>{{ all_result.win_rate }}%</td>
+                            <td>{{ all_result.peace_rate }}%</td>
+                            <td>{{ all_result.lose_rate }}%</td>
+                            <td>53.33%</td>
+                            <td>26.67%</td>
+                            <td>20.00%</td>
+                            <td>44.83%</td>
+                            <td>0.00%</td>
+                            <td>55.17%</td>
+                            <td>56.67%</td>
+                            <td class="last">43.33%</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+            <!-- lcontent_full end -->
+
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://www.500cache.com/public/css/footer.css?v=20181019">
+
+<script type="text/javascript" src="https://www.500cache.com/public/js/jquery/jquery.min.js"></script>
+
+<script type="text/javascript" src="https://www.500cache.com/liansai/js/laisaistorage.js?v=20141127"></script>
+</body>
+</html>

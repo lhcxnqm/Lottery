@@ -16,6 +16,15 @@ class History(models.Model):
     def short_time(self):
         return self.match_time[5:]
 
+    def result_host(self):
+        return self.result[0]
+
+    def result_guest(self):
+        return self.result[-1]
+
+    class Meta:
+        ordering = ['-match_time']
+
 
 class BigOrSmall(models.Model):
     company = models.CharField(max_length=8)   # 公司

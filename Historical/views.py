@@ -3,9 +3,10 @@ from .models import History, BigOrSmall, European, Asia
 import datetime
 from Historical import historySpider, getData
 from pandas.tseries.offsets import Day
+from django.db.models import Q
 
 
-# 点击历史导航栏
+# 点击历史导航栏进入
 def index_history(request):
     prior_day = datetime.date.today() - Day()
     if 'year' in request.POST:
@@ -38,6 +39,66 @@ def index_history(request):
         #     start_save(match_id, prior_day)
         #
         return render(request, "history.html", {'result': '暂无比赛记录，请查询其他日期'})
+
+
+# 队伍战绩详情
+def team_detail(request, match_id, team_type):
+    # 根据赛事编号获取相应的队伍名称
+    team = History.objects.get(matchId=match_id)
+    if 'host'.__eq__(team_type):
+        team_name = team.hostTeam
+        team_message = History.objects.filter(Q(hostTeam=team.hostTeam) | Q(guestTeam=team.hostTeam))
+    else:
+        team_name = team.guestTeam
+        team_message = History.objects.filter(Q(guestTeam=team.guestTeam) | Q(hostTeam=team.guestTeam))
+
+    team_list, all_result = return_victory_or_defeat(team_name, team_message)
+
+    return render(request, "teamDetail.html",
+                  {'team': team, 'team_name': team_name, 'team_list': team_list, 'all_result': all_result})
+
+
+# 返回一组team_message中，指定队伍的基本信息,胜平负,盘口
+def return_victory_or_defeat(team_name, team_message):
+    win, peace, lose = 0, 0, 0
+    team_list = []
+    for each in team_message:
+        team_item = dict()
+        team_item['matchId'] = each.matchId
+        team_item['match'] = each.match
+        team_item['match_time'] = each.match_time
+        team_item['hostTeam'] = each.hostTeam
+        team_item['guestTeam'] = each.guestTeam
+        team_item['result_host'] = each.result_host
+        team_item['result_guest'] = each.result_guest
+
+        team_item['immediateOpening'] = Asia.objects.get(company='澳门', subMatchId_id=each.matchId).immediateOpening
+        europe = European.objects.get(company='澳门', subMatchId_id=each.matchId)
+        team_item['immediateWin'] = europe.immediateWin
+        team_item['immediatePeace'] = europe.immediatePeace
+        team_item['immediateLose'] = europe.immediateLose
+
+        if team_name == each.hostTeam and each.result[0] > each.result[-1]:
+            win += 1
+            team_item['victory_or_defeat'] = '胜'
+        elif each.result[0] == each.result[-1]:
+            peace += 1
+            team_item['victory_or_defeat'] = '平'
+        elif team_name == each.guestTeam and each.result[-1] > each.result[0]:
+            win += 1
+            team_item['victory_or_defeat'] = '胜'
+        else:
+            lose += 1
+            team_item['victory_or_defeat'] = '负'
+
+        team_list.append(team_item)
+
+    all_result = {'total_win': win, 'total_peace': peace, 'total_lose': lose, 'total_count': team_message.count(),
+                  'win_rate': "%.2f" % float(win/team_message.count()*100),
+                  'peace_rate': "%.2f" % float(peace/team_message.count()*100),
+                  'lose_rate': "%.2f" % float(lose/team_message.count()*100)}
+
+    return team_list, all_result
 
 
 # 历史亚盘信息详情
@@ -105,6 +166,7 @@ def return_europe_result(result_item, each, company):
         pass
 
 
+# 存储数据公共方法
 def save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, company):
     try:
         # 存储亚盘信息
@@ -134,6 +196,7 @@ def save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, comp
         pass
 
 
+# 开始存储
 def start_save(match_id, prior_day):
     team_message, asia_dict = getData.get_asia_detail(match_id)
 
@@ -155,6 +218,7 @@ def start_save(match_id, prior_day):
             save_message(match_id, asia_dict, big_or_small_dict, europe_dict, each, '威廉希尔')
 
 
+# 开始删除
 def start_delete(match_id):
     # 删除亚盘信息
     obj = Asia.objects.filter(subMatchId_id=match_id)
