@@ -47,21 +47,31 @@ def team_detail(request, match_id, team_type):
     team = History.objects.get(matchId=match_id)
     if 'host'.__eq__(team_type):
         team_name = team.hostTeam
-        team_message = History.objects.filter(Q(hostTeam=team.hostTeam) | Q(guestTeam=team.hostTeam))
+        team_message = History.objects.filter(Q(hostTeam=team_name) | Q(guestTeam=team_name))
     else:
         team_name = team.guestTeam
-        team_message = History.objects.filter(Q(guestTeam=team.guestTeam) | Q(hostTeam=team.guestTeam))
+        team_message = History.objects.filter(Q(guestTeam=team_name) | Q(hostTeam=team_name))
 
-    team_list, all_result = return_victory_or_defeat(team_name, team_message)
+    team_list = []
+    team_list, all_result = return_victory_or_defeat(team_name, team_message, team_list)
 
     return render(request, "teamDetail.html",
                   {'team': team, 'team_name': team_name, 'team_list': team_list, 'all_result': all_result})
 
 
-# 返回一组team_message中，指定队伍的基本信息,胜平负,盘口
-def return_victory_or_defeat(team_name, team_message):
+# 返回一组team_message中，指定队伍的基本信息, 胜平负, 盘口输赢
+def return_victory_or_defeat(team_name, team_message, team_list):
     win, peace, lose = 0, 0, 0
-    team_list = []
+    win_handicap, peace_handicap, lose_handicap = 0, 0, 0
+    handicap_let = {'平手': 0, '平手/半球': -0.25, '半球': -0.5, '半球/一球': -0.75,
+                    '一球': -1, '一球/球半': -1.25, '球半': -1.5, '球半/两球': -1.75,
+                    '两球': -2, '两球/两球半': -2.25, '两球半': -2.5, '两球半/三球': -2.75,
+                    '三球': -3, '三球/三球半': -3.25, '三球半': -3.5, '三球半/四球': -3.75,
+                    '受平手/半球': 0.25, '受半球': 0.5, '受半球/一球': 0.75,
+                    '受一球': 1, '受一球/球半': 1.25, '受球半': 1.5, '受球半/两球': 1.75,
+                    '受两球': 2, '受两球/两球半': 2.25, '受两球半': 2.5, '受两球半/三球': 2.75,
+                    '受三球': 3, '受三球/三球半': 3.25, '受三球半': 3.5, '受三球半/四球': 3.75}
+
     for each in team_message:
         team_item = dict()
         team_item['matchId'] = each.matchId
@@ -72,11 +82,42 @@ def return_victory_or_defeat(team_name, team_message):
         team_item['result_host'] = each.result_host
         team_item['result_guest'] = each.result_guest
 
-        team_item['immediateOpening'] = Asia.objects.get(company='澳门', subMatchId_id=each.matchId).immediateOpening
-        europe = European.objects.get(company='澳门', subMatchId_id=each.matchId)
-        team_item['immediateWin'] = europe.immediateWin
-        team_item['immediatePeace'] = europe.immediatePeace
-        team_item['immediateLose'] = europe.immediateLose
+        # 指定队伍每一场赛事的胜平负及主流欧赔
+        try:
+            team_item['immediateOpening'] = Asia.objects.get(company='澳门', subMatchId_id=each.matchId).immediateOpening
+
+            # 指定队伍每一场的盘口输赢情况
+            handicap_calculate = float(handicap_let[team_item['immediateOpening']])
+            result_host, result_guest = float(each.result[0]), float(each.result[-1])
+            if team_name == each.hostTeam:
+                if result_host + handicap_calculate > result_guest:
+                    team_item['handicap'] = '赢'
+                    win_handicap += 1
+                elif result_host + handicap_calculate == result_guest:
+                    team_item['handicap'] = '走盘'
+                    peace_handicap += 1
+                else:
+                    team_item['handicap'] = '输'
+                    lose_handicap += 1
+            else:
+                if result_guest > result_host + handicap_calculate:
+                    team_item['handicap'] = '赢'
+                    win_handicap += 1
+                elif result_host + handicap_calculate == result_guest:
+                    team_item['handicap'] = '走盘'
+                    peace_handicap += 1
+                else:
+                    team_item['handicap'] = '输'
+                    lose_handicap += 1
+        except Asia.DoesNotExist as e:
+            print(e)
+        try:
+            europe = European.objects.get(company='澳门', subMatchId_id=each.matchId)
+            team_item['immediateWin'] = europe.immediateWin
+            team_item['immediatePeace'] = europe.immediatePeace
+            team_item['immediateLose'] = europe.immediateLose
+        except European.DoesNotExist as e:
+            print(e)
 
         if team_name == each.hostTeam and each.result[0] > each.result[-1]:
             win += 1
@@ -96,7 +137,11 @@ def return_victory_or_defeat(team_name, team_message):
     all_result = {'total_win': win, 'total_peace': peace, 'total_lose': lose, 'total_count': team_message.count(),
                   'win_rate': "%.2f" % float(win/team_message.count()*100),
                   'peace_rate': "%.2f" % float(peace/team_message.count()*100),
-                  'lose_rate': "%.2f" % float(lose/team_message.count()*100)}
+                  'lose_rate': "%.2f" % float(lose/team_message.count()*100),
+                  'win_handicap': win_handicap, 'peace_handicap': peace_handicap, 'lose_handicap': lose_handicap,
+                  'win_handicap_rate': "%.2f" % float(win_handicap/(win_handicap+peace_handicap+lose_handicap)*100),
+                  'peace_handicap_rate': "%.2f" % float(peace_handicap/(win_handicap+peace_handicap+lose_handicap)*100),
+                  'lose_handicap_rate': "%.2f" % float(lose_handicap/(win_handicap+peace_handicap+lose_handicap)*100)}
 
     return team_list, all_result
 

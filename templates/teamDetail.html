@@ -126,7 +126,17 @@
                                                 </td>
 
                                                 <td>{{ each.immediateOpening }}</td>
-                                                <td>赢</td>
+
+                                                <td>
+                                                    {% if each.handicap == '赢' %}
+                                                        <span class="lred">{{ each.handicap }}</span>
+                                                    {% elif each.handicap == '走盘' %}
+                                                        <span class="lgreen">{{ each.handicap }}</span>
+                                                    {% else %}
+                                                        {{ each.handicap }}
+                                                    {% endif %}
+                                                </td>
+
                                                 <td>大</td>
                                                 <td class="last">
                                                     <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}数据分析" target="_blank">析</a>
@@ -173,9 +183,9 @@
                             <td class="td_num">16</td>
                             <td class="td_num">8</td>
                             <td class="td_num">6</td>
-                            <td class="td_num">13</td>
-                            <td class="td_num">0</td>
-                            <td class="td_num">16</td>
+                            <td class="td_num">{{ all_result.win_handicap }}</td>
+                            <td class="td_num">{{ all_result.peace_handicap }}</td>
+                            <td class="td_num">{{ all_result.lose_handicap }}</td>
                             <td class="td_num">17</td>
                             <td class="td_num last">13</td>
                             <td rowspan="2" class="td_num1">42</td>
@@ -189,9 +199,9 @@
                             <td>53.33%</td>
                             <td>26.67%</td>
                             <td>20.00%</td>
-                            <td>44.83%</td>
-                            <td>0.00%</td>
-                            <td>55.17%</td>
+                            <td>{{ all_result.win_handicap_rate }}%</td>
+                            <td>{{ all_result.peace_handicap_rate }}%</td>
+                            <td>{{ all_result.lose_handicap_rate }}%</td>
                             <td>56.67%</td>
                             <td class="last">43.33%</td>
                         </tr>
@@ -206,10 +216,7 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="https://www.500cache.com/public/css/footer.css?v=20181019">
 
-<script type="text/javascript" src="https://www.500cache.com/public/js/jquery/jquery.min.js"></script>
 
-<script type="text/javascript" src="https://www.500cache.com/liansai/js/laisaistorage.js?v=20141127"></script>
 </body>
 </html>
