@@ -63,6 +63,7 @@
                                         <th width="140">主流欧指</th>
                                         <th width="85">主流盘口</th>
                                         <th width="50">盘路</th>
+                                        <th width="50">大小球</th>
                                         <th width="50">大小</th>
                                         <th>分析</th>
                                     </tr>
@@ -137,9 +138,22 @@
                                                     {% endif %}
                                                 </td>
 
-                                                <td>大</td>
+                                                <td>{{ each.sizeOpening }}</td>
+
+                                                <td>
+                                                    {% if each.handicap_size == '走盘' %}
+                                                        <span class="lgreen">{{ each.handicap_size }}</span>
+                                                    {% elif each.handicap_size == '大' %}
+                                                        <span class="lred">{{ each.handicap_size }}</span>
+                                                    {% else %}
+                                                         {{ each.handicap_size }}
+                                                    {% endif %}
+                                                </td>
+
                                                 <td class="last">
-                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}数据分析" target="_blank">析</a>
+                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">析</a>&nbsp;
+                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">亚</a>&nbsp;
+                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">欧</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -186,11 +200,11 @@
                             <td class="td_num">{{ all_result.win_handicap }}</td>
                             <td class="td_num">{{ all_result.peace_handicap }}</td>
                             <td class="td_num">{{ all_result.lose_handicap }}</td>
-                            <td class="td_num">17</td>
-                            <td class="td_num last">13</td>
-                            <td rowspan="2" class="td_num1">42</td>
-                            <td rowspan="2" class="td_num1">45</td>
-                            <td rowspan="2" class="td_num1">-3</td>
+                            <td class="td_num">{{ all_result.total_big }}</td>
+                            <td class="td_num last">{{ all_result.total_small }}</td>
+                            <td rowspan="2" class="td_num1">{{ all_result.goal }}</td>
+                            <td rowspan="2" class="td_num1">{{ all_result.fumble }}</td>
+                            <td rowspan="2" class="td_num1">{{ all_result.clear_wins }}</td>
                         </tr>
                         <tr>
                             <td>{{ all_result.win_rate }}%</td>
@@ -202,8 +216,8 @@
                             <td>{{ all_result.win_handicap_rate }}%</td>
                             <td>{{ all_result.peace_handicap_rate }}%</td>
                             <td>{{ all_result.lose_handicap_rate }}%</td>
-                            <td>56.67%</td>
-                            <td class="last">43.33%</td>
+                            <td>{{ all_result.big_rate }}%</td>
+                            <td class="last">{{ all_result.small_rate }}%</td>
                         </tr>
                         </tbody>
                     </table>
