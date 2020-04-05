@@ -196,6 +196,50 @@ def history_asia(request, match_id):
     return render(request, "history_asia.html", {'team_message': team_message, 'result_list': result_list})
 
 
+# 历史欧赔信息详情
+def history_european(request, match_id):
+    history = History.objects.get(matchId=match_id)
+    team_message = dict()
+    return_team_result(team_message, history)
+
+    result_list = []
+    average_win_probability, average_peace_probability, average_lose_probability = 0, 0, 0
+    average_start_win_probability, average_start_peace_probability, average_start_lose_probability = 0, 0, 0
+    for each in European.objects.filter(subMatchId_id=match_id):
+        result_item = dict()
+        return_europe_result(result_item, history, each.company)
+        # 即时概率计算
+        result_item['immediateWinProbability'] = "%.2f" % float(1/result_item['immediateWin']/(1/result_item['immediateWin'] + 1/result_item['immediatePeace'] + 1/result_item['immediateLose'])*100)
+        result_item['immediatePeaceProbability'] = "%.2f" % float(1 / result_item['immediatePeace']/(1/result_item['immediateWin'] + 1/result_item['immediatePeace'] + 1/result_item['immediateLose']) * 100)
+        result_item['immediateLoseProbability'] = "%.2f" % float(1 / result_item['immediateLose']/(1/result_item['immediateWin'] + 1/result_item['immediatePeace'] + 1/result_item['immediateLose']) * 100)
+        result_item['startWinProbability'] = "%.2f" % float(1 / result_item['startWin']/(1/result_item['startWin'] + 1/result_item['startPeace'] + 1/result_item['startLose']) * 100)
+        result_item['startPeaceProbability'] = "%.2f" % float(1 / result_item['startPeace']/(1/result_item['startWin'] + 1/result_item['startPeace'] + 1/result_item['startLose']) * 100)
+        result_item['startLoseProbability'] = "%.2f" % float(1 / result_item['startLose']/(1/result_item['startWin'] + 1/result_item['startPeace'] + 1/result_item['startLose']) * 100)
+        # 即时凯利计算前提
+        average_win_probability += float(result_item['immediateWinProbability'])
+        average_peace_probability += float(result_item['immediatePeaceProbability'])
+        average_lose_probability += float(result_item['immediateLoseProbability'])
+        average_start_win_probability += float(result_item['startWinProbability'])
+        average_start_peace_probability += float(result_item['startPeaceProbability'])
+        average_start_lose_probability += float(result_item['startLoseProbability'])
+        # 返还率计算
+        result_item['immediateReturnRate'] = "%.2f" % float(result_item['immediateWin']*result_item['immediatePeace']*result_item['immediateLose'] / (result_item['immediateWin']*result_item['immediatePeace']+result_item['immediateWin']*result_item['immediateLose']+result_item['immediatePeace']*result_item['immediateLose'])*100)
+        result_item['startReturnRate'] = "%.2f" % float(result_item['startWin']*result_item['startPeace']*result_item['startLose'] / (result_item['startWin']*result_item['startPeace']+result_item['startWin']*result_item['startLose']+result_item['startPeace']*result_item['startLose'])*100)
+
+        result_list.append(result_item)
+
+    # 即时凯利计算
+    for each in result_list:
+        each['immediateWinKelley'] = "%.2f" % float(each['immediateWin']*average_win_probability/4/100)
+        each['immediatePeaceKelley'] = "%.2f" % float(each['immediatePeace']*average_peace_probability/4/100)
+        each['immediateLoseKelley'] = "%.2f" % float(each['immediateLose']*average_lose_probability/4/100)
+        each['startWinKelley'] = "%.2f" % float(each['startWin'] * average_start_win_probability / 4 / 100)
+        each['startPeaceKelley'] = "%.2f" % float(each['startPeace'] * average_start_peace_probability / 4 / 100)
+        each['startLoseKelley'] = "%.2f" % float(each['startLose'] * average_start_lose_probability / 4 / 100)
+
+    return render(request, "history_european.html", {'team_message': team_message, 'result_list': result_list})
+
+
 # 返回赛事基本信息
 def return_team_result(team_message, each):
     team_message['matchId'] = each.matchId
