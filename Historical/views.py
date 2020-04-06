@@ -181,7 +181,7 @@ def return_victory_or_defeat(team_name, team_message, team_list):
     return team_list, all_result
 
 
-# 历史亚盘信息详情
+# 历史亚盘信息详情页
 def history_asia(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
@@ -196,7 +196,7 @@ def history_asia(request, match_id):
     return render(request, "history_asia.html", {'team_message': team_message, 'result_list': result_list})
 
 
-# 历史欧赔信息详情
+# 历史欧赔信息详情页
 def history_european(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
@@ -238,6 +238,21 @@ def history_european(request, match_id):
         each['startLoseKelley'] = "%.2f" % float(each['startLose'] * average_start_lose_probability / 4 / 100)
 
     return render(request, "history_european.html", {'team_message': team_message, 'result_list': result_list})
+
+
+# 历史大小球盘详情页
+def history_big_or_small(request, match_id):
+    history = History.objects.get(matchId=match_id)
+    team_message = dict()
+    return_team_result(team_message, history)
+
+    result_list = []
+    for each in BigOrSmall.objects.filter(subMatchId_id=match_id):
+        result_item = dict()
+        return_big_or_small_result(result_item, history, each.company)
+        result_list.append(result_item)
+
+    return render(request, "history_bigorsmall.html", {'team_message': team_message, 'result_list': result_list})
 
 
 # 返回赛事基本信息
@@ -287,6 +302,23 @@ def return_europe_result(result_item, each, company):
         result_item['startPeace'] = each_europe.startPeace
         result_item['startLose'] = each_europe.startLose
     except European.DoesNotExist:
+        pass
+
+
+# 返回大小球盘信息
+def return_big_or_small_result(result_item, each, company):
+    try:
+        each_big_or_small = BigOrSmall.objects.get(company=company, subMatchId_id=each.matchId)
+        result_item['company'] = each_big_or_small.company
+        result_item['immediateUpperStage'] = each_big_or_small.immediateUpperStage
+        result_item['immediateLowerStage'] = each_big_or_small.immediateLowerStage
+        result_item['immediateOpening'] = each_big_or_small.immediateOpening
+        result_item['changedTime'] = each_big_or_small.changedTime
+        result_item['startUpperStage'] = each_big_or_small.startUpperStage
+        result_item['startLowerStage'] = each_big_or_small.startLowerStage
+        result_item['startOpening'] = each_big_or_small.startOpening
+        result_item['startTime'] = each_big_or_small.startTime
+    except BigOrSmall.DoesNotExist:
         pass
 
 
