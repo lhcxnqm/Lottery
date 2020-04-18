@@ -45,9 +45,9 @@
                     </div>
                     <div class="lcol_bd jTab">
                         <div class="ltab_hd" tid="913">
-                            <a href="javascript:void(0);" hoa="0" class="ltab_btn jTabBtn on">全部</a>
-                            <a href="javascript:void(0);" hoa="1" class="ltab_btn jTabBtn">主场</a>
-                            <a href="javascript:void(0);" hoa="2" class="ltab_btn jTabBtn">客场</a>
+                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}" hoa="0" class="ltab_btn jTabBtn {{ all_on }}">全部</a>
+                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}main" hoa="1" class="ltab_btn jTabBtn {{ main_on }}">主场</a>
+                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}second" hoa="2" class="ltab_btn jTabBtn {{ guest_on }}">客场</a>
                         </div>
                         <div class="ltab_bd_wrap">
                             <div class="ltab_bd jTabBD">

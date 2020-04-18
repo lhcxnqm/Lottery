@@ -45,18 +45,37 @@ def index_history(request):
 def team_detail(request, match_id, team_type):
     # 根据赛事编号获取相应的队伍名称
     team = History.objects.get(matchId=match_id)
-    if 'host'.__eq__(team_type):
+    # 控制前端是否高亮
+    all_on, main_on, guest_on = '', '', ''
+    if 'host' in team_type:
         team_name = team.hostTeam
         team_message = History.objects.filter(Q(hostTeam=team_name) | Q(guestTeam=team_name))[:30]
+        if 'main' in team_type:
+            team_message = History.objects.filter(hostTeam=team_name)[:30]
+            main_on = 'on'
+        if 'second' in team_type:
+            team_message = History.objects.filter(guestTeam=team_name)[:30]
+            guest_on = 'on'
+        team_type = 'host'
     else:
         team_name = team.guestTeam
         team_message = History.objects.filter(Q(guestTeam=team_name) | Q(hostTeam=team_name))[:30]
+        if 'main' in team_type:
+            team_message = History.objects.filter(hostTeam=team_name)[:30]
+            main_on = 'on'
+        if 'second' in team_type:
+            team_message = History.objects.filter(guestTeam=team_name)[:30]
+            guest_on = 'on'
+        team_type = 'guest'
+    all_on = '' if 'on'.__eq__(main_on) or 'on'.__eq__(guest_on) else 'on'
 
     team_list = []
     team_list, all_result = return_victory_or_defeat(team_name, team_message, team_list)
 
     return render(request, "teamDetail.html",
-                  {'team': team, 'team_name': team_name, 'team_list': team_list, 'all_result': all_result})
+                  {'team': team, 'team_name': team_name, 'team_type': team_type,
+                   'all_on': all_on, 'main_on': main_on, 'guest_on': guest_on,
+                   'team_list': team_list, 'all_result': all_result})
 
 
 # 返回一组team_message中，指定队伍的基本信息, 胜平负, 盘口输赢, 大小球
