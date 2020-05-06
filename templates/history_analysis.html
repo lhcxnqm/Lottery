@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ team_message.hostTeam }}VS{{ team_message.guestTeam }}-数据分析</title>
+    <link href="/static/history_global.css" rel="stylesheet"/>
+    <link href="/static/global.css" type="text/css" rel="stylesheet">
+    <link href="/static/liansai.css" type="text/css" rel="stylesheet">
+</head>
+
+<body class="odds">
+<div class="odds_header">
+    <div class="odds_hd_cont">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody>
+            <tr>
+                <td width="290" align="right">
+                    <ul class="odds_hd_list">
+                        <li><a class="hd_name" href="" target="_blank">{{ team_message.hostTeam }}</a></li>
+                    </ul>
+                </td>
+                <td width="110"><span class="odds_hd_team">
+        	<a href="" target="_blank"><img
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png" alt=""
+                    width="65" height="65"/></a>        </span></td>
+                <td align="center" width="190">
+                    <div class="odds_hd_center">
+                        <div class="odds_hd_ls" id="odds_hd_ls">
+                            <a class="hd_name" target="_blank">{{ team_message.match }}{{ team_message.round }}
+                            </a>
+                        </div>
+                        <p>{{ team_message.match_time }}</p>
+                        <p class="odds_hd_bf"><strong>{{ team_message.result }}</strong></p>
+                    </div>
+                </td>
+
+                <td width="110"><span class="odds_hd_team odds_hd_team2">
+        	<a href="http://liansai.500.com/team/7014/" target="_blank"><img
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_7014.png" alt=""
+                    width="65" height="65"/></a>
+                <td align="left">
+                    <ul class="odds_hd_list">
+                        <li><a class="hd_name" href="" target="_blank">{{ team_message.guestTeam }}</a></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="odds_nav">
+        <ul class="odds_nav_list" id="odds_nav_list">
+            <li class="cur"><a href="" title="">数据分析</a></li>
+            <li><a href="/history/european_{{ team_message.matchId }}" title="">主流欧赔</a></li>
+            <li><a href="/history/asia_{{ team_message.matchId }}" title="">亚盘对比</a></li>
+            <li><a href="/history/big_or_small_{{ team_message.matchId }}" title="">大小指数</a></li>
+            <li><a href="" title="">走势分析</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="odds_content" style="position:relative">
+    <!--两队交战史-->
+    <div class="mar_b history M_box" id="team_jiaozhan">
+        <div class="M_title"><h4>{{ team_message.hostTeam }}VS{{ team_message.guestTeam }} 交战历史</h4></div>
+        <div class="M_content">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="pub_table">
+                <colgroup>
+                    <col width="60">
+                    <col width="100">
+                    <col width="240">
+                    <col width="40">
+                    <col width="140">
+                    <col width="60">
+                    <col width="50">
+                    <col width="50">
+                    <col width="100">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th class="th_one">赛事</th>
+                    <th>比赛日期</th>
+                    <th>主队  <em>比分</em>  客队</th>
+                    <th>赛果</th>
+                    <th>平均欧指 -- 终盘</th>
+                    <th>平均亚指 -- 终盘</th>
+                    <th>盘路</th>
+                    <th>大小</th>
+                    <th>备注</th>
+                </tr>
+                {% for each in both_team_list %}
+                    <tr class="tr2">
+                        <td class="td_one" bgcolor="{{ team_message.match_color }}"><a rel="nofollow">{{ team_message.match }}</a></td>
+                        <td>{{ each.match_time }}</td>
+                        <td>
+                            {{ each.hostTeam }}&nbsp;
+                            {% if each.result_host > each.result_guest %}
+                                <span class="lred">{{ each.result_host }}</span>:{{ each.result_guest }}
+                            {% elif each.result_host == each.result_guest %}
+                                <span class="lgreen">{{ each.result_host }}:{{ each.result_guest }}</span>
+                            {% else %}
+                                {{ each.result_host }}:<span class="lred">{{ each.result_guest }}</span>
+                            {% endif %}
+                            &nbsp;{{ each.guestTeam }}
+
+                        </td>
+                        <td>
+                            {% if each.victory_or_defeat == '胜' %}
+                                <span class="lred">{{ each.victory_or_defeat }}</span>
+                            {% elif each.victory_or_defeat == '平' %}
+                                <span class="lgreen">{{ each.victory_or_defeat }}</span>
+                            {% else %}
+                                <span class="lblue">{{ each.victory_or_defeat }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if each.result_host > each.result_guest %}
+                                <span class="lpl_on">{{ each.immediateWin }}</span>
+                                <span>{{ each.immediatePeace }}</span>
+                                <span>{{ each.immediateLose }}</span>
+                            {% elif each.result_host == each.result_guest %}
+                                <span>{{ each.immediateWin }}</span>
+                                <span class="lpl_on">{{ each.immediatePeace }}</span>
+                                <span>{{ each.immediateLose }}</span>
+                            {% else %}
+                                <span>{{ each.immediateWin }}</span>
+                                <span>{{ each.immediatePeace }}</span>
+                                <span class="lpl_on">{{ each.immediateLose }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <p class="pub_table_pl"><span
+                                class="table_pl_center">{{ each.immediateOpening }}</span>
+                            </p>
+                        </td>
+                        <td>
+                            {% if each.handicap == '赢' %}
+                                <span class="lred">{{ each.handicap }}</span>
+                            {% elif each.handicap == '走盘' %}
+                                <span class="lgreen">{{ each.handicap }}</span>
+                            {% else %}
+                                {{ each.handicap }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if each.handicap_size == '走盘' %}
+                                <span class="lgreen">{{ each.handicap_size }}</span>
+                            {% elif each.handicap_size == '大' %}
+                                <span class="lred">{{ each.handicap_size }}</span>
+                            {% else %}
+                                 {{ each.handicap_size }}
+                            {% endif %}
+                        </td>
+                        <td>-</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 近期战绩 -->
+    <div class="M_box record">
+        <div class="module_cur" style="">
+            <div id="team_zhanji1_0">
+                <form name="zhanji_00" id="zhanji_00" action="" method="post"
+                      onsubmit="return false;">
+                    <div class="M_content_t">
+                        <h2>近期战绩</h2>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="odds_zj_tubiao">
+            <div class="team_a" id="team_zhanji2_1">
+                <form name="zhanji_11" id="zhanji_11" action="/fenxi1/inc/shuju_zhanji.php" method="post"
+                      onsubmit="return false;">
+                    <div class="M_content_t">
+                        <div class="selt"><strong class="team_name">{{ team_message.hostTeam }}</strong>
+                        </div>
+                    </div>
+                    <div class="M_content">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pub_table">
+                            <tbody>
+                            <tr>
+                                <th width="60" class="th_one">赛事</th>
+                                <th width="86">比赛日期</th>
+                                <th><p class="dz"><span class="dz-l">主队</span><em>比分</em><span class="dz-r">客队</span>
+                                </p></th>
+                                <th width="52">盘口</th>
+                                <th width="44">赛果</th>
+                                <th width="44">盘路</th>
+                                <th width="44">大小</th>
+                            </tr>
+                            {% for each in host_team_list %}
+                            <tr class="tr1">
+                                <td class="td_one" bgcolor="{{ each.match_color }}"><a href="" title="">{{ each.match }}</a></td>
+                                <td>{{ each.short_time }}</td>
+                                <td class="dz">
+                                    <span style="float: left">{{ each.hostTeam }}</span>
+                                    {% if each.result_host > each.result_guest %}
+                                        <span class="lred">{{ each.result_host }}</span>:{{ each.result_guest }}
+                                    {% elif each.result_host == each.result_guest %}
+                                        <span class="lgreen">{{ each.result_host }}:{{ each.result_guest }}</span>
+                                    {% else %}
+                                        {{ each.result_host }}:<span class="lred">{{ each.result_guest }}</span>
+                                    {% endif %}
+                                    <span style="float: right">{{ each.guestTeam }}</span>
+                                </td>
+                                <td>{{ each.origin_handicap }}</td>
+                                <td>
+                                    {% if each.victory_or_defeat == '胜' %}
+                                        <span class="lred">{{ each.victory_or_defeat }}</span>
+                                    {% elif each.victory_or_defeat == '平' %}
+                                        <span class="lgreen">{{ each.victory_or_defeat }}</span>
+                                    {% else %}
+                                        <span class="lblue">{{ each.victory_or_defeat }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if each.handicap == '赢' %}
+                                        <span class="lred">{{ each.handicap }}</span>
+                                    {% elif each.handicap == '走盘' %}
+                                        <span class="lgreen">{{ each.handicap }}</span>
+                                    {% else %}
+                                        {{ each.handicap }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if each.handicap_size == '走盘' %}
+                                        <span class="lgreen">{{ each.handicap_size }}</span>
+                                    {% elif each.handicap_size == '大' %}
+                                        <span class="lred">{{ each.handicap_size }}</span>
+                                    {% else %}
+                                         {{ each.handicap_size }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="bottom_info">
+                            <p><strong>{{ team_message.hostTeam }}</strong>近{{ host_all_result.total_count }}场战绩<span class="mar_left20">
+                                <span class="ying">{{ host_all_result.total_win }}胜</span>
+                                <span class="ping">{{ host_all_result.total_peace }}平</span>
+                                <span class="shu">{{ host_all_result.total_lose }}负</span></span>
+                                <span class="mar_left20">进<span class="ying">{{ host_all_result.goal }}球</span>
+                                    失<span class="shu">{{ host_all_result.fumble }}球</span></span>
+                            </p>
+                            <div class="chart">
+                                <table cellspacing="0" cellpadding="0" border="0" align="center">
+                                    <tbody>
+                                    <tr>
+                                        <td valign="bottom" height="65">最近</td>
+                                        {% for each in host_team_list %}
+                                            {% if each.victory_or_defeat == "平" %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/m_green.png" alt="平"></div>
+                                            </td>
+                                            {% elif each.victory_or_defeat == "胜" %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/h_red.png" alt="胜"></div>
+                                            </td>
+                                            {% else %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/l_blue.png" alt="负"></div>
+                                            </td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td valign="bottom">最远</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="team_b" id="team_zhanji2_0">
+                <form name="zhanji_20" id="zhanji_20" action="/fenxi1/inc/shuju_zhanji.php" method="post"
+                      onsubmit="return false;">
+                    <div class="M_content_t">
+                        <div class="selt"><strong class="team_name">{{ team_message.guestTeam }}</strong>
+                        </div>
+                    </div>
+                    <div class="M_content">
+                        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="pub_table">
+                            <tbody>
+                            <tr>
+                                <th width="60" class="th_one">赛事</th>
+                                <th width="86">比赛日期</th>
+                                <th><p class="dz"><span class="dz-l">主队</span><em>比分</em><span class="dz-r">客队</span>
+                                </p></th>
+                                <th width="52">盘口</th>
+                                <th width="44">赛果</th>
+                                <th width="44">盘路</th>
+                                <th width="44">大小</th>
+                            </tr>
+
+                            {% for each in guest_team_list %}
+                            <tr class="tr1">
+                                <td class="td_one" bgcolor="{{ each.match_color }}"><a href="" title="">{{ each.match }}</a></td>
+                                <td>{{ each.short_time }}</td>
+                                <td class="dz">
+                                    <span style="float: left">{{ each.hostTeam }}</span>
+                                    {% if each.result_host > each.result_guest %}
+                                        <span class="lred">{{ each.result_host }}</span>:{{ each.result_guest }}
+                                    {% elif each.result_host == each.result_guest %}
+                                        <span class="lgreen">{{ each.result_host }}:{{ each.result_guest }}</span>
+                                    {% else %}
+                                        {{ each.result_host }}:<span class="lred">{{ each.result_guest }}</span>
+                                    {% endif %}
+                                    <span style="float: right">{{ each.guestTeam }}</span>
+                                </td>
+                                <td>{{ each.origin_handicap }}</td>
+                                <td>
+                                    {% if each.victory_or_defeat == '胜' %}
+                                        <span class="lred">{{ each.victory_or_defeat }}</span>
+                                    {% elif each.victory_or_defeat == '平' %}
+                                        <span class="lgreen">{{ each.victory_or_defeat }}</span>
+                                    {% else %}
+                                        <span class="lblue">{{ each.victory_or_defeat }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if each.handicap == '赢' %}
+                                        <span class="lred">{{ each.handicap }}</span>
+                                    {% elif each.handicap == '走盘' %}
+                                        <span class="lgreen">{{ each.handicap }}</span>
+                                    {% else %}
+                                        {{ each.handicap }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if each.handicap_size == '走盘' %}
+                                        <span class="lgreen">{{ each.handicap_size }}</span>
+                                    {% elif each.handicap_size == '大' %}
+                                        <span class="lred">{{ each.handicap_size }}</span>
+                                    {% else %}
+                                         {{ each.handicap_size }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="bottom_info">
+                            <p>
+                                <strong>{{ team_message.guestTeam }}</strong>
+                                近{{ guest_all_result.total_count }}场战绩<span class="mar_left20"><span class="ying">{{ guest_all_result.total_win }}胜</span>
+                                <span class="ping">{{ guest_all_result.total_peace }}平</span>
+                                <span class="shu">{{ guest_all_result.total_lose }}负</span></span>
+                                <span class="mar_left20">进<span class="ying">{{ guest_all_result.goal }}球</span>
+                                    失<span class="shu">{{ guest_all_result.fumble }}球</span></span>
+                            </p>
+                            <div class="chart">
+                                <table cellspacing="0" cellpadding="0" border="0" align="center">
+                                    <tbody>
+                                    <tr>
+                                        <td valign="bottom" height="65">最近</td>
+                                        {% for each in guest_team_list %}
+                                            {% if each.victory_or_defeat == "平" %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/m_green.png" alt="平"></div>
+                                            </td>
+                                            {% elif each.victory_or_defeat == "胜" %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/h_red.png" alt="胜"></div>
+                                            </td>
+                                            {% else %}
+                                            <td valign="bottom" height="65" width="21">
+                                                <div><img src="/static/images/l_blue.png" alt="负"></div>
+                                            </td>
+                                            {% endif %}
+                                        {% endfor %}
+                                        <td valign="bottom">最远</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<p></p>
+
+</body>
+</html>

@@ -3,24 +3,20 @@
 <head>
     <meta charset="utf-8">
     <title>{{ team_name }}</title>
-    <link rel="canonical" href="http://liansai.500.com/team//teamfixture/"/>
-    <link href="https://www.500cache.com/public/css/global.css?v=20141127" type="text/css" rel="stylesheet">
-    <link href="https://www.500cache.com/liansai/css/liansai.css?v=20141127" type="text/css" rel="stylesheet">
+    <link href="/static/global.css" type="text/css" rel="stylesheet">
+    <link href="/static/liansai.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
-<link href="https://www.500cache.com/public/css/top_v2.css?v=20200327001" rel="stylesheet" type="text/css"/>
-
-<script type="text/javascript" src="https://www.500cache.com/public/js/public/core_jq.js"></script>
-<script type="text/javascript" src="https://www.500cache.com/public/js/public/top_v2.js?v=1200333"></script>
-<link href="https://www.500cache.com/public/css/dxt/topmenuheader.css?v=20151210" rel="stylesheet">
+<link href="/static/top_v2.css" rel="stylesheet" type="text/css"/>
+<link href="/static/topmenuheader.css" rel="stylesheet">
 
 <div class="lwrap">
 
     <div class="lmain">
         <div class="lmain_in clearfix">
             <div class="lcrumbs" style="margin-top:0px;">您当前的位置：<a href="">Ocean足彩网</a> &gt; <a
-                    href="http://liansai.500.com/">联赛资料</a> &gt; <a href="http://liansai.500.com/zuqiu-5865/">{{ team.match }}</a>
+                    href="">联赛资料</a> &gt; <a href="">{{ team.match }}</a>
                 &gt; {{ team_name }}
             </div>
             <!-- lpage_race_head end -->
@@ -71,7 +67,7 @@
                                     <tbody class="jTrInterval his_table">
                                         {% for each in team_list %}
                                             <tr id="{{ each.matchId }}" class="306">
-                                                <td><a href="" target="_blank">{{ each.match }}</a></td>
+                                                <td bgcolor="{{ each.match_color }}"><a href="" target="_blank" style="color: #fff">{{ each.match }}</a></td>
                                                 <td class="td_time">{{ each.match_time }}</td>
 
                                                 <td class="td_lteam">

@@ -99,11 +99,7 @@ def return_victory_or_defeat(team_name, team_message, team_list):
 
     for each in team_message:
         team_item = dict()
-        team_item['matchId'] = each.matchId
-        team_item['match'] = each.match
-        team_item['match_time'] = each.match_time
-        team_item['hostTeam'] = each.hostTeam
-        team_item['guestTeam'] = each.guestTeam
+        return_team_result(team_item, each)
         team_item['result_host'] = each.result_host
         team_item['result_guest'] = each.result_guest
 
@@ -119,6 +115,7 @@ def return_victory_or_defeat(team_name, team_message, team_list):
             team_item['immediateOpening'] = Asia.objects.get(company='澳门', subMatchId_id=each.matchId).immediateOpening
             # 指定队伍每一场的盘口输赢情况
             handicap_calculate = float(handicap_let[team_item['immediateOpening']])
+            team_item['origin_handicap'] = handicap_calculate
             result_host, result_guest = float(each.result[0]), float(each.result[-1])
             if team_name == each.hostTeam:
                 if result_host + handicap_calculate > result_guest:
@@ -184,6 +181,11 @@ def return_victory_or_defeat(team_name, team_message, team_list):
 
         team_list.append(team_item)
 
+    big_rate = 0 if big_handicap == 0 and small_handicap == 0 else \
+        "%.2f" % float(big_handicap/(big_handicap+small_handicap)*100)
+    small_rate = 0 if big_handicap == 0 and small_handicap == 0 else \
+        "%.2f" % float(small_handicap/(big_handicap+small_handicap)*100)
+
     all_result = {'total_win': win, 'total_peace': peace, 'total_lose': lose, 'total_count': team_message.count(),
                   'win_rate': "%.2f" % float(win/team_message.count()*100),
                   'peace_rate': "%.2f" % float(peace/team_message.count()*100),
@@ -193,8 +195,7 @@ def return_victory_or_defeat(team_name, team_message, team_list):
                   'peace_handicap_rate': "%.2f" % float(peace_handicap/(win_handicap+peace_handicap+lose_handicap)*100),
                   'lose_handicap_rate': "%.2f" % float(lose_handicap/(win_handicap+peace_handicap+lose_handicap)*100),
                   'total_big': big_handicap, 'total_small': small_handicap,
-                  'big_rate': "%.2f" % float(big_handicap/(big_handicap+small_handicap)*100),
-                  'small_rate': "%.2f" % float(small_handicap/(big_handicap+small_handicap)*100),
+                  'big_rate': big_rate, 'small_rate': small_rate,
                   'goal': goal, 'fumble': fumble, 'clear_wins': goal-fumble}
 
     return team_list, all_result
@@ -272,6 +273,36 @@ def history_big_or_small(request, match_id):
         result_list.append(result_item)
 
     return render(request, "history_bigorsmall.html", {'team_message': team_message, 'result_list': result_list})
+
+
+# 历史数据分析详情页
+def history_analysis(request, match_id):
+    history = History.objects.get(matchId=match_id)
+    team_message = dict()
+    return_team_result(team_message, history)
+
+    # 获取主客交战历史
+    both_team_message = History.objects.filter(Q(hostTeam=history.hostTeam, guestTeam=history.guestTeam) |
+                                               Q(guestTeam=history.hostTeam, hostTeam=history.guestTeam))[:6]
+    both_team_list = []
+    both_team_list, both_all_result = return_victory_or_defeat(history.hostTeam, both_team_message, both_team_list)
+
+    # 获取主队近期战绩
+    host_team_message = History.objects.filter(Q(hostTeam=history.hostTeam, match_time__lt=history.match_time) |
+                                               Q(guestTeam=history.hostTeam, match_time__lt=history.match_time))[:10]
+    host_team_list = []
+    host_team_list, host_all_result = return_victory_or_defeat(history.hostTeam, host_team_message, host_team_list)
+
+    # 获取客队近期战绩
+    guest_team_message = History.objects.filter(Q(hostTeam=history.guestTeam, match_time__lt=history.match_time) |
+                                                Q(guestTeam=history.guestTeam, match_time__lt=history.match_time))[:10]
+    guest_team_list = []
+    guest_team_list, guest_all_result = return_victory_or_defeat(history.guestTeam, guest_team_message, guest_team_list)
+
+    return render(request, "history_analysis.html",
+                  {'team_message': team_message, 'both_team_list': both_team_list,
+                   'host_team_list': host_team_list, 'host_all_result': host_all_result,
+                   'guest_team_list': guest_team_list, 'guest_all_result': guest_all_result})
 
 
 # 返回赛事基本信息
