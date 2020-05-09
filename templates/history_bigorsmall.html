@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>{{ team_message.hostTeam }}VS{{ team_message.guestTeam }}-大小对比</title>
     <link href="/static/history_global.css" rel="stylesheet"/>
+    <link href="/static/global.css" type="text/css" rel="stylesheet">
+    <link href="/static/liansai.css" type="text/css" rel="stylesheet">
 </head>
 
 <body class="odds">
@@ -51,7 +53,6 @@
             <li><a href="/history/european_{{ team_message.matchId }}" title="">主流欧赔</a></li>
             <li><a href="/history/asia_{{ team_message.matchId }}" title="">亚盘对比</a></li>
             <li class="cur"><a href="" title="">大小指数</a></li>
-            <li><a href="" title="">走势分析</a></li>
         </ul>
     </div>
 </div>
@@ -78,7 +79,7 @@
                     <th>统计</th>
                 </tr>
                 <tr xls="header">
-                    <th class="th_one">序号</th>
+                    <th class="th_one">-</th>
                     <th class="tb_plgs"><span row="1">赔率公司</span>&nbsp;&nbsp;</th>
                     <th>
                         <table cellspacing="0" cellpadding="0" class="pl_table_data">
@@ -124,7 +125,7 @@
                 <tr class="tr1" xls="row" id="293" dt="">
                     <td class="td_one">
                         <p>
-                            <input id="ck293" type="checkbox" value=""/> 1 </p>
+                            <input id="ck293" type="checkbox" value=""/></p>
                     </td>
                     <td class="tb_plgs" row="1"><p><a title=""><span>{{ each.company }}</span></a>
                     </p></td>

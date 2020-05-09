@@ -53,7 +53,6 @@
             <li><a href="/history/european_{{ team_message.matchId }}" title="">主流欧赔</a></li>
             <li><a href="/history/asia_{{ team_message.matchId }}" title="">亚盘对比</a></li>
             <li><a href="/history/big_or_small_{{ team_message.matchId }}" title="">大小指数</a></li>
-            <li><a href="" title="">走势分析</a></li>
         </ul>
     </div>
 </div>
@@ -175,7 +174,8 @@
                 <form name="zhanji_11" id="zhanji_11" action="/fenxi1/inc/shuju_zhanji.php" method="post"
                       onsubmit="return false;">
                     <div class="M_content_t">
-                        <div class="selt"><strong class="team_name">{{ team_message.hostTeam }}</strong>
+                        <div class="selt">
+                            <a href="/history/team_{{ team_message.matchId }}_host" target="_blank"><strong class="team_name">{{ team_message.hostTeam }}</strong></a>
                         </div>
                     </div>
                     <div class="M_content">
@@ -279,7 +279,8 @@
                 <form name="zhanji_20" id="zhanji_20" action="/fenxi1/inc/shuju_zhanji.php" method="post"
                       onsubmit="return false;">
                     <div class="M_content_t">
-                        <div class="selt"><strong class="team_name">{{ team_message.guestTeam }}</strong>
+                        <div class="selt">
+                            <a href="/history/team_{{ team_message.matchId }}_guest" target="_blank"><strong class="team_name">{{ team_message.guestTeam }}</strong></a>
                         </div>
                     </div>
                     <div class="M_content">

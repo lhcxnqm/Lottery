@@ -41,30 +41,33 @@ def index_history(request):
         return render(request, "history.html", {'result': '暂无比赛记录，请查询其他日期'})
 
 
-# 队伍战绩详情
+# 球队战绩详情页
 def team_detail(request, match_id, team_type):
     # 根据赛事编号获取相应的队伍名称
     team = History.objects.get(matchId=match_id)
     # 控制前端是否高亮
     all_on, main_on, guest_on = '', '', ''
+    # host 表传进来主队, main 表主场记录, second 表客场记录
     if 'host' in team_type:
         team_name = team.hostTeam
-        team_message = History.objects.filter(Q(hostTeam=team_name) | Q(guestTeam=team_name))[:30]
+        team_message = History.objects.filter(Q(hostTeam=team_name, match_time__lt=team.match_time) |
+                                              Q(guestTeam=team_name, match_time__lt=team.match_time))[:30]
         if 'main' in team_type:
-            team_message = History.objects.filter(hostTeam=team_name)[:30]
+            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:30]
             main_on = 'on'
         if 'second' in team_type:
-            team_message = History.objects.filter(guestTeam=team_name)[:30]
+            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:30]
             guest_on = 'on'
         team_type = 'host'
     else:
         team_name = team.guestTeam
-        team_message = History.objects.filter(Q(guestTeam=team_name) | Q(hostTeam=team_name))[:30]
+        team_message = History.objects.filter(Q(guestTeam=team_name, match_time__lt=team.match_time) |
+                                              Q(hostTeam=team_name, match_time__lt=team.match_time))[:30]
         if 'main' in team_type:
-            team_message = History.objects.filter(hostTeam=team_name)[:30]
+            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:30]
             main_on = 'on'
         if 'second' in team_type:
-            team_message = History.objects.filter(guestTeam=team_name)[:30]
+            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:30]
             guest_on = 'on'
         team_type = 'guest'
     all_on = '' if 'on'.__eq__(main_on) or 'on'.__eq__(guest_on) else 'on'
