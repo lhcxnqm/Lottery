@@ -21,7 +21,7 @@
                 </td>
                 <td width="110"><span class="odds_hd_team">
         	<a href="" target="_blank"><img
-                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_3986.png" alt=""
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_554.png" alt=""
                     width="65" height="65"/></a>        </span></td>
                 <td align="center" width="190">
                     <div class="odds_hd_center">
@@ -36,7 +36,7 @@
 
                 <td width="110"><span class="odds_hd_team odds_hd_team2">
         	<a href="http://liansai.500.com/team/7014/" target="_blank"><img
-                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_7014.png" alt=""
+                    src="http://odds.500.com/static/soccerdata/images/TeamPic/teamsignnew_1238.png" alt=""
                     width="65" height="65"/></a>
                 <td align="left">
                     <ul class="odds_hd_list">
@@ -173,11 +173,14 @@
                         <time>{{ each.startTime }}</time>
                     </td>
                     <td>
-                        <a href="" target="_blank"
-                           rel="nofollow">主</a> <a
-                            href="" target="_blank"
-                            rel="nofollow">客</a>
-                        <a href="" class="red" target="_blank" rel="nofollow">同</a>
+                        <form method="post" action="/history/asia_{{ team_message.matchId }}/">
+                            {% csrf_token %}
+                            <input type="text" name="company" value="{{ each.company }}" hidden>
+                            <input type="text" name="startUpperStage" value="{{ each.startUpperStage }}" hidden>
+                            <input type="text" name="startLowerStage" value="{{ each.startLowerStage }}" hidden>
+                            <input type="text" name="startOpening" value="{{ each.startOpening }}" hidden>
+                            <input type="submit" value="同">
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

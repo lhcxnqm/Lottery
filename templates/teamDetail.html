@@ -11,8 +11,13 @@
 <link href="/static/top_v2.css" rel="stylesheet" type="text/css"/>
 <link href="/static/topmenuheader.css" rel="stylesheet">
 
-<div class="lwrap">
+<script>
+    function choose_number(choose) {
+        location.href = "/history/team_{{ team.matchId }}_{{ team_type }}" + choose
+    }
+</script>
 
+<div class="lwrap">
     <div class="lmain">
         <div class="lmain_in clearfix">
             <div class="lcrumbs" style="margin-top:0px;">您当前的位置：<a href="/history/" target="_blank">Ocean足彩网</a> &gt; <a
@@ -31,19 +36,39 @@
                     <div class="lcol_hd lcol_hd_nobd">
                         <h3 class="lcol_tit">以往赛季参考</h3>
                         <div class="lcol_tit_sub lyiwsj_panel">
-                            <select id="record" name="drop_down">
-                                <option value="10">近10场</option>
-                                <option selected="selected" value="30">近30场</option>
-                                <option value="50">近50场</option>
-                                <option value="100">近100场</option>
+                            <select id="record" name="drop_down" onchange="choose_number(this.options[selectedIndex].value)">
+                                {% if ten == "selected" %}
+                                    <option selected="selected" value="10">近10场</option>
+                                    <option value="30">近30场</option>
+                                    <option value="50">近50场</option>
+                                    <option value="100">近100场</option>
+                                {% endif %}
+                                {% if thirty == "selected" %}
+                                    <option  value="10">近10场</option>
+                                    <option selected="selected" value="30">近30场</option>
+                                    <option  value="50">近50场</option>
+                                    <option  value="100">近100场</option>
+                                {% endif %}
+                                {% if fifty == "selected" %}
+                                    <option  value="10">近10场</option>
+                                    <option  value="30">近30场</option>
+                                    <option selected="selected" value="50">近50场</option>
+                                    <option  value="100">近100场</option>
+                                {% endif %}
+                                {% if hundred == "selected" %}
+                                    <option  value="10">近10场</option>
+                                    <option  value="30">近30场</option>
+                                    <option  value="50">近50场</option>
+                                    <option selected="selected" value="100">近100场</option>
+                                {% endif %}
                             </select>
                         </div>
                     </div>
                     <div class="lcol_bd jTab">
                         <div class="ltab_hd" tid="913">
                             <a href="/history/team_{{ team.matchId }}_{{ team_type }}" hoa="0" class="ltab_btn jTabBtn {{ all_on }}">全部</a>
-                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}main" hoa="1" class="ltab_btn jTabBtn {{ main_on }}">主场</a>
-                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}second" hoa="2" class="ltab_btn jTabBtn {{ guest_on }}">客场</a>
+                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}main{{ choose_number }}" hoa="1" class="ltab_btn jTabBtn {{ main_on }}">主场</a>
+                            <a href="/history/team_{{ team.matchId }}_{{ team_type }}second{{ choose_number }}" hoa="2" class="ltab_btn jTabBtn {{ guest_on }}">客场</a>
                         </div>
                         <div class="ltab_bd_wrap">
                             <div class="ltab_bd jTabBD">
@@ -147,9 +172,9 @@
                                                 </td>
 
                                                 <td class="last">
-                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">析</a>&nbsp;
+                                                    <a href="/history/analysis_{{ each.matchId }}" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">析</a>&nbsp;
                                                     <a href="/history/asia_{{ each.matchId }}" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">亚</a>&nbsp;
-                                                    <a href="" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">欧</a>
+                                                    <a href="/history/european_{{ each.matchId }}" title="{{ each.hostTeam }}VS{{ each.guestTeam }}" target="_blank">欧</a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

@@ -24,7 +24,7 @@
         <div>选择彩种</div>
         <ul id="lot-ul">
             <li data-href="/">竞彩足球</li>
-            <li data-href="/">球队详情</li>
+            <li data-href="/">联赛详情</li>
         </ul>
         <script type="text/javascript">
             (function (a, b) {
@@ -45,13 +45,13 @@
     <div class="bf_btn">
         <div class="l">
             <ul id="ul-keep-or-hide" class="show_hide_chose li_change">
-                <li data-act="keeps" class="selected">保留</li>
-                <li data-act="hides">隐藏</li>
+{#                <li data-act="keeps" class="selected">保留</li>#}
+{#                <li data-act="hides">隐藏</li>#}
             </ul>
             <div class="select_left select_box" id="select-match">
                 <div class="select_center">
                 <span class="select_right">
-                    <span class="down_select">赛事选择</span>
+{#                    <span class="down_select">赛事选择</span>#}
                 </span>
                 </div>
                 <span class="link_up" style="width: 76px;"></span>
@@ -80,28 +80,14 @@
             <div class="select_left select_box" id="select-company">
                 <span class="link_up" style="width: 76px;"></span>
                 <div class="layer lsxz lsxz_company">
-                    <div class="sx">
-                        <div>功能选择</div>
-                        <label for="ck_sound"><input type="checkbox" id="ck_sound" checked="checked">声音提示</label> &nbsp;
-                        <label for="ck_tips"><input type="checkbox" id="ck_tips" checked="checked">变化窗口提示</label>&nbsp;
-                    </div>
+
                     <table width="250" border="0" align="center" cellpadding="2" cellspacing="0">
                         <colgroup span="3" width="33%"></colgroup>
                         <thead>
-                        <tr>
-                            <td>公司选择</td>
-                            <td colspan="2">提示：最多同时选择2家公司</td>
-                        </tr>
+
                         </thead>
                         <tbody id="company-tbody">
-                        <tr>
-                            <td><label for="cck_3" style="color: red;"><input id="cck_3" type="checkbox"
-                                                                              checked="checked" value="3">Bet365</label>
-                            </td>
-                            <td><label for="cck_5" style="color: rgb(51, 51, 51);"><input id="cck_5" type="checkbox"
-                                                                                          value="5"
-                                                                                          disabled="">澳门</label></td>
-                        </tr>
+
 
 
                         </tbody>
@@ -114,8 +100,8 @@
                 </div>
             </div>
             <div class="game_info">
-                共<span id="game-total-count">10</span>场 隐藏<span class="red"
-                                                                id="game-hided-count">0</span>场&nbsp;&nbsp;
+{#                共<span id="game-total-count">10</span>场 隐藏<span class="red"#}
+{#                                                                id="game-hided-count">0</span>场&nbsp;&nbsp;#}
             </div>
         {% block searchHistory %}{% endblock %}
         </div>

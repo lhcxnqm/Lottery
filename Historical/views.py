@@ -4,6 +4,7 @@ import datetime
 from Historical import historySpider, getData
 from pandas.tseries.offsets import Day
 from django.db.models import Q
+import re
 
 
 # 点击历史导航栏进入
@@ -43,6 +44,23 @@ def index_history(request):
 
 # 球队战绩详情页
 def team_detail(request, match_id, team_type):
+    if len(team_type) > 5:
+        try:
+            choose_number = int(re.compile(r'\d+').findall(team_type)[0])
+            if choose_number == 10:
+                ten, thirty, fifty, hundred = "selected", "", "", ""
+            elif choose_number == 30:
+                ten, thirty, fifty, hundred = "", "selected", "", ""
+            elif choose_number == 50:
+                ten, thirty, fifty, hundred = "", "", "selected", ""
+            else:
+                ten, thirty, fifty, hundred = "", "", "", "selected"
+        except IndexError as e:
+            print(e)
+    else:
+        choose_number = 30
+        ten, thirty, fifty, hundred = "", "selected", "", ""
+
     # 根据赛事编号获取相应的队伍名称
     team = History.objects.get(matchId=match_id)
     # 控制前端是否高亮
@@ -51,23 +69,23 @@ def team_detail(request, match_id, team_type):
     if 'host' in team_type:
         team_name = team.hostTeam
         team_message = History.objects.filter(Q(hostTeam=team_name, match_time__lt=team.match_time) |
-                                              Q(guestTeam=team_name, match_time__lt=team.match_time))[:30]
+                                              Q(guestTeam=team_name, match_time__lt=team.match_time))[:choose_number]
         if 'main' in team_type:
-            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:30]
+            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:choose_number]
             main_on = 'on'
         if 'second' in team_type:
-            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:30]
+            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:choose_number]
             guest_on = 'on'
         team_type = 'host'
     else:
         team_name = team.guestTeam
         team_message = History.objects.filter(Q(guestTeam=team_name, match_time__lt=team.match_time) |
-                                              Q(hostTeam=team_name, match_time__lt=team.match_time))[:30]
+                                              Q(hostTeam=team_name, match_time__lt=team.match_time))[:choose_number]
         if 'main' in team_type:
-            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:30]
+            team_message = History.objects.filter(hostTeam=team_name, match_time__lt=team.match_time)[:choose_number]
             main_on = 'on'
         if 'second' in team_type:
-            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:30]
+            team_message = History.objects.filter(guestTeam=team_name, match_time__lt=team.match_time)[:choose_number]
             guest_on = 'on'
         team_type = 'guest'
     all_on = '' if 'on'.__eq__(main_on) or 'on'.__eq__(guest_on) else 'on'
@@ -77,6 +95,7 @@ def team_detail(request, match_id, team_type):
 
     return render(request, "teamDetail.html",
                   {'team': team, 'team_name': team_name, 'team_type': team_type,
+                   'ten': ten, 'thirty': thirty, 'fifty': fifty, 'hundred': hundred, 'choose_number': choose_number,
                    'all_on': all_on, 'main_on': main_on, 'guest_on': guest_on,
                    'team_list': team_list, 'all_result': all_result})
 
@@ -86,7 +105,7 @@ def return_victory_or_defeat(team_name, team_message, team_list):
     win, peace, lose = 0, 0, 0
     win_handicap, peace_handicap, lose_handicap = 0, 0, 0
     big_handicap, small_handicap = 0, 0
-    goal, fumble = 0,0 # 进球,失球
+    goal, fumble = 0, 0  # 进球,失球
     handicap_let = {'平手': 0, '平手/半球': -0.25, '半球': -0.5, '半球/一球': -0.75,
                     '一球': -1, '一球/球半': -1.25, '球半': -1.5, '球半/两球': -1.75,
                     '两球': -2, '两球/两球半': -2.25, '两球半': -2.5, '两球半/三球': -2.75,
@@ -204,11 +223,43 @@ def return_victory_or_defeat(team_name, team_message, team_list):
     return team_list, all_result
 
 
+# 亚盘、大小球盘相同盘口导出Excel处理
+def export_same_opening(same_opening_list):
+    export_list = []
+    for each in same_opening_list:
+        each_main = History.objects.get(matchId=each.subMatchId_id)
+        temp = dict()
+        temp['company'] = each.company
+        temp['startUpperStage'] = each.startUpperStage
+        temp['startLowerStage'] = each.startLowerStage
+        temp['startOpening'] = each.startOpening
+        temp['match'] = each_main.match
+        temp['matchTime'] = each_main.match_time
+        temp['hostTeam'] = each_main.hostTeam
+        temp['guestTeam'] = each_main.guestTeam
+        temp['result'] = each_main.result
+        export_list.append(temp)
+
+    return export_list
+
+
 # 历史亚盘信息详情页
 def history_asia(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
     return_team_result(team_message, history)
+
+    # 按照公司、上下盘开盘，导出同种盘口的Excel并统计输赢盘情况
+    if "company" in request.POST:
+        company = request.POST["company"]
+        start_upper_stage = request.POST["startUpperStage"]
+        start_lower_stage = request.POST["startLowerStage"]
+        start_opening = request.POST["startOpening"]
+        same_opening_list = Asia.objects.filter(company=company, startUpperStage=start_upper_stage,
+                                                startLowerStage=start_lower_stage, startOpening=start_opening)
+
+        export_list = export_same_opening(same_opening_list)
+        print(export_list)
 
     result_list = []
     for each in Asia.objects.filter(subMatchId_id=match_id):
