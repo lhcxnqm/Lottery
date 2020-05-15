@@ -227,11 +227,14 @@
                         </table>
                     </td>
                     <td>
-                        <a href="" target="_blank"
-                           rel="nofollow">主</a> <a
-                            href="" target="_blank"
-                            rel="nofollow">客</a>
-                        <a href="" class="red" target="_blank" rel="nofollow">同</a>
+                        <form method="post" action="/history/european_{{ team_message.matchId }}/">
+                            {% csrf_token %}
+                            <input type="text" name="company" value="{{ each.company }}" hidden>
+                            <input type="text" name="startWin" value="{{ each.startWin }}" hidden>
+                            <input type="text" name="startPeace" value="{{ each.startPeace }}" hidden>
+                            <input type="text" name="startLose" value="{{ each.startLose }}" hidden>
+                            <input class="btn btn-default" type="submit" value="同">
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

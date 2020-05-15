@@ -173,11 +173,15 @@
                         <time>{{ each.startTime }}</time>
                     </td>
                     <td>
-                        <a href="" target="_blank"
-                           rel="nofollow">主</a> <a
-                            href="" target="_blank"
-                            rel="nofollow">客</a>
-                        <a href="" class="red" target="_blank" rel="nofollow">同</a>
+                        <form method="post" action="/history/big_or_small_{{ team_message.matchId }}/">
+                            {% csrf_token %}
+                            <input type="text" name="big_or_small" hidden>
+                            <input type="text" name="company" value="{{ each.company }}" hidden>
+                            <input type="text" name="startUpperStage" value="{{ each.startUpperStage }}" hidden>
+                            <input type="text" name="startLowerStage" value="{{ each.startLowerStage }}" hidden>
+                            <input type="text" name="startOpening" value="{{ each.startOpening }}" hidden>
+                            <input class="btn btn-default" type="submit" value="同">
+                        </form>
                     </td>
                 </tr>
             {% endfor %}

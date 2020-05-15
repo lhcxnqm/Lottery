@@ -1,10 +1,25 @@
 from django.shortcuts import render
 from .models import History, BigOrSmall, European, Asia
 import datetime
-from Historical import historySpider, getData
+from Historical import getData
 from pandas.tseries.offsets import Day
 from django.db.models import Q
 import re
+import pandas as pd
+import os
+
+handicap_let = {'平手': 0, '平手/半球': -0.25, '半球': -0.5, '半球/一球': -0.75,
+                '一球': -1, '一球/球半': -1.25, '球半': -1.5, '球半/两球': -1.75,
+                '两球': -2, '两球/两球半': -2.25, '两球半': -2.5, '两球半/三球': -2.75,
+                '三球': -3, '三球/三球半': -3.25, '三球半': -3.5, '三球半/四球': -3.75,
+                '受平手/半球': 0.25, '受半球': 0.5, '受半球/一球': 0.75,
+                '受一球': 1, '受一球/球半': 1.25, '受球半': 1.5, '受球半/两球': 1.75,
+                '受两球': 2, '受两球/两球半': 2.25, '受两球半': 2.5, '受两球半/三球': 2.75,
+                '受三球': 3, '受三球/三球半': 3.25, '受三球半': 3.5, '受三球半/四球': 3.75}
+handicap_size = {'1': 1, '1/1.5': 1.25, '1.5': 1.5, '1.5/2': 1.75, '2': 2, '2/2.5': 2.25, '2.5': 2.5, '2.5/3': 2.75,
+                 '3': 3, '3/3.5': 3.25, '3.5': 3.5, '3.5/4': 3.75, '4': 4, '4/4.5': 4.25, '4.5': 4.5, '4.5/5': 4.75,
+                 '5': 5, '5/5.5': 5.25, '5.5': 5.5, '5.5/6': 5.75, '6': 6, '6/6.5': 6.25, '6.5': 6.5, '6.5/7': 6.75,
+                 '7': 7, '7/7.5': 7.25}
 
 
 # 点击历史导航栏进入
@@ -106,18 +121,6 @@ def return_victory_or_defeat(team_name, team_message, team_list):
     win_handicap, peace_handicap, lose_handicap = 0, 0, 0
     big_handicap, small_handicap = 0, 0
     goal, fumble = 0, 0  # 进球,失球
-    handicap_let = {'平手': 0, '平手/半球': -0.25, '半球': -0.5, '半球/一球': -0.75,
-                    '一球': -1, '一球/球半': -1.25, '球半': -1.5, '球半/两球': -1.75,
-                    '两球': -2, '两球/两球半': -2.25, '两球半': -2.5, '两球半/三球': -2.75,
-                    '三球': -3, '三球/三球半': -3.25, '三球半': -3.5, '三球半/四球': -3.75,
-                    '受平手/半球': 0.25, '受半球': 0.5, '受半球/一球': 0.75,
-                    '受一球': 1, '受一球/球半': 1.25, '受球半': 1.5, '受球半/两球': 1.75,
-                    '受两球': 2, '受两球/两球半': 2.25, '受两球半': 2.5, '受两球半/三球': 2.75,
-                    '受三球': 3, '受三球/三球半': 3.25, '受三球半': 3.5, '受三球半/四球': 3.75}
-    handicap_size = {'1': 1, '1/1.5': 1.25, '1.5': 1.5, '1.5/2': 1.75, '2': 2, '2/2.5': 2.25, '2.5': 2.5, '2.5/3': 2.75,
-                     '3': 3, '3/3.5': 3.25, '3.5': 3.5, '3.5/4': 3.75, '4': 4, '4/4.5': 4.25, '4.5': 4.5, '4.5/5': 4.75,
-                     '5': 5, '5/5.5': 5.25, '5.5': 5.5, '5.5/6': 5.75, '6': 6, '6/6.5': 6.25, '6.5': 6.5, '6.5/7': 6.75,
-                     '7': 7, '7/7.5': 7.25}
 
     for each in team_message:
         team_item = dict()
@@ -223,8 +226,38 @@ def return_victory_or_defeat(team_name, team_message, team_list):
     return team_list, all_result
 
 
+# 欧盘相同指数导出Excel处理
+def export_same_european(same_opening_list):
+    export_list = []
+    for each in same_opening_list:
+        each_main = History.objects.get(matchId=each.subMatchId_id)
+        temp = dict()
+        temp['company'] = each.company
+        temp['startWin'] = each.startWin
+        temp['startPeace'] = each.startPeace
+        temp['startLose'] = each.startLose
+        temp['match'] = each_main.match
+        temp['matchTime'] = each_main.match_time
+        temp['hostTeam'] = each_main.hostTeam
+        temp['guestTeam'] = each_main.guestTeam
+        temp['result'] = each_main.result
+
+        # 计算每一场胜平负情况
+        result_host, result_guest = float(temp['result'][0]), float(temp['result'][-1])
+        if result_host == result_guest:
+            temp['handicap'] = 'X'
+        elif result_host > result_guest:
+            temp['handicap'] = '3'
+        else:
+            temp['handicap'] = '1'
+
+        export_list.append(temp)
+
+    return export_list
+
+
 # 亚盘、大小球盘相同盘口导出Excel处理
-def export_same_opening(same_opening_list):
+def export_same_opening(same_opening_list, request):
     export_list = []
     for each in same_opening_list:
         each_main = History.objects.get(matchId=each.subMatchId_id)
@@ -238,6 +271,34 @@ def export_same_opening(same_opening_list):
         temp['hostTeam'] = each_main.hostTeam
         temp['guestTeam'] = each_main.guestTeam
         temp['result'] = each_main.result
+
+        # 计算每一场上下盘口情况
+        result_host, result_guest = float(temp['result'][0]), float(temp['result'][-1])
+        if 'big_or_small' not in request.POST:
+            handicap_calculate = float(handicap_let[temp['startOpening']])
+            if handicap_calculate < 0:
+                if result_host + handicap_calculate > result_guest:
+                    temp['handicap'] = '上盘'
+                elif result_host + handicap_calculate == result_guest:
+                    temp['handicap'] = '走盘'
+                else:
+                    temp['handicap'] = '下盘'
+            else:
+                if result_host + handicap_calculate > result_guest:
+                    temp['handicap'] = '下盘'
+                elif result_host + handicap_calculate == result_guest:
+                    temp['handicap'] = '走盘'
+                else:
+                    temp['handicap'] = '上盘'
+        else:
+            handicap_calculate = float(handicap_size[temp['startOpening']])
+            if result_host + result_guest > handicap_calculate:
+                temp['handicap'] = '大球'
+            elif result_host + result_guest == handicap_calculate:
+                temp['handicap'] = '走盘'
+            else:
+                temp['handicap'] = '小球'
+
         export_list.append(temp)
 
     return export_list
@@ -257,9 +318,30 @@ def history_asia(request, match_id):
         start_opening = request.POST["startOpening"]
         same_opening_list = Asia.objects.filter(company=company, startUpperStage=start_upper_stage,
                                                 startLowerStage=start_lower_stage, startOpening=start_opening)
-
-        export_list = export_same_opening(same_opening_list)
-        print(export_list)
+        export_list = export_same_opening(same_opening_list, request)
+        # 导出数据清理
+        pf = pd.DataFrame(list(export_list))
+        order = ['company', 'startUpperStage', 'startOpening', 'startLowerStage',
+                 'match', 'matchTime', 'hostTeam', 'result', 'guestTeam', 'handicap']
+        pf = pf[order]
+        columns_map = {
+            'company': '公司',
+            'startUpperStage': '上盘水位',
+            'startOpening': '初盘',
+            'startLowerStage': '下盘水位',
+            'match': '赛事',
+            'matchTime': '比赛时间',
+            'hostTeam': '主队',
+            'result': '赛果',
+            'guestTeam': '客队',
+            'handicap': '盘路'
+        }
+        pf.rename(columns_map, inplace=True)
+        if '/' in start_opening:
+            start_opening = start_opening.replace('/', '')
+        file_name = company + '_' + start_upper_stage + '_' + start_lower_stage + '_' + start_opening + '.xlsx'
+        file_path = os.path.join(os.path.expanduser('~') + '/Desktop', file_name)
+        pf.to_excel(file_path, encoding='utf-8', index=False)
 
     result_list = []
     for each in Asia.objects.filter(subMatchId_id=match_id):
@@ -275,6 +357,37 @@ def history_european(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
     return_team_result(team_message, history)
+
+    # 按照公司、欧赔指数，导出同种欧指的Excel并统计胜平负情况
+    if "company" in request.POST:
+        company = request.POST["company"]
+        start_win = request.POST["startWin"]
+        start_peace = request.POST["startPeace"]
+        start_lose = request.POST["startLose"]
+        same_opening_list = European.objects.filter(company=company, startWin=start_win,
+                                                    startPeace=start_peace, startLose=start_lose)
+        export_list = export_same_european(same_opening_list)
+        # 导出数据清理
+        pf = pd.DataFrame(list(export_list))
+        order = ['company', 'startWin', 'startPeace', 'startLose',
+                 'match', 'matchTime', 'hostTeam', 'result', 'guestTeam', 'handicap']
+        pf = pf[order]
+        columns_map = {
+            'company': '公司',
+            'startWin': '胜',
+            'startPeace': '平',
+            'startLose': '负',
+            'match': '赛事',
+            'matchTime': '比赛时间',
+            'hostTeam': '主队',
+            'result': '赛果',
+            'guestTeam': '客队',
+            'handicap': '结果'
+        }
+        pf.rename(columns_map, inplace=True)
+        file_name = company + '_' + start_win + '_' + start_peace + '_' + start_lose + '.xlsx'
+        file_path = os.path.join(os.path.expanduser('~') + '/Desktop', file_name)
+        pf.to_excel(file_path, encoding='utf-8', index=False)
 
     result_list = []
     average_win_probability, average_peace_probability, average_lose_probability = 0, 0, 0
@@ -319,6 +432,39 @@ def history_big_or_small(request, match_id):
     history = History.objects.get(matchId=match_id)
     team_message = dict()
     return_team_result(team_message, history)
+
+    # 按照公司、上下盘开盘，导出同种盘口的Excel并统计输赢盘情况
+    if "company" in request.POST:
+        company = request.POST["company"]
+        start_upper_stage = request.POST["startUpperStage"]
+        start_lower_stage = request.POST["startLowerStage"]
+        start_opening = request.POST["startOpening"]
+        same_opening_list = BigOrSmall.objects.filter(company=company, startUpperStage=start_upper_stage,
+                                                      startLowerStage=start_lower_stage, startOpening=start_opening)
+        export_list = export_same_opening(same_opening_list, request)
+        # 导出数据清理
+        pf = pd.DataFrame(list(export_list))
+        order = ['company', 'startUpperStage', 'startOpening', 'startLowerStage',
+                 'match', 'matchTime', 'hostTeam', 'result', 'guestTeam', 'handicap']
+        pf = pf[order]
+        columns_map = {
+            'company': '公司',
+            'startUpperStage': '上盘水位',
+            'startOpening': '初盘',
+            'startLowerStage': '下盘水位',
+            'match': '赛事',
+            'matchTime': '比赛时间',
+            'hostTeam': '主队',
+            'result': '赛果',
+            'guestTeam': '客队',
+            'handicap': '盘路'
+        }
+        pf.rename(columns_map, inplace=True)
+        if '/' in start_opening:
+            start_opening = start_opening.replace('/', '')
+        file_name = company + '_' + start_upper_stage + '_' + start_lower_stage + '_' + start_opening + '.xlsx'
+        file_path = os.path.join(os.path.expanduser('~') + '/Desktop', file_name)
+        pf.to_excel(file_path, encoding='utf-8', index=False)
 
     result_list = []
     for each in BigOrSmall.objects.filter(subMatchId_id=match_id):
